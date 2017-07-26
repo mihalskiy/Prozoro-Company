@@ -14,9 +14,11 @@ if ($_POST['enter']) {
         </div>
             <!--content-->
         <div class="content">
-            <div class="row">
-                   
+            <div class="row">                  
                    <div class="container">
+                       <!-- <div class="col-xs-12 col-md-8">
+                           <div class="row"><p>dfef</p></div>
+                       </div> -->
                         <form class="form-signin">
                             <h2 class="form-signin-heading" >Вхід на сайт</h2>
                             <label for="inputEmail" class="sr-only">Email address</label>
@@ -30,10 +32,8 @@ if ($_POST['enter']) {
                             </div>
                             <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
                         </form>
-</div>
-                   
+</div>                 
             </div>
-
         </div>
             <!--footer-->
         <div class="footer">

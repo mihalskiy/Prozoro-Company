@@ -10,13 +10,12 @@
         <div class="content">
             <div class="row">
                    
-                   <div class="container">
-    <div class="wrapper">
+                   <div class="container ">
         <div class="registerForm">
-            <h1> Сторінка реєстрації</h1>
+            <h2> Сторінка реєстрації</h2>
             <form method='POST' action='/register'>
 
-                <div class="form-group .col-md-4">
+                <div class="form-group">
                     <label for="login">логін</label>
                     <input type="login" class="form-control" id="login" placeholder="Логін" required>
                 </div>
@@ -32,7 +31,7 @@
                     <label for="name">Імя</label>
                     <input type="name" class="form-control" id="name" placeholder="Імя" required>
                 </div>
-                <button type="submit" class="btn btn-default">Реєстрація</button>
+                <button type="submit" class="btn btn-primary">Реєстрація</button>
             <form>
         </div>
     </div>

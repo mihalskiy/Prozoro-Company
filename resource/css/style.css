@@ -21,7 +21,22 @@ body {
 }
 
 .content {
+    margin-top: 5px;
     width: 100%;
     background-color: #ffffff;
 
+}
+
+.registerForm, .form-signin  {
+    padding: 6px;
+    margin: 0 191px 40px 280px;
+}
+
+.registerForm h2, .form-signin {
+    text-align: center;
+}
+
+.navbar, .content {
+    margin-bottom: 0;
+    margin-top: 0;
 }
