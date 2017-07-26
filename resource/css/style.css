@@ -1,0 +1,27 @@
+
+* {
+    margin: 0;
+    padding: 0
+}
+
+body {
+    width: 100%;
+    background-color: #bfbfbf;
+}
+
+.header {
+    width: 512px;
+    height: 425px;
+    background: url('/resource/img/logotype.png') no-repeat;
+}
+
+.navbar-brand img {
+    position: relative;
+    top: -50px
+}
+
+.content {
+    width: 100%;
+    background-color: #ffffff;
+
+}
