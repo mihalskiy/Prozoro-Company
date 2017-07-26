@@ -1,55 +1,72 @@
 <?php
-if ($_POST['enter']) {
-    echo 'Запрос...';
-    exit;
-}
+/**
+ * PHP Grid Component
+ *
+ * @author Abu Ghufran <gridphp@gmail.com> - http://www.phpgrid.org
+ * @version 2.0.0
+ * @license: see license.txt included in package
+ */
+
+include_once "config.php";
+
+include(PHPGRID_LIBPATH."inc/jqgrid_dist.php");
+
+// Database config file to be passed in phpgrid constructor
+$db_conf = array( 	
+					"type" 		=> PHPGRID_DBTYPE, 
+					"server" 	=> PHPGRID_DBHOST,
+					"user" 		=> PHPGRID_DBUSER,
+					"password" 	=> PHPGRID_DBPASS,
+					"database" 	=> PHPGRID_DBNAME
+				);
+
+$g = new jqgrid($db_conf);
+
+$grid["caption"] = "Sample Grid";
+$g->set_options($grid);
+$g->table = "secretary, admin";
+
+
+$out = $g->render("list1");
 ?>
-<?php Head('Вхід в систему')?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+<head>
+	<link rel='stylesheet' type='text/css' href='http://code.jquery.com/ui/1.10.3/themes/redmond/jquery-ui.css' />
+    <link rel='stylesheet' type='text/css' href='http://www.trirand.com/blog/jqgrid/themes/ui.jqgrid.css' />	
+ 
+	<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+	
+	<script type='text/javascript' src='http://www.trirand.com/blog/jqgrid/js/jquery-ui-custom.min.js'></script>        
+    <script type='text/javascript' src='http://www.trirand.com/blog/jqgrid/js/i18n/grid.locale-en.js'></script>
+    <script type='text/javascript' src='http://www.trirand.com/blog/jqgrid/js/jquery.jqGrid.js'></script>
+</head>
 <body>
-<div class="container">
-    <div class="row">
-            <!-- Menu -->
-        <div class="innerMenu">
-              <?php Menu() ?>  
-        </div>
-            <!--content-->
-        <div class="content">
-            <div class="row">                  
-                   <div class="container">
-                       <!-- <div class="col-xs-12 col-md-8">
-                           <div class="row"><p>dfef</p></div>
-                       </div> -->
-                        <form class="form-signin">
-                            <h2 class="form-signin-heading" >Вхід на сайт</h2>
-                            <label for="inputEmail" class="sr-only">Email address</label>
-                            <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-                            <label for="inputPassword" class="sr-only">Password</label>
-                            <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" value="remember-me"> Remember me
-                                </label>
-                            </div>
-                            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-                        </form>
-</div>                 
-            </div>
-        </div>
-            <!--footer-->
-        <div class="footer">
-            <div class="row">
-                <footer>
-
-                </footer>
-            </div>
-        </div>
-
-    </div>
-</div>
-
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="resource/js/bootstrap.min.js" type="text/javascript"></script>
+<script>
+	function validate_onblur(o)
+	{
+		if (o.value < 20)
+		{
+			$('#FormError>td').html('Must be greater than 20'); $('#FormError').show();	
+			$(o).css('borderColor','red');
+			setTimeout(function(){$(o).focus()}, 10);
+		}
+		else
+		{
+			$('#FormError>td').html(''); $('#FormError').hide();	
+			$(o).css('borderColor','');
+		}
+	}
+	
+	function my_validation(value,label)
+	{
+		if (value > 100)
+			return [true,""];
+		else
+			return [false,label+": Should be greater than 100"];
+	}
+	</script>
+	<div style="margin:10px">
+	<?php echo $out?>
 </body>
 </html>

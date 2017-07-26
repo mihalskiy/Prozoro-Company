@@ -1,6 +1,6 @@
 <?php 
 define ('HOST', 'localhost');
-define ('USERS', 'root');
+define ('USER', 'root');
 define ('PASS', '');
 define ('DB', 'myoffice');
 ?>

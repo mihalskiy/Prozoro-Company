@@ -1,7 +1,19 @@
 <?php
-include_once 'setting.php';
+include_once 'config.php';
 session_start();
-$CONNECT = mysqli_connect(HOST, USERS, PASS, DB);
+
+// old link
+//$CONNECT = mysqli_connect(HOST, USER, PASS, DB);
+
+$db_conf = array( 	
+					"type" 		=> PHPGRID_DBTYPE, 
+					"server" 	=> PHPGRID_DBHOST,
+					"user" 		=> PHPGRID_DBUSER,
+					"password" 	=> PHPGRID_DBPASS,
+					"database" 	=> PHPGRID_DBNAME
+);
+
+
 
 // проверка соиденение
 //if ($CONNECT) echo 'Поключение к БД Успешно ';
@@ -32,11 +44,24 @@ $Param[$URL_Parts[$i]] = $URL_Parts[++$i];
 // подключение файлов
 
 if ($Page == 'index' and $Module == 'index') include('page/index.php');
-else if ($Page == 'calendar') echo 'Календарь';
+else if ($Page == 'calendar') echo include('page/secretary.php');
 else if ($Page == 'graphics') echo 'Графіки';
 else if ($Page == 'register') /*echo 'Реєстрація'*/ include('page/register.php');
-else if ($Page == 'login') /*echo 'Реєстрація'*/ include('page/login.php');
+else if ($Page == 'login') include('page/login.php');
 
+else if ($Page == 'account')  include('forms/account.php');
+
+
+// функция обработки форми
+
+function FormChars ($p1) {
+return nl2br(htmlspecialchars(trim($p1), ENT_QUOTES), false);
+}
+
+// шифровка пароля 
+function GenPass ($p1, $p2) {
+    return md5('MRRUSLAN'.md5('594'.$p1.'741').md5('910'.$p2.'531'));
+}
 
 // вставка header на страници
 function Head($p1) {
@@ -44,7 +69,7 @@ function Head($p1) {
 }
 
 function Menu() {
-    echo '<div class="navbar"><nav class="navbar navbar-inverse"><div class="container-fluid"><div class="navbar-header"><a class="navbar-brand" href="#"><img alt="Brand" src="resource/img/logo.png" width="115px" height="115px"></a></div><div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"><ul class="nav navbar-nav"><li class="active"><a href="#">Головна <span class="sr-only">(current)</span></a></li><li><a href="#">Календарь</a></li><li><a href="#">Графіки робіт</a></li><li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Учасники <span class="caret"></span></a><ul class="dropdown-menu"><li><a href="#">Секретарь</a></li><li><a href="#">Бухгалтер</a></li><li><a href="#">Юрист</a></li><li role="separator" class="divider"></li><li><a href="#">Кошторисник</a></li><li role="separator" class="divider"></li><li><a href="#">Деректор</a></li></ul></li></ul><ul class="nav navbar-nav navbar-right"><li><a href="/register">Реєстрація</a></li><li><a href="/login">Війти в систему</a></li></ul></div></nav></div>';
+    echo '<div class="navbar"><nav class="navbar navbar-inverse"><div class="container-fluid"><div class="navbar-header"><a class="navbar-brand" href="#"><img alt="Brand" src="resource/img/logo.png" width="115px" height="115px"></a></div><div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"><ul class="nav navbar-nav"><li class="active"><a href="#">Головна <span class="sr-only">(current)</span></a></li><li><a href="#">Календарь</a></li><li><a href="/secretary">Графіки робіт</a></li><li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Учасники <span class="caret"></span></a><ul class="dropdown-menu"><li><a href="#">Секретарь</a></li><li><a href="#">Бухгалтер</a></li><li><a href="#">Юрист</a></li><li role="separator" class="divider"></li><li><a href="#">Кошторисник</a></li><li role="separator" class="divider"></li><li><a href="#">Деректор</a></li></ul></li></ul><ul class="nav navbar-nav navbar-right"><li><a href="/register">Реєстрація</a></li><li><a href="/login">Війти в систему</a></li></ul></div></nav></div>';
 }
 
 
