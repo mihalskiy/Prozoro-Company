@@ -20,7 +20,7 @@ public function secretary()
 }
 public function _example_output($output = null)
 {
-  $this->load->view('example.php', $output);
+  $this->load->view('table.php', $output);
 }
 }
 /* End of file main.php */

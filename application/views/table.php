@@ -6,13 +6,13 @@
 
 <?php 
 foreach($css_files as $file): ?>
-	<link type="text/css" rel="stylesheet" href="<?php echo $file; ?>" />
+<link type="text/css" rel="stylesheet" href="<?php echo $file; ?>" />
 <?php endforeach; ?>
 <?php foreach($js_files as $file): ?>
 	<script src="<?php echo $file; ?>"></script>
-<?php endforeach; ?>
+<?php endforeach; ?> 
  
- <link rel="shortcut icon" href="/resource/img/logo.ico" type="image/x-icon">
+<link rel="shortcut icon" href="/resource/img/happyLogo.ico" type="image/x-icon">
 <link href="/resource/css/bootstrap.css" rel="stylesheet" type="text/css">
 <link href="/resource/css/style.css" type="text/css" rel="stylesheet"> 
 
@@ -27,7 +27,7 @@ foreach($css_files as $file): ?>
 					<nav class="navbar navbar-inverse">
 						<div class="container-fluid">
 							<div class="navbar-header">
-								<a class="navbar-brand" href="#"><img alt="Brand" src="/resource/img/logo.png" width="115px" height="115px"></a>
+								<a class="navbar-brand" href="#"><img alt="Brand" src="/resource/img/Logo.png"></a>
 								</div>
 								<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 									<ul class="nav navbar-nav">

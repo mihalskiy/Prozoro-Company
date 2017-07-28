@@ -5,6 +5,6 @@ class Welcome extends CI_Controller {
 
 	public function index($output = null)
 	{
-        $this->load->view('index', $output);
+        $this->load->view('table', $output);
 	}
 }

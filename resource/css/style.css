@@ -17,7 +17,9 @@ body {
 
 .navbar-brand img {
     position: relative;
-    top: -50px
+    top: -18px;
+    width: 130px;
+    height: 55px;
 }
 
 .content {
@@ -26,6 +28,13 @@ body {
     background-color: #ffffff;
 
 }
+
+/* .navbar-brand  a img {
+    width: 25px;
+    height: 25px;
+    margin-top: 5px;
+    display: block;
+} */
 
 .registerForm, .form-signin  {
     padding: 6px;
