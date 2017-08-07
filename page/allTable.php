@@ -25,7 +25,10 @@ $grid["view_options"]["width"]="520";
 $grid["loadtext"] = "Завантаження...";
 $grid["altRows"] = true; 
 $grid["toppager"] = true; 
-
+$grid["export"] = array("format"=>"pdf", "filename"=>"my-file", "sheetname"=>"test");
+$grid["export"] = array("filename"=>"my-file", "heading"=>"Invoice Details", "orientation"=>"landscape", "paper"=>"a4");
+$grid["export"]["paged"] = "1";
+$grid["export"]["range"] = "filtered";
 
 $g->set_options($grid); 
 
@@ -34,7 +37,11 @@ $col["title"] = "№";
 $col["name"] = "id"; 
 $col["editable"] = false; 
 $col["width"] = "30"; 
-$cols[] = $col; 
+$col["editable"] = false; // this column is not editable 
+$col["search"] = true; 
+$col["editable"] = true; 
+$col["export"] = true; // this column will not be exported 
+$cols[] = $col;
 
 $col = array(); 
 $col["title"] = "Сайт";  
@@ -228,16 +235,16 @@ $out = $g->render("list1");
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html>
 <head>
-	<link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.10.3/themes/redmond/jquery-ui.css" />
-    <link rel="stylesheet" type="text/css" href="http://www.trirand.com/blog/jqgrid/themes/ui.jqgrid.css" />	
+    <link rel="shortcut icon" href="resource/img/logo.ico" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" media="screen" href="resource/js/themes/redmond/jquery-ui.custom.css"></link>  
+	<link  type='text/css' href='http://www.trirand.com/blog/jqgrid/themes/ui.jqgrid.css' />
+    <link rel='stylesheet' type='text/css' href='resource/js/jqgrid/css/ui.jqgrid.css' />	
     <link href="resource/css/style.css" type="text/css" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-	<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-	
-	<script type="text/javascript" src="http://www.trirand.com/blog/jqgrid/js/jquery-ui-custom.min.js"></script>        
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqgrid/4.6.0/js/i18n/grid.locale-ua.js"></script>
-    <script type="text/javascript" src="http://www.trirand.com/blog/jqgrid/js/jquery.jqGrid.js"></script>
+    <link rel="stylesheet" type="text/css" href="resource/css/bootstrap.min.css">
+	<script type='text/javascript' src="resource/js/jquery.min.js"></script>
+	<script type='text/javascript' src='resourdce/js/themes/jquery-ui.custom.min.js'></script>        
+    <script type='text/javascript' src='resource/js/jqgrid/js/i18n/grid.locale-ua.js'></script>
+    <script type='text/javascript' src='resource/js/jqgrid/js/jquery.jqGrid.js'></script>
 </head>
 <body>
 <div class="container">

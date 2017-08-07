@@ -24,7 +24,7 @@ $out = $p->render('c1');
 <!DOCTYPE html> 
 <html> 
     <head>
-        <base href="/" />    
+        <link rel="shortcut icon" href="resource/img/logo.ico" type="image/x-icon">   
         <script src="lib/js/jquery.min.js"></script> 
         <script src="lib/js/chartphp.js"></script> 
         <link rel="stylesheet" href="lib/js/chartphp.css"> 

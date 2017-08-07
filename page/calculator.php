@@ -53,6 +53,26 @@ $col["width"] = "30";
 $cols[] = $col; 
 
 $col = array(); 
+$col["title"] = "Сайт";  
+$col["name"] = "secretarySite";  
+$col["editable"] = false; 
+$col["formatter"] = "function(cellval,options,rowdata){ return '<a target=\"_blank\" href=\"http://'+cellval+'\">'+cellval+'</a>'; }";
+$col["unformat"] = "function(cellval,options,cell){ return $('a', cell).attr('href').replace('http://',''); }";
+$cols[] = $col; 
+
+$col = array(); 
+$col["title"] = "Адреса обєкту";  
+$col["name"] = "secretaryAddres";  
+$col["editable"] = false; 
+$cols[] = $col; 
+
+$col = array(); 
+$col["title"] = "Види робіт";  
+$col["name"] = "secretaryWork";  
+$col["editable"] = false; 
+$cols[] = $col; 
+
+$col = array(); 
 $col["title"] = "Дата передачі пакету документів юристом"; // caption of column 
 $col["name"] = "lawyerDateFile"; // grid column name, must be exactly same as returned column-name from sql (tablefield or field-alias) 
 $col["editable"] = true; 
@@ -95,22 +115,16 @@ $out = $g->render("list1");
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html>
 <head>
-	<link rel='stylesheet' type='text/css' href='http://code.jquery.com/ui/1.10.3/themes/redmond/jquery-ui.css' />
-    <link rel='stylesheet' type='text/css' href='http://www.trirand.com/blog/jqgrid/themes/ui.jqgrid.css' />	
+    <link rel="shortcut icon" href="resource/img/logo.ico" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" media="screen" href="resource/js/themes/redmond/jquery-ui.custom.css"></link>  
+	<link  type='text/css' href='http://www.trirand.com/blog/jqgrid/themes/ui.jqgrid.css' />
+    <link rel='stylesheet' type='text/css' href='resource/js/jqgrid/css/ui.jqgrid.css' />	
     <link href="resource/css/style.css" type="text/css" rel="stylesheet">
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-    
-    
-
-	<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-	
-	<script type='text/javascript' src='http://www.trirand.com/blog/jqgrid/js/jquery-ui-custom.min.js'></script>        
-    <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jqgrid/4.6.0/js/i18n/grid.locale-ua.js'></script>
-    <script type='text/javascript' src='http://www.trirand.com/blog/jqgrid/js/jquery.jqGrid.js'></script>
+    <link rel="stylesheet" type="text/css" href="resource/css/bootstrap.min.css">
+	<script type='text/javascript' src="resource/js/jquery.min.js"></script>
+	<script type='text/javascript' src='resourdce/js/themes/jquery-ui.custom.min.js'></script>        
+    <script type='text/javascript' src='resource/js/jqgrid/js/i18n/grid.locale-ua.js'></script>
+    <script type='text/javascript' src='resource/js/jqgrid/js/jquery.jqGrid.js'></script>
 </head>
 <body>
 <div class="container">

@@ -1,11 +1,4 @@
 <?php
-/**
- * PHP Grid Component
- *
- * @author Abu Ghufran <gridphp@gmail.com> - http://www.phpgrid.org
- * @version 2.0.0
- * @license: see license.txt included in package
- */
 
 include_once "config.php";
 
@@ -36,6 +29,9 @@ $grid["loadtext"] = "Завантаження...";
 $grid["add_options"] = array('width'=>'420');
 $grid["edit_options"] = array('width'=>'420');
 $grid["view_options"] = array('width'=>'420');
+$grid["export"] = array("format"=>"pdf", "filename"=>"my-file", "sheetname"=>"test");
+$grid["export"] = array("filename"=>"my-file", "heading"=>"Invoice Details", "orientation"=>"landscape", "paper"=>"a4");
+
 
 
 // required for iphone/safari scroll display 
@@ -49,7 +45,7 @@ $col["name"] = "id"; // grid column name, must be exactly same as returned colum
 $col["editable"] = false; 
 $col["width"] = "30";
 $col["search"] = false;
-
+$col["export"] = true;
 $cols[] = $col; 
 
 $col = array(); 
@@ -57,9 +53,9 @@ $col["title"] = "Сайт"; // caption of column
 $col["name"] = "secretarySite"; // grid column name, must be exactly same as returned column-name from sql (tablefield or field-alias) 
 $col["editable"] = true; 
 $col["search"] = false;
-
 $col["formatter"] = "function(cellval,options,rowdata){ return '<a target=\"_blank\" href=\"http://'+cellval+'\">'+cellval+'</a>'; }";
 $col["unformat"] = "function(cellval,options,cell){ return $('a', cell).attr('href').replace('http://',''); }";
+$col["export"] = true;
 $cols[] = $col; 
 
 $col = array(); 
@@ -67,7 +63,7 @@ $col["title"] = "Форма проведення закупівлі"; // caption
 $col["name"] = "secretaryForm"; // grid column name, must be exactly same as returned column-name from sql (tablefield or field-alias) 
 $col["editable"] = true; 
 $col["search"] = false;
-
+$col["export"] = true;
 $cols[] = $col; 
 
 $col = array(); 
@@ -75,7 +71,7 @@ $col["title"] = "Адреса об'єкту"; // caption of column
 $col["name"] = "secretaryAddres"; // grid column name, must be exactly same as returned column-name from sql (tablefield or field-alias) 
 $col["editable"] = true; 
 $col["search"] = false;
-
+$col["export"] = true;
 $cols[] = $col; 
 
 
@@ -85,7 +81,7 @@ $col["title"] = "Види робіт"; // caption of column
 $col["name"] = "secretaryWork"; // grid column name, must be exactly same as returned column-name from sql (tablefield or field-alias) 
 $col["editable"] = true; 
 $col["search"] = false;
-
+$col["export"] = true;
 $cols[] = $col; 
 
 $col = array(); 
@@ -93,7 +89,7 @@ $col["title"] = "Замовник"; // caption of column
 $col["name"] = "secretaryCustomer"; // grid column name, must be exactly same as returned column-name from sql (tablefield or field-alias) 
 $col["editable"] = true; 
 $col["search"] = false;
-
+$col["export"] = true;
 $cols[] = $col; 
 
 $col = array(); 
@@ -101,7 +97,7 @@ $col["title"] = "Вартість робіт по оголошенню, тис.�
 $col["name"] = "secretaryPrice"; // grid column name, must be exactly same as returned column-name from sql (tablefield or field-alias) 
 $col["editable"] = true; 
 $col["search"] = false;
-
+$col["export"] = true;
 $cols[] = $col; 
 
 $col = array(); 
@@ -110,7 +106,7 @@ $col["name"] = "secretaryInputPrice"; // grid column name, must be exactly same 
 $col["editable"] = true;
 $col["formatter"] = "number"; 
 $col["search"] = false;
-
+$col["export"] = true;
 $cols[] = $col; 
 
 $col = array(); 
@@ -118,7 +114,7 @@ $col["title"] = "Банківська гарантія тендерної про
 $col["name"] = "secretaryBank"; // grid column name, must be exactly same as returned column-name from sql (tablefield or field-alias) 
 $col["editable"] = true; 
 $col["search"] = false;
-
+$col["export"] = true;
 $cols[] = $col; 
 
 $col = array(); 
@@ -126,7 +122,7 @@ $col["title"] = "Банківська гарантія виконання дго
 $col["name"] = "secretaryBankWork"; // grid column name, must be exactly same as returned column-name from sql (tablefield or field-alias) 
 $col["editable"] = true; 
 $col["search"] = false;
-
+$col["export"] = true;
 $cols[] = $col; 
 
 $col = array(); 
@@ -136,10 +132,8 @@ $col["editable"] = true;
 $col["datefmt"] = "Y-m-d";
 $col["formatter"] = "date";
 $col["formatoptions"] = array("srcformat"=>'Y-m-d',"newformat"=>'d/m/Y');
-$col["formatter"] = "datetime";
-$col["formatoptions"] = array("srcformat"=>'Y-m-d',"newformat"=>'d/m/Y');
 $col["search"] = false;
-
+$col["export"] = true;
 $cols[] = $col;
 
 $col = array(); 
@@ -147,7 +141,7 @@ $col["title"] = "Дата завершення прийому пропозиці
 $col["name"] = "secretaryDateOver"; // grid column name, must be exactly same as returned column-name from sql (tablefield or field-alias) 
 $col["editable"] = true; 
 $col["search"] = false;
-
+$col["export"] = true;
 $cols[] = $col; 
 
 $col = array(); 
@@ -158,7 +152,7 @@ $col["formatter"] = "datetime";
 $col["formatoptions"] = array("srcformat"=>'Y-m-d',"newformat"=>'d/m/Y');
 $col["searchoptions"]["sopt"] = array("cn");
 $col["search"] = false;
-
+$col["export"] = true;
 $cols[] = $col; 
 
 $col = array(); 
@@ -166,7 +160,7 @@ $col["title"] = "Результати акціону"; // caption of column
 $col["name"] = "secretaryResultAction"; // grid column name, must be exactly same as returned column-name from sql (tablefield or field-alias) 
 $col["editable"] = true; 
 $col["search"] = false;
-
+$col["export"] = true;
 $cols[] = $col; 
 
 $col = array(); 
@@ -174,7 +168,7 @@ $col["title"] = "Сума перемоги тис.грн"; // caption of column
 $col["name"] = "secretarySumWinner"; // grid column name, must be exactly same as returned column-name from sql (tablefield or field-alias) 
 $col["editable"] = true; 
 $col["search"] = false;
-
+$col["export"] = true;
 $cols[] = $col; 
 
 $col = array(); 
@@ -182,6 +176,7 @@ $col["title"] = "Результати ауккціону після кваліф
 $col["name"] = "secretaryResultActionAbout"; // grid column name, must be exactly same as returned column-name from sql (tablefield or field-alias) 
 $col["editable"] = true; 
 $col["search"] = false;
+$col["export"] = true;
 $cols[] = $col; 
 
 # Customization of Action column width and other properties
@@ -220,22 +215,16 @@ $out = $g->render("list1");
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html>
 <head>
-	<link rel='stylesheet' type='text/css' href='http://code.jquery.com/ui/1.10.3/themes/redmond/jquery-ui.css' />
-    <link rel='stylesheet' type='text/css' href='http://www.trirand.com/blog/jqgrid/themes/ui.jqgrid.css' />	
+    <link rel="shortcut icon" href="resource/img/logo.ico" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" media="screen" href="resource/js/themes/redmond/jquery-ui.custom.css"></link>  
+	<link  type='text/css' href='http://www.trirand.com/blog/jqgrid/themes/ui.jqgrid.css' />
+    <link rel='stylesheet' type='text/css' href='resource/js/jqgrid/css/ui.jqgrid.css' />	
     <link href="resource/css/style.css" type="text/css" rel="stylesheet">
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-    
-    
-
-	<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-	
-	<script type='text/javascript' src='http://www.trirand.com/blog/jqgrid/js/jquery-ui-custom.min.js'></script>        
-    <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jqgrid/4.6.0/js/i18n/grid.locale-ua.js'></script>
-    <script type='text/javascript' src='http://www.trirand.com/blog/jqgrid/js/jquery.jqGrid.js'></script>
+    <link rel="stylesheet" type="text/css" href="resource/css/bootstrap.min.css">
+	<script type='text/javascript' src="resource/js/jquery.min.js"></script>
+	<script type='text/javascript' src='resourdce/js/themes/jquery-ui.custom.min.js'></script>        
+    <script type='text/javascript' src='resource/js/jqgrid/js/i18n/grid.locale-ua.js'></script>
+    <script type='text/javascript' src='resource/js/jqgrid/js/jquery.jqGrid.js'></script>
 </head>
 <body>
 <div class="container">
@@ -269,7 +258,7 @@ $out = $g->render("list1");
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="resource/js/bootstrap.min.js" type="text/javascript"></script>
 
-<script>
+<!-- <script>
 function edit_as_radio(o)
 {
     setTimeout(function(){
@@ -277,7 +266,7 @@ function edit_as_radio(o)
         jQuery(o).parent().append('<input title="0" type="radio" name="rd_closed" value="0" onclick="jQuery(\'#total\').val(0);"/> 0 <input title="5" type="radio" name="rd_closed" value="5" onclick="jQuery(\'#total\').val(5);"/> 5 <input title="10" type="radio" name="rd_closed" value="10" onclick="jQuery(\'#total\').val(10);"/> 10');
     },100);
 }
-</script>
+</script> -->
 
 </body>
 </html>

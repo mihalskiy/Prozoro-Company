@@ -122,6 +122,8 @@ if (!empty($tab))
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html>
 <head>
+    <link rel="shortcut icon" href="resource/img/logo.ico" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" media="screen" href="resource/css/jquery-ui.custom.css"></link>
 	<link rel='stylesheet' type='text/css' href='http://code.jquery.com/ui/1.10.3/themes/redmond/jquery-ui.css' />
     <link rel='stylesheet' type='text/css' href='http://www.trirand.com/blog/jqgrid/themes/ui.jqgrid.css' />	
     <link href="resource/css/style.css" type="text/css" rel="stylesheet">
