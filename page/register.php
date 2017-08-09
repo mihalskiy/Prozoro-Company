@@ -4,7 +4,8 @@
     <div class="row">
             <!-- Menu -->
         <div class="innerMenu">
-              <?php Menu() ?>  
+              <?php Menu();
+              MessageShow()?>  
         </div>
             <!--content-->
         <div class="content">
@@ -16,7 +17,7 @@
             <form method="POST" action="/account/register">
                 <div class="form-group">
                     <label for="login">логін</label>
-                    <input type="text" class="form-control" name="login"  placeholder="Логін" >
+                    <input type="text" class="form-control" name="login"  placeholder="Логін" required>
                 </div>
                 <div class="form-group">
                     <label for="email">Email адреса</label>
@@ -30,10 +31,15 @@
                     <label for="name">Імя</label>
                     <input type="text" class="form-control" name="name"  placeholder="Імя" required>
                 </div>
-                  <div class="form-group">
+                <div class="form-group">
                     <label for="avatar">Аватар</label>
                     <input type="file" id="avatar">
                     <p class="help-block">Завантажте аватар</p>
+                </div>
+                <div class="form-group captcha">
+                    <span for="captcha">Введіть код перевірки</span>
+                    <input type="text" class="form-control clearfix" name="captcha" id="captcha">  
+                    <img src="resource/captcha.php" alt="каптча" >
                 </div>
                 <input type="submit" name="enter" class="btn btn-primary" value="Регистрация">
             </form>

@@ -46,11 +46,12 @@ $Param[$URL_Parts[$i]] = $URL_Parts[++$i];
 // подключение файлов
 
 if ($Page == 'index' and $Module == 'index') include('page/index.php');
-else if ($Page == 'calendar') echo include('page/secretary.php');
-else if ($Page == 'graphic') include('page/graphic.php');
-else if ($Page == 'register') /*echo 'Реєстрація'*/ include('page/register.php');
+
+else if ($Page == 'register')  include('page/register.php');
 else if ($Page == 'login') include('page/login.php');
 
+else if ($Page == 'calendar') echo include('page/secretary.php');
+else if ($Page == 'graphic') include('page/graphic.php');
 else if ($Page == 'secretary') include('page/secretary.php');
 else if ($Page == 'calculator') include('page/calculator.php');
 else if ($Page == 'lawyer') include('page/lawyer.php');
@@ -63,19 +64,21 @@ else if ($Page == 'select') include('page/dbSelect.php');
 else if ($Page == 'account')  include('forms/account.php');
 
 
+
 // функция отправки сообщения
 function MessageSend($p1, $p2) {
-	if($p1 == 1) $p1 = 'Помидка';
-	else if($p1 == 1) $p1 = 'Підказка';
-	else if($p1 == 1) $p1 = 'Інформація';
-	$_SESSION['message'] = '<div class="messageBlock"><b>'.$p1.'</b>:'.$p2.'</div>';
-	exit(header('Loacation: ', $_SERVER['HTTP_REFERER']));
+if ($p1 == 1) $p1 = 'Помилка';
+else if ($p1 == 2) $p1 = 'Підсказка';
+else if ($p1 == 3) $p1 = 'Інформація';
+$_SESSION['message'] = '<div class="messageBlock"><b>'.$p1.'</b>: '.$p2.'</div>';
+exit(header('Location: '.$_SERVER['HTTP_REFERER']));
 }
 
 // функция показа сообщения
 function MessageShow() {
-	echo $Message; 
-	$_SESSION['message'] = array();
+if ($_SESSION['message'])$Message = $_SESSION['message'];
+echo $Message;
+$_SESSION['message'] = array();
 }
 
 
@@ -92,7 +95,7 @@ function GenPass ($p1, $p2) {
 
 // вставка header на страници
 function Head($p1) {
-    echo '<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><title>'.$p1.'</title><link rel="shortcut icon" href="resource/img/logo.ico" type="image/x-icon"><link href="resource/css/bootstrap.min.css" rel="stylesheet" type="text/css"><script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script><script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><link href="/resource/css/style.css" type="text/css" rel="stylesheet"></head>';
+    echo '<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><title>'.$p1.'</title><link rel="shortcut icon" href="resource/img/logo.ico" type="image/x-icon"><link href="resource/css/bootstrap.min.css" rel="stylesheet" type="text/css"><script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script><script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><link href="resource/css/style.css" type="text/css" rel="stylesheet"></head>';
 }
 
 function Menu() {

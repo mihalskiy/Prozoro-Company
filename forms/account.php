@@ -8,9 +8,13 @@ if ($Module == 'register' and $_POST['enter']) {
     $_POST['name'] = FormChars($_POST['name']);
     $_POST['avatar'] = FormChars($_POST['avatar']);
     $_POST['avatar'] = 0;
+    $_POST['captcha'] = FormChars($_POST['captcha']);
     // проверка на пустоту форм
-if (!$_POST['login'] or !$_POST['email'] or !$_POST['password'] or !$_POST['name']) exit ('Помилка валідації форми');
+if (!$_POST['login'] or !$_POST['email'] or !$_POST['password'] or !$_POST['name'] or !$_POST['captcha']) MessageSend (1, ' заповнення форми');
 
+
+//проверка каптчи
+if ($_SESSION['captcha'] != md5($_POST['captcha'])) MessageSend (1, ' не правельно введений код перевірки');
 
 // проверка значений в базе
 $Row = mysqli_fetch_assoc(mysqli_query($CONNECT, "SELECT `login` FROM `users` WHERE `login` = '$_POST[login]'"));
