@@ -1,9 +1,11 @@
 <?php
 include_once 'config.php';
+include_once 'setting.php';
+
 session_start();
 
 // old link
-//$CONNECT = mysqli_connect(HOST, USER, PASS, DB);
+$CONNECT = mysqli_connect(HOST, USER, PASS, DB);
 
 $db_conf = array( 	
 					"type" 		=> PHPGRID_DBTYPE, 
