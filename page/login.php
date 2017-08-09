@@ -1,9 +1,4 @@
-<?php
-if ($_POST['enter']) {
-    echo 'Завантаження...';
-    exit;
-}
-?>
+
 <?php Head('Вхід в систему')?>
 <body>
 <div class="container">

@@ -36,9 +36,9 @@ $grid["toolbar"] = "up";
 $grid["autoresize"] = true; // responsive effect 
 $grid["view_options"]['width']='520'; 
 $grid["loadtext"] = "Завантаження...";
-$grid["add_options"] = array('width'=>'420');
-$grid["edit_options"] = array('width'=>'420');
-$grid["view_options"] = array('width'=>'420');
+$grid["add_options"] = array('width'=>'620');
+$grid["edit_options"] = array('width'=>'620');
+$grid["view_options"] = array('width'=>'620'); 
 
 // required for iphone/safari scroll display 
 // $grid["height"] = "auto"; 
@@ -76,8 +76,6 @@ $col = array();
 $col["title"] = "Дата передачі пакету документів юристом"; // caption of column 
 $col["name"] = "lawyerDateFile"; // grid column name, must be exactly same as returned column-name from sql (tablefield or field-alias) 
 $col["editable"] = true; 
-$col["dbname"] = "date_format(lawyerDateFile, '%d-%m-%Y')";
-$col["formatter"] = "select";
 $cols[] = $col; 
 
 $col = array(); 
@@ -86,12 +84,19 @@ $col["name"] = "lawyerDownloadDocument"; // grid column name, must be exactly sa
 $col["editable"] = true; 
 $cols[] = $col; 
 
+# Customization of Action column width and other properties
+$col = array();
+$col["title"] = "Редагування";
+$col["name"] = "act";
+$col["width"] = "50";
+$cols[] = $col;
+
 $g->set_columns($cols); 
 
 $g->set_actions(array( 
-        "add"=>true, // allow/disallow add 
+        "add"=>false, // allow/disallow add 
         "edit"=>true, // allow/disallow edit 
-        "delete"=>true, // allow/disallow delete 
+        "delete"=>false, // allow/disallow delete 
         "clone"=>true, // allow/disallow delete 
         "rowactions"=>true, // show/hide row wise edit/del/save option 
         "search" => "advance", // show single/multi field search condition (e.g. simple or advance) 

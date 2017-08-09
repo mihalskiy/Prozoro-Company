@@ -31,9 +31,9 @@ $grid["toolbar"] = "up";
 $grid["autoresize"] = true; // responsive effect 
 $grid["view_options"]['width']='520'; 
 $grid["loadtext"] = "Завантаження...";
-$grid["add_options"] = array('width'=>'420');
-$grid["edit_options"] = array('width'=>'420');
-$grid["view_options"] = array('width'=>'420');
+$grid["add_options"] = array('width'=>'620');
+$grid["edit_options"] = array('width'=>'620');
+$grid["view_options"] = array('width'=>'620'); 
 
 // required for iphone/safari scroll display 
 // $grid["height"] = "auto"; 
@@ -68,6 +68,13 @@ $col["title"] = "Орієнтовний термін закінчення роб
 $col["name"] = "adminDateFinishWork"; // grid column name, must be exactly same as returned column-name from sql (tablefield or field-alias) 
 $col["editable"] = true; 
 $cols[] = $col; 
+
+# Customization of Action column width and other properties
+$col = array();
+$col["title"] = "Редагування";
+$col["name"] = "act";
+$col["width"] = "50";
+$cols[] = $col;
 
 $g->set_columns($cols); 
 

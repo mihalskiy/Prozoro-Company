@@ -13,25 +13,30 @@
                    <div class="container ">
         <div class="registerForm">
             <h2> Сторінка реєстрації</h2>
-            <form  method="POST" action="/account/register">
+            <form method="POST" action="/account/register">
                 <div class="form-group">
                     <label for="login">логін</label>
-                    <input type="text" class="form-control" name="login"  placeholder="Логін" required>
+                    <input type="text" class="form-control" name="login"  placeholder="Логін" >
                 </div>
                 <div class="form-group">
-                    <label for="Email1">Email адреса</label>
+                    <label for="email">Email адреса</label>
                     <input type="email" class="form-control" name="email"  placeholder="Email" required>
                 </div>
                 <div class="form-group">
-                    <label for="Password1" >Пароль</label>
+                    <label for="password" >Пароль</label>
                     <input type="password" name="password" class="form-control"  placeholder="Пароль" required>
                 </div>
                 <div class="form-group">
                     <label for="name">Імя</label>
                     <input type="text" class="form-control" name="name"  placeholder="Імя" required>
                 </div>
-                <button type="submit" name="enter" class="btn btn-primary">Регистрация</button>
-            <form>
+                  <div class="form-group">
+                    <label for="avatar">Аватар</label>
+                    <input type="file" id="avatar">
+                    <p class="help-block">Завантажте аватар</p>
+                </div>
+                <input type="submit" name="enter" class="btn btn-primary" value="Регистрация">
+            </form>
         </div>
     </div>
 </div>

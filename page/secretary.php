@@ -26,9 +26,10 @@ $grid["view_options"]['width']='520';
 $grid["shrinkToFit"] = true;
 $grid["autowidth"] = true; 
 $grid["loadtext"] = "Завантаження...";
-$grid["add_options"] = array('width'=>'420');
-$grid["edit_options"] = array('width'=>'420');
-$grid["view_options"] = array('width'=>'420');
+$grid["form"]["position"] = "center";
+$grid["add_options"] = array('width'=>'620');
+$grid["edit_options"] = array('width'=>'620');
+$grid["view_options"] = array('width'=>'620'); 
 $grid["export"] = array("format"=>"pdf", "filename"=>"my-file", "sheetname"=>"test");
 $grid["export"] = array("filename"=>"my-file", "heading"=>"Invoice Details", "orientation"=>"landscape", "paper"=>"a4");
 
@@ -70,6 +71,8 @@ $col = array();
 $col["title"] = "Адреса об'єкту"; // caption of column 
 $col["name"] = "secretaryAddres"; // grid column name, must be exactly same as returned column-name from sql (tablefield or field-alias) 
 $col["editable"] = true; 
+$col["edittype"] = "textarea"; // render as textarea on edit 
+$col["editoptions"] = array("rows"=>2, "cols"=>20); // with these attributes 
 $col["search"] = false;
 $col["export"] = true;
 $cols[] = $col; 
@@ -113,6 +116,9 @@ $col = array();
 $col["title"] = "Банківська гарантія тендерної пропозиції"; // caption of column 
 $col["name"] = "secretaryBank"; // grid column name, must be exactly same as returned column-name from sql (tablefield or field-alias) 
 $col["editable"] = true; 
+$col["formatoptions"]["op"] = "bw";
+$col["edittype"] = "checkbox"; 
+$col["editoptions"] = array("value"=>"Так:НІ"); 
 $col["search"] = false;
 $col["export"] = true;
 $cols[] = $col; 
@@ -120,7 +126,9 @@ $cols[] = $col;
 $col = array(); 
 $col["title"] = "Банківська гарантія виконання дговору"; // caption of column 
 $col["name"] = "secretaryBankWork"; // grid column name, must be exactly same as returned column-name from sql (tablefield or field-alias) 
-$col["editable"] = true; 
+$col["editable"] = true;
+$col["edittype"] = "checkbox"; 
+$col["editoptions"] = array("value"=>"Так:НІ");
 $col["search"] = false;
 $col["export"] = true;
 $cols[] = $col; 
@@ -129,9 +137,6 @@ $col = array();
 $col["title"] = "Дата початку прийому пропозицій"; // caption of column 
 $col["name"] = "secretaryDateStart"; // grid column name, must be exactly same as returned column-name from sql (tablefield or field-alias) 
 $col["editable"] = true;
-$col["datefmt"] = "Y-m-d";
-$col["formatter"] = "date";
-$col["formatoptions"] = array("srcformat"=>'Y-m-d',"newformat"=>'d/m/Y');
 $col["search"] = false;
 $col["export"] = true;
 $cols[] = $col;
@@ -148,9 +153,6 @@ $col = array();
 $col["title"] = "Дата акціону"; // caption of column 
 $col["name"] = "secretaryDateAuction"; // grid column name, must be exactly same as returned column-name from sql (tablefield or field-alias) 
 $col["editable"] = true;
-$col["formatter"] = "datetime";
-$col["formatoptions"] = array("srcformat"=>'Y-m-d',"newformat"=>'d/m/Y');
-$col["searchoptions"]["sopt"] = array("cn");
 $col["search"] = false;
 $col["export"] = true;
 $cols[] = $col; 
@@ -193,6 +195,7 @@ $g->set_actions(array(
         "edit"=>true, // allow/disallow edit 
         "delete"=>true, // allow/disallow delete 
         "clone"=>true, // allow/disallow delete 
+        "import"=>true,
         "rowactions"=>true, // show/hide row wise edit/del/save option 
         "search" => "advance", // show single/multi field search condition (e.g. simple or advance) 
         "showhidecolumns" => false 
@@ -204,7 +207,21 @@ $out = $g->render("list1");
 
 // $themes = array("black-tie","blitzer","cupertino","dark-hive","dot-luv","eggplant","excite-bike","flick","hot-sneaks","humanity","le-frog","mint-choc","overcast","pepper-grinder","redmond","smoothness","south-street","start","sunny","swanky-purse","trontastic","ui-darkness","ui-lightness","vader"); 
 // $i = rand(0,8); 
+// custom on_export callback function
+function custom_export($param)
+{
+    $sql = $param["sql"]; // the SQL statement for export
+    $grid = $param["grid"]; // the complete grid object reference
 
+    if ($grid->options["export"]["format"] == "xls")
+    {
+        // excel generate code goes here
+    }
+    else if ($grid->options["export"]["format"] == "pdf")
+    {
+        // pdf generate code goes here
+    }
+}
 // // if set from page 
 // if (is_numeric($_GET["themeid"])) 
 //     $i = $_GET["themeid"]; 
