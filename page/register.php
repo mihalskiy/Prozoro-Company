@@ -17,7 +17,7 @@
             <form method="POST" action="/account/register">
                 <div class="form-group">
                     <label for="login">логін</label>
-                    <input type="text" class="form-control" name="login"  placeholder="Логін" required>
+                    <input type="text" class="form-control" name="login" maxlength="15" pattern="[A-Za-z-0-9]{5,15}" title="не менше 5 і не більше 15 латинських символів або цифр" placeholder="Логін" required>
                 </div>
                 <div class="form-group">
                     <label for="email">Email адреса</label>
@@ -25,11 +25,11 @@
                 </div>
                 <div class="form-group">
                     <label for="password" >Пароль</label>
-                    <input type="password" name="password" class="form-control"  placeholder="Пароль" required>
+                    <input type="password" name="password" class="form-control" maxlength="15" pattern="[A-Za-z-0-9]{5,15}" title="не менше 5 і не більше 15 латинських символів або цифр" placeholder="Пароль" required>
                 </div>
                 <div class="form-group">
                     <label for="name">Імя</label>
-                    <input type="text" class="form-control" name="name"  placeholder="Імя" required>
+                    <input type="text" class="form-control" name="name"  placeholder="Імя" maxlength="15" pattern="[А-Яа-яЁё]{3,15}" title="не менше 3 і не більше 15 кирилицею символів або цифр" required>
                 </div>
                 <div class="form-group">
                     <label for="avatar">Аватар</label>
@@ -38,10 +38,10 @@
                 </div>
                 <div class="form-group captcha">
                     <span for="captcha">Введіть код перевірки</span>
-                    <input type="text" class="form-control clearfix" name="captcha" id="captcha">  
+                    <input type="text" class="form-control clearfix" name="captcha" pattern="[0-9]{1,5}" title="Тільки номера" id="captcha">  
                     <img src="resource/captcha.php" alt="каптча" >
                 </div>
-                <input type="submit" name="enter" class="btn btn-primary" value="Регистрация">
+                <input type="submit" name="enter" class="btn btn-success" value="Регистрация">
             </form>
         </div>
     </div>

@@ -20,12 +20,17 @@ if ($_SESSION['captcha'] != md5($_POST['captcha'])) MessageSend (1, ' не пр�
 $Row = mysqli_fetch_assoc(mysqli_query($CONNECT, "SELECT `login` FROM `users` WHERE `login` = '$_POST[login]'"));
 if ($Row['login']) exit('Логін <b>'.$_POST['login'].'</b> вже використовується.');
 
-$Row = mysqli_fetch_assoc(mysqli_query($CONNECT, "SELECT 'login' FROM 'users' WHERE 'email' = '$_POST[email]'"));
-if ($Row['email']) exit('email <b>'.$_POST['email'].'</b> вже використовується.');
+$Row = mysqli_fetch_assoc(mysqli_query($CONNECT, "SELECT `email` FROM `users` WHERE `email` = '$_POST[email]'"));
+if ($Row['email']) exit('E-Mail <b>'.$_POST['email'].'</b> уже используеться.');
 
 // витягиваем данние
-mysqli_query($CONNECT, "INSERT INTO `users`  VALUES ('', '$_POST[login]', '$_POST[password]', '$_POST[name]', NOW(), '$_POST[email]', '$_POST[avatar]')");
-echo 'OK';
+mysqli_query($CONNECT, "INSERT INTO `users`  VALUES ('', '$_POST[login]', '$_POST[password]', '$_POST[name]', NOW(), '$_POST[email]', '$_POST[avatar]', 0)");
+
+// код для почти
+$Code = substr(base64_encode($_POST['email']), 0, -1);
+// отправка
+mail($_POST['email'], 'Реєстрація на сайті PROZORO-COMPANY', 'Посилання для активації: http://prozorocompany/account/activate/code/'.substr($Code, 5).substr($Code, 0, -5), 'From: muxalsku@mai.ru');
+MessageSend(3, 'Реєстрація пройшла успішно на вказаний E-Mail <b>'.$_POST['email'].'</b> відправленно лист підвердження');
 
 } 
 ?> 
