@@ -63,6 +63,22 @@ else if ($Page == 'select') include('page/dbSelect.php');
 else if ($Page == 'account')  include('forms/account.php');
 
 
+// функция отправки сообщения
+function MessageSend($p1, $p2) {
+	if($p1 == 1) $p1 = 'Помидка';
+	else if($p1 == 1) $p1 = 'Підказка';
+	else if($p1 == 1) $p1 = 'Інформація';
+	$_SESSION['message'] = '<div class="messageBlock"><b>'.$p1.'</b>:'.$p2.'</div>';
+	exit(header('Loacation: ', $_SERVER['HTTP_REFERER']));
+}
+
+// функция показа сообщения
+function MessageShow() {
+	echo $Message; 
+	$_SESSION['message'] = array();
+}
+
+
 // функция обработки форми
 
 function FormChars ($p1) {
