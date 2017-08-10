@@ -66,11 +66,12 @@ else if ($Page == 'account')  include('forms/account.php');
 
 
 // функция отправки сообщения
-function MessageSend($p1, $p2) {
+function MessageSend($p1, $p2, $p3 = '') {
 if ($p1 == 1) $p1 = 'Помилка';
 else if ($p1 == 2) $p1 = 'Підсказка';
 else if ($p1 == 3) $p1 = 'Інформація';
 $_SESSION['message'] = '<div class="messageBlock"><b>'.$p1.'</b>: '.$p2.'</div>';
+if ($p3) $_SERVER['HTTP_REFERER'] = $p3;
 exit(header('Location: '.$_SERVER['HTTP_REFERER']));
 }
 

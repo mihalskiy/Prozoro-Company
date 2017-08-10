@@ -31,6 +31,19 @@ $Code = substr(base64_encode($_POST['email']), 0, -1);
 // отправка
 mail($_POST['email'], 'Реєстрація на сайті PROZORO-COMPANY', 'Посилання для активації: http://prozorocompany/account/activate/code/'.substr($Code, 5).substr($Code, 0, -5), 'From: muxalsku@mai.ru');
 MessageSend(3, 'Реєстрація пройшла успішно на вказаний E-Mail <b>'.$_POST['email'].'</b> відправленно лист підвердження');
-
 } 
+
+//потверждения емейл
+ else if ($Module == 'activate' and $Param['code']){
+    if(!$_SESSION['USER_ACTIVE_EMAIL']) {
+        $Email = base64_decode(substr($Param['code'], 5).substr($Param['code'], 0, 5));
+        if (strpos($Email, '@') !== false) {
+            mysqli_query($CONNECT, "UPDATE 'users' SET 'active' = 1 WHERE 'email' = '$Email'");
+            $_SESSION['USER_ACTIVE_EMAIL'] = $Email;
+            MessageSend(3, 'E-mail адресу <b>'.$Email.'</b> пітвердженно.', '/login');
+        }
+        else MessageSend(1, 'E-mail адресу не пітвердженно.', '/login');
+        
+    }
+else MessageSend(1, 'E-mail адрес <b>'.$_SESSION['USER_ACTIVE_EMAIL'].'</b> вже пітвердженно.', '/login'); }
 ?> 

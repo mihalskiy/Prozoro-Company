@@ -4,7 +4,8 @@
     <div class="row">
             <!-- Menu -->
         <div class="innerMenu">
-              <?php Menu() ?>  
+            <?php Menu();
+              MessageShow()?>   
         </div>
             <!--content-->
         <div class="content">
