@@ -15,18 +15,19 @@
                        <!-- <div class="col-xs-12 col-md-8">
                            <div class="row"><p>dfef</p></div>
                        </div> -->
-                        <form class="form-signin">
+                        <form form method="POST" action="/account/login" class="col-md-4 col-md-offset-5">
                             <h2 class="form-signin-heading" >Вхід на сайт</h2>
-                            <label for="inputEmail" class="sr-only">Email address</label>
-                            <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-                            <label for="inputPassword" class="sr-only">Password</label>
-                            <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" value="remember-me"> Remember me
-                                </label>
+                            <label for="login" class="sr-only">Логін</label>
+                            <input type="text" class="form-control" name="login" maxlength="15" pattern="[A-Za-z-0-9]{5,15}" title="не менше 5 і не більше 15 латинських символів або цифр" placeholder="Логін" required>
+                            <label for="password" class="sr-only">Пароль</label>
+                            <input type="password" name="password" class="form-control" maxlength="15" pattern="[A-Za-z-0-9]{5,15}" title="не менше 5 і не більше 15 латинських символів або цифр" placeholder="Пароль" required>
+                            <div class="form-group captcha">
+                                <span for="captcha">Введіть код перевірки</span>
+                                <input type="text" class="form-control clearfix" name="captcha" pattern="[0-9]{1,5}" title="Тільки номера" id="captcha">  
+                                <img src="resource/captcha.php" alt="каптча" >
                             </div>
-                            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+                            <input type="submit" name="enter" class="btn btn-success" value="Вхід">
+                            
                         </form>
 </div>                 
             </div>

@@ -49,6 +49,7 @@ if ($Page == 'index' and $Module == 'index') include('page/index.php');
 
 else if ($Page == 'register')  include('page/register.php');
 else if ($Page == 'login') include('page/login.php');
+else if ($Page == 'profile') include('page/profile.php');
 
 else if ($Page == 'calendar') echo include('page/secretary.php');
 else if ($Page == 'graphic') include('page/graphic.php');
@@ -82,9 +83,14 @@ echo $Message;
 $_SESSION['message'] = array();
 }
 
+// функция анти гость
+function ULogin ($p1) {
+	if ($p1 <=0 and $_SESSION['USER_LOGIN_IN'] != $p1) MessageSend (1, 'Данна сторінка доступга тільки для гостей');
+	else if ($_SESSION['USER_LOGIN_IN'] != $p1)  MessageSend (1, 'Для перегляду сторінки зареєструйтеся будь-ласка!');
+}
+
 
 // функция обработки форми
-
 function FormChars ($p1) {
 return nl2br(htmlspecialchars(trim($p1), ENT_QUOTES), false);
 }

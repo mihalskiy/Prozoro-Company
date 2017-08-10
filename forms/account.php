@@ -46,4 +46,34 @@ MessageSend(3, 'Реєстрація пройшла успішно на вказ
         
     }
 else MessageSend(1, 'E-mail адрес <b>'.$_SESSION['USER_ACTIVE_EMAIL'].'</b> вже пітвердженно.', '/login'); }
+
+
+// модуль авторизации
+else if ($Module == 'login' and $_POST['enter']){
+    $_POST['login'] = FormChars($_POST['login']);
+    // FormChars удаляем теги (пробел) кода
+    $_POST['password'] = GenPass(FormChars($_POST['password']), $_POST['login']);
+    $_POST['captcha'] = FormChars($_POST['captcha']);
+
+    // проверка на пустость
+if (!$_POST['login'] or !$_POST['password']  or !$_POST['captcha']) MessageSend (1, ' не правельно введені данні');
+    //проверка каптчи
+if ($_SESSION['captcha'] != md5($_POST['captcha'])) MessageSend (1, ' не правельно заповнена форма');
+
+$Row = mysqli_fetch_assoc(mysqli_query($CONNECT, "SELECT `password`, 'avtive' FROM `users` WHERE `login` = '$_POST[login]'"));
+if ($Row['password'] !== $_POST['password']) MessageSend (1, ' Логін чи Пароль введені не вірно');
+if ($Row['active'] == 0) MessageSend (1, 'Акаунт користувача <b>'.$_POST['login'].'</b> не пітверджено.');
+$Row = mysqli_fetch_assoc(mysqli_query($CONNECT, "SELECT 'id', 'name', 'regdate', 'email',  'avatar' FROM 'users' WHERE 'login' = '$_POST[login]'"));
+
+// присваюем юзерам данние
+$_SESSION['USER_ID'] = $Row['id'];
+$_SESSION['USER_NAME'] = $Row['name'];
+$_SESSION['USER_REGDATE'] = $Row['regdate'];
+$_SESSION['USER_EMAIL'] = $Row['email'];
+$_SESSION['USER_AVATAR'] = $Row['avatar'];
+
+$_SESSION['USER_LOGIN_IN'] = $Row['1'];
+exit(header('Location: /profile'));
+}
+
 ?> 
