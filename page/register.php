@@ -1,4 +1,6 @@
-<?php Head('Сторінка Реєстрації')?>
+<?php 
+ULogin(0);
+Head('Сторінка Реєстрації')?>
 <body>
 <div class="container">
     <div class="row">

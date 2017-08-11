@@ -85,8 +85,8 @@ $_SESSION['message'] = array();
 
 // функция анти гость
 function ULogin ($p1) {
-	if ($p1 <=0 and $_SESSION['USER_LOGIN_IN'] != $p1) MessageSend (1, 'Данна сторінка доступга тільки для гостей');
-	else if ($_SESSION['USER_LOGIN_IN'] != $p1)  MessageSend (1, 'Для перегляду сторінки зареєструйтеся будь-ласка!');
+	if ($p1 <=0 and $_SESSION['USER_LOGIN_IN'] != $p1) MessageSend (1, 'Данна сторінка доступга тільки для гостей', '/register');
+	else if ($_SESSION['USER_LOGIN_IN'] != $p1)  MessageSend (1, 'Для перегляду сторінки зареєструйтеся будь-ласка!', '/register');
 }
 
 
@@ -106,7 +106,9 @@ function Head($p1) {
 }
 
 function Menu() {
-    echo '<div class="navbar"><nav class="navbar navbar-inverse"><div class="container-fluid"><div class="navbar-header"><a class="navbar-brand" href="/"><img alt="Brand" src="resource/img/bg.png" width="132px" height="47px"></a></div><div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"><ul class="nav navbar-nav"><li class="active"><a href="#">Головна <span class="sr-only">(current)</span></a></li><li><a href="#">Календарь</a></li><li><a href="/graphic">Графіки робіт</a></li><li><a href="/all">Уся таблиця</a></li><li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Учасники <span class="caret"></span></a><ul class="dropdown-menu"><li><a href="/secretary">Секретарь</a></li><li><a href="/accountant">Бухгалтер</a></li><li><a href="/lawyer">Юрист</a></li><li role="separator" class="divider"></li><li><a href="/calculator">Кошторисник</a></li><li role="separator" class="divider"></li><li><a href="/business">Деловод</a></li><li><a href="/admin">Адмін</a></li></ul></li></ul><ul class="nav navbar-nav navbar-right"><li><a href="/register">Реєстрація</a></li><li><a href="/login">Війти в систему</a></li></ul></div></nav></div>';
+	if ($_SESSION['USER_LOGIN_IN'] != 1) $Menu = '<ul class="nav navbar-nav navbar-right"><li><a href="/register">Реєстрація</a></li><li><a href="/login">Війти в систему</a></li></ul></div></nav>';
+	else  $Menu = '<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown link</a><div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink"><a class="dropdown-item" href="#">Action</a><a class="dropdown-item" href="#">Another action</a><a class="dropdown-item" href="#">Something else here</a></div></li>';
+    echo '<div class="navbar"><nav class="navbar navbar-inverse"><div class="container-fluid"><div class="navbar-header"><a class="navbar-brand" href="/"><img alt="Brand" src="resource/img/bg.png" width="132px" height="47px"></a></div><div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"><ul class="nav navbar-nav"><li class="active"><a href="#">Головна <span class="sr-only">(current)</span></a></li><li><a href="#">Календарь</a></li><li><a href="/graphic">Графіки робіт</a></li><li><a href="/all">Уся таблиця</a></li><li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Учасники <span class="caret"></span></a><ul class="dropdown-menu"><li><a href="/secretary">Секретарь</a></li><li><a href="/accountant">Бухгалтер</a></li><li><a href="/lawyer">Юрист</a></li><li role="separator" class="divider"></li><li><a href="/calculator">Кошторисник</a></li><li role="separator" class="divider"></li><li><a href="/business">Деловод</a></li><li><a href="/admin">Адмін</a></li></ul></li></ul>'.$Menu.'</div>';
 }
 
 

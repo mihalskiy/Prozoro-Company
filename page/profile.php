@@ -1,5 +1,6 @@
-
-<?php Head('Профіль користувача')?>
+<?php
+ULogin(1);
+ Head('Профіль користувача')?>
 <body>
 <div class="container">
     <div class="row">

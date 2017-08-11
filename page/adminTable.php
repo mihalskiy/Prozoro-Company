@@ -1,12 +1,5 @@
 <?php
-/**
- * PHP Grid Component
- *
- * @author Abu Ghufran <gridphp@gmail.com> - http://www.phpgrid.org
- * @version 2.0.0
- * @license: see license.txt included in package
- */
-
+ULogin(1);
 include_once "config.php";
 
 include(PHPGRID_LIBPATH."inc/jqgrid_dist.php");

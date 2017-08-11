@@ -1,5 +1,7 @@
 
-<?php Head('Вхід в систему')?>
+<?php 
+ULogin(0);
+Head('Вхід в систему')?>
 <body>
 <div class="container">
     <div class="row">
