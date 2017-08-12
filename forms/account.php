@@ -1,4 +1,14 @@
 <?php 
+//виход из сессии
+if($Module == 'logout' and $_SESSION['USER_LOGIN_IN'] = 1) {
+    if ($_COOKIE['user']) {
+        setcookie('user', '', strtotime('-30 days') , '/');
+    unset($_COOKIE['user']);
+    }
+session_unset();
+exit (header('Location: /login'));
+}
+
 // доступ для гостей
 ULogin(0);
 
@@ -26,7 +36,7 @@ $Code = substr(base64_encode($_POST['email']), 0, -1);
 
 // отправка email
 mail($_POST['email'], 'Реєстрація на сайті Prozoro-Compay', 'Посилання для активації: http:/prozoro-compay/account/activate/code/'.substr($Code, -5).substr($Code, 0, -5), 'From: Prozoro-Compay');
-MessageSend(3, 'Регистрация акаунта успешно завершена. На указанный E-mail адрес <b>'.$_POST['email'].'</b> отправленно письмо о подтверждении регистрации.');
+MessageSend(3, 'Рєстрація  акаунта успішно закінчена. На вказану E-mail адресу <b>'.$_POST['email'].'</b> відправлено лист  пітвердження  реєстрації.');
 }
 
 //потверждения емейл
@@ -63,6 +73,8 @@ $_SESSION['USER_REGDATE'] = $Row['regdate'];
 $_SESSION['USER_EMAIL'] = $Row['email'];
 $_SESSION['USER_AVATAR'] = $Row['avatar'];
 $_SESSION['USER_LOGIN_IN'] = 1;
+//хранение кукки
+if($_REQUEST['remember'] ) setcookie('user', $_POST['password'], strtotime('+5 days'), '/');
 exit(header('Location: /profile'));
 }
 ?>

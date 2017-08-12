@@ -28,6 +28,11 @@ Head('Вхід в систему')?>
                                 <input type="text" class="form-control clearfix" name="captcha" pattern="[0-9]{1,5}" title="Тільки номера" id="captcha">  
                                 <img src="resource/captcha.php" alt="каптча" >
                             </div>
+                              <div>
+                                <label>
+                                <input type="checkbox" name="remember"> Запамятати мене
+                                </label>
+                            </div>
                             <input type="submit" name="enter" class="btn btn-success" value="Вхід">
                             
                         </form>
