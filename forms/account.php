@@ -19,7 +19,7 @@ if ($Module == 'restore' and !$Param['code'] and substr($_SESSION['RESTORE'], 0,
 if ($Module == 'restore' and $_SESSION['RESTORE'] and substr($_SESSION['RESTORE'], 0, 4) != 'wait') MessageSend(2, 'Ваш пароль ранее уже был изменен. Для входа используйте нвоый пароль <b>'.$_SESSION['RESTORE'].'</b>', '/login');
 // проверка
 if ($Module == 'restore' and $Param['code']) {
-$Row = mysqli_fetch_assoc(mysqli_query($CONNECT, 'SELECT `login` FROM `users` WHERE `id` = '.str_replace(md5(substr($_SESSION['RESTORE'], 5)), '', $Param['code'])));
+$Row = mysqli_fetch_assoc(mysqli_query($CONNECT, 'SELECT `email` FROM `users` WHERE `id` = '.str_replace(md5($Row['email']), '', $Param['code'])));
 if (!$Row['login']) MessageSend(1, 'Невозможно восстановить пароль.', '/login');
 $Random = RandomString(15);
 $_SESSION['RESTORE'] = $Random;
@@ -37,9 +37,9 @@ if (!$_POST['login'] or !$_POST['captcha']) MessageSend(1, 'Не можливо 
 if ($_SESSION['captcha'] != md5($_POST['captcha'])) MessageSend(1, 'Код веддено не вірно.');
 // подключение  к бд
  $Row = mysqli_fetch_assoc(mysqli_query($CONNECT, "SELECT `id`, `email` FROM `users` WHERE `login` = '$_POST[login]'"));
-if (!$Row['email'])  MessageSend(1, ' такого E-Mail не знайдено.');
+if (!$Row['email'])  MessageSend(1, ' такого логіну не знайдено.');
 // отправка E-Mail с шифровкою
-mail($_POST['email'], 'Prozoro-Compay', 'Посилання для відновлення паролю: http:/prozoro-compay/account/restore/code/'.md5('ProzoroCompay').$Row[id], 'From: Prozoro-Compay');
+mail($_POST['email'], 'Prozoro-Compay', 'Посилання для відновлення паролю: http:/prozoro-compay/account/restore/code/'.md5($Row['email']).$Row[id], 'From: Prozoro-Compay');
 
 $_SESSION['RESTORE'] == 'wait_'.$Row['email'];
 MessageSend(2, 'На ваш емейл <b>'.HideEmail($Row['email']).'</b> відправленно пітвердження змінни паролю');
@@ -67,7 +67,9 @@ if ($Row['login']) MessageSend(1, 'Логін <b>'.$_POST['login'].'</b> вже 
 if ($Row['email']) MessageSend(1, 'E-Mail <b>'.$_POST['email'].'</b> вже використовується.');
 // витягиваем данние
 mysqli_query($CONNECT, "INSERT INTO `users`  VALUES ('', '$_POST[login]', '$_POST[password]', '$_POST[name]', NOW(), '$_POST[email]',  0, 0)");
+    // код шифровки данніх
     $Code = substr(base64_encode($_POST['email']), 0, -1);
+    $Code = str_replace('=', '', base64_encode($_POST['email']));
 // отправка email
 mail($_POST['email'], 'Реєстрація на сайті Prozoro-Compay', 'Посилання для активації: http:/prozoro-compay/account/activate/code/'.substr($Code, -5).substr($Code, 0, -5), 'From: Prozoro-Compay');
 MessageSend(3, 'Рєстрація  акаунта успішно закінчена. На вказану E-mail адресу <b>'.$_POST['email'].'</b> відправлено лист  пітвердження  реєстрації.');
