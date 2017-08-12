@@ -9,6 +9,30 @@ session_unset();
 exit (header('Location: /login'));
 }
 
+//редактирование профиля 
+if($Module == 'edit' and $_POST['enter']) { 
+    ULogin(1);
+    $_POST['opassword'] = FormChars($_POST['opassword']);
+    $_POST['npassword'] = FormChars($_POST['npassword']);
+    $_POST['name'] = FormChars($_POST['name']);
+// проверка путие ли форми
+if ($_POST['opassword'] or  $_POST['npassword'] ) {
+    if (!$_POST['opassword'] ) MessageSend(1, 'Не вказали старий пароль');
+    if (!$_POST['npassword'] ) MessageSend(1, 'Не вказали новий пароль');
+    if ($_SESSION['USER_PASSWORD'] != GenPass($_POST['opassword'], $_SESSION['USER_LOGIN'])) MessageSend(2, 'Старий пароль вказано не вірно.');
+$Password = GenPass($_POST['npassword'], $_SESSION['USER_LOGIN']);
+mysqli_query($CONNECT, "UPDATE `users`  SET `password` = '$Password' WHERE `id` = $_SESSION[USER_ID]");
+$_SESSION['USER_PASSWORD'] = $Password;
+} 
+// обновка бд из сессии
+if ($_POST['name'] != $_SESSION['USER_NAME']) {
+    mysqli_query($CONNECT, "UPDATE `users`  SET `name` = '$_POST[name]' WHERE `id` = $_SESSION[USER_ID]");
+    $_SESSION['USER_NAME'] = $_POST['name'];
+}
+MessageSend(3, 'Дані успішно змінені');
+}
+
+
 // доступ для гостей
 ULogin(0);
 
@@ -106,8 +130,10 @@ if ($_SESSION['captcha'] != md5($_POST['captcha'])) MessageSend(1, 'Код пе�
     $Row = mysqli_fetch_assoc(mysqli_query($CONNECT, "SELECT `password`, `active` FROM `users` WHERE `login` = '$_POST[login]'"));
 if ($Row['password'] != $_POST['password']) MessageSend(1, 'Не правельний логін чи пароль.');
 if ($Row['active'] == 0) MessageSend(1, 'Аккаунт користувача <b>'.$_POST['login'].'</b> не пітвердженно.');
-    $Row = mysqli_fetch_assoc(mysqli_query($CONNECT, "SELECT `id`, `name`, `regdate`, `email`,  `avatar` FROM `users` WHERE `login` = '$_POST[login]'"));
+    $Row = mysqli_fetch_assoc(mysqli_query($CONNECT, "SELECT `id`, `name`, `regdate`, `email`, `password`, `login`, `avatar` FROM `users` WHERE `login` = '$_POST[login]'"));
 // присваюем юзерам данние
+    $_SESSION['USER_LOGIN'] = $Row['login'];
+    $_SESSION['USER_PASSWORD'] = $Row['password'];
     $_SESSION['USER_ID'] = $Row['id'];
     $_SESSION['USER_NAME'] = $Row['name'];
     $_SESSION['USER_REGDATE'] = $Row['regdate'];

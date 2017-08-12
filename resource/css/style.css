@@ -75,8 +75,12 @@ body {
     width: 85px;
 }
 
-.btn {
-    
+li a img {
+    width: 40px;
+    height: 40px;
+    display: block;
+    border-radius: 50px 50px 50px 50px !important;
+    margin-top: 6px;
 }
 
 
