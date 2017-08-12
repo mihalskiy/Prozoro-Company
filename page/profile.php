@@ -11,7 +11,15 @@ ULogin(1);
         </div>
             <!--content-->
         <div class="content">
-                 123
+            <?php
+            echo'
+            <h4>Імя</h4> '.$_SESSION['USER_NAME'].'
+            <h4>Дата реєстрації</h4> '.$_SESSION['USER_REGDATE'].'
+            <h4>E-Mail</h4> '.$_SESSION['USER_EMAIL'].'
+            <h4>Аватар</h4> '.$_SESSION['USER_AVATAR'].'
+
+            ';
+            ?>
         </div>
             <!--footer-->
         <div class="footer">
