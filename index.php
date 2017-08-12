@@ -60,6 +60,8 @@ if ($Page == 'index' and $Module == 'index') include('page/index.php');
 else if ($Page == 'register')  include('page/register.php');
 else if ($Page == 'login') include('page/login.php');
 else if ($Page == 'profile') include('page/profile.php');
+else if ($Page == 'restore') include('page/restore.php');
+
 
 else if ($Page == 'calendar') echo include('page/secretary.php');
 else if ($Page == 'graphic') include('page/graphic.php');
@@ -82,6 +84,7 @@ if ($p1 == 1) $p1 = 'Помилка';
 else if ($p1 == 2) $p1 = 'Підсказка';
 else if ($p1 == 3) $p1 = 'Інформація';
 $_SESSION['message'] = '<div class="messageBlock"><b>'.$p1.'</b>: '.$p2.'</div>';
+// переход на страницу
 if ($p3) $_SERVER['HTTP_REFERER'] = $p3;
 exit(header('Location: '.$_SERVER['HTTP_REFERER']));
 }
@@ -116,8 +119,8 @@ function Head($p1) {
 }
 
 function Menu() {
-	if ($_SESSION['USER_LOGIN_IN'] != 1) $Menu = '<ul class="nav navbar-nav navbar-right"><li><a href="/register">Реєстрація</a></li><li><a href="/login">Вхід</a></li>';
-	else  $Menu = '<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"><ul class="nav navbar-nav"><li class="active"><a href="/">Головна <span class="sr-only">(current)</span></a></li><li><a href="#">Календарь</a></li><li><a href="/graphic">Графіки робіт</a></li><li><a href="/all">Уся таблиця</a></li><li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Учасники <span class="caret"></span></a><ul class="dropdown-menu"><li><a href="/secretary">Секретарь</a></li><li><a href="/accountant">Бухгалтер</a></li><li><a href="/lawyer">Юрист</a></li><li role="separator" class="divider"></li><li><a href="/calculator">Кошторисник</a></li><li role="separator" class="divider"></li><li><a href="/business">Деловод</a></li><li><a href="/admin">Адмін</a></li></ul></li></ul><ul class="nav navbar-nav navbar-right"><li><a href="#">Чат</a></li><li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Налаштування <span class="caret"></span></a><ul class="dropdown-menu"><li><a href="/profile">Мій профіль</a></li><li><li role="separator" class="divider"></li><li><a href="/account/logout">Вийти</a></li></ul></li></ul></div>';
+	if ($_SESSION['USER_LOGIN_IN'] != 1) $Menu = '<ul class="nav navbar-nav navbar-right"><li><a href="/register">Реєстрація</a></li><li><a href="/login">Вхід</a></li><li><a href="/restore">Відновлення паролю</a></li>';
+	else  $Menu = '<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"><ul class="nav navbar-nav"><li class="active"><a href="/">Головна <span class="sr-only">(current)</span></a></li><li><a href="#">Календарь</a></li><li><a href="/graphic">Графіки робіт</a></li><li><a href="/all">Уся таблиця</a></li><li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Учасники <span class="caret"></span></a><ul class="dropdown-menu"><li><a href="/secretary">Секретарь</a></li><li><a href="/accountant">Бухгалтер</a></li><li><a href="/lawyer">Юрист</a></li><li role="separator" class="divider"></li><li><a href="/calculator">Кошторисник</a></li><li role="separator" class="divider"></li><li><a href="/business">Деловод</a></li><li><a href="/admin">Адмін</a></li></ul></li></ul><ul class="nav navbar-nav navbar-right"><li><a href="#">Чат</a></li><li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Налаштування <span class="caret"></span></a><ul class="dropdown-menu"><li><a href="/profile">Мій профіль</a></li><li><a href="/profile">Мій профіль</a></li><li><li role="separator" class="divider"></li><li><a href="/account/logout">Вийти</a></li></ul></li></ul></div>';
     echo '<div class="navbar"><nav class="navbar navbar-inverse"><div class="container-fluid"><div class="navbar-header"><a class="navbar-brand" href="/"><img alt="Brand" src="resource/img/bg.png" width="132px" height="47px"></a></div>'.$Menu.'</div>';
 }
 
