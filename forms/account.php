@@ -29,6 +29,42 @@ if ($_POST['name'] != $_SESSION['USER_NAME']) {
     mysqli_query($CONNECT, "UPDATE `users`  SET `name` = '$_POST[name]' WHERE `id` = $_SESSION[USER_ID]");
     $_SESSION['USER_NAME'] = $_POST['name'];
 }
+
+//загрузка аватар проверка файла
+if($_FILES['avatar']['tmp_name']) {
+   if  ($_FILES['avatar']['type'] != 'image/jpeg') MessageSend(2, 'Не вірний тип забраження');
+   if  ($_FILES['avatar']['size'] > 200000) MessageSend(2, 'Розмір зображження великий.');
+
+// если условия норм лепим картинку
+$Image = imagecreatefromjpeg($_FILES['avatar']['tmp_name']);
+$Size = getimagesize($_FILES['avatar']['tmp_name']);
+$Tmp = imagecreatetruecolor(120, 120);
+imagecopyresampled($Tmp, $Image, 0, 0, 0, 0, 120, 120, $Size[0],  $Size[1]);
+
+//проверка 
+if ($_SESSION['USER_AVATAR'] == 0) {
+// количество фйлов в деректории, возращение свободной деректории для загрузка
+$Files = glob ('resource/avatar/*', GLOB_ONLYDIR);
+// функция записи если аватар не вибран
+foreach($Files as $num => $Dir) {
+$Num ++;
+$Count = sizeof(glob($Dir.'/*.*'));
+if ($Count < 250) {
+$Download = $Dir.'/'.$_SESSION['USER_ID'];
+$_SESSION['USER_AVATAR'] = $Num;
+mysqli_query($CONNECT, "UPDATE `users`  SET `avatar` = $Num WHERE `id` = $_SESSION[USER_ID]");
+break;
+}
+}
+}
+// если вібран и нужно изменить
+else $Download = 'resource/avatar/'.$_SESSION['USER_AVATAR'].'/'.$_SESSION['USER_ID'];
+
+// сахранение картинки на сервере
+imagejpeg($Tmp, $Download.'.jpg');
+imagedestroy($Image);
+imagedestroy($Tmp);
+}
 MessageSend(3, 'Дані успішно змінені');
 }
 
