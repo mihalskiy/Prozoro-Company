@@ -26,7 +26,7 @@ Head('Відновлення паролю')?>
                                 <input type="text" class="form-control clearfix" name="captcha" pattern="[0-9]{1,5}" title="Тільки номера" id="captcha">  
                                 <img src="resource/captcha.php" alt="каптча" >
                             </div>
-                            <input type="submit" name="enter" class="btn btn-success" value="Вхід">
+                            <input type="submit" name="enter" class="btn btn-success" value="Відновити">
                             
                         </form>
 </div>                 

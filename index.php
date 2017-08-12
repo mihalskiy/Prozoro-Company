@@ -53,8 +53,15 @@ $Param[$URL_Parts[$i]] = $URL_Parts[++$i];
 }
 }
 
-// подключение файлов
 
+
+// Загрузка файлов
+// if ($Page == 'loads') {
+// 	if (!$Module or $Page == 'loads' and $Module == 'category' or $Page == 'loads' and $Module == 'main') include ('module/loads/main.php')
+// 	else if ($Module == 'material') include 
+// }
+
+// подключение файлов
 if ($Page == 'index' and $Module == 'index') include('page/index.php');
 
 else if ($Page == 'register')  include('page/register.php');
@@ -75,6 +82,7 @@ else if ($Page == 'all') include('page/allTable.php');
 else if ($Page == 'select') include('page/dbSelect.php');
 
 else if ($Page == 'account')  include('forms/account.php');
+
 
 
 
@@ -113,13 +121,26 @@ function GenPass ($p1, $p2) {
     return md5('MRRUSLAN'.md5('594'.$p1.'741').md5('910'.$p2.'531'));
 }
 
+// фенкция генерации набор случайніх символов
+function RandomString($p1) {
+$Char = '0123456789abcdefghijklmnopqrstuvwxyz';
+for ($i = 0; $i < $p1; $i ++) $String .= $Char[rand(0, strlen($Char) - 1)];
+return $String;
+}
+
+// скрить str
+function HideEmail($p1) {
+$Explode = explode('@', $p1);
+return $Explode[0].'@*****';
+}
+
 // вставка header на страници
 function Head($p1) {
     echo '<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><title>'.$p1.'</title><link rel="shortcut icon" href="resource/img/logo.ico" type="image/x-icon"><link href="resource/css/bootstrap.min.css" rel="stylesheet" type="text/css"><script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script><script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><link href="resource/css/style.css" type="text/css" rel="stylesheet"></head>';
 }
 
 function Menu() {
-	if ($_SESSION['USER_LOGIN_IN'] != 1) $Menu = '<ul class="nav navbar-nav navbar-right"><li><a href="/register">Реєстрація</a></li><li><a href="/login">Вхід</a></li><li><a href="/restore">Відновлення паролю</a></li>';
+	if ($_SESSION['USER_LOGIN_IN'] != 1) $Menu = '<ul class="nav navbar-nav navbar-right"><li><a href="/register">Реєстрація</a></li><li><a href="/login">Вхід</a></li><li><a href="/restore">Відновити пароль</a></li>';
 	else  $Menu = '<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"><ul class="nav navbar-nav"><li class="active"><a href="/">Головна <span class="sr-only">(current)</span></a></li><li><a href="#">Календарь</a></li><li><a href="/graphic">Графіки робіт</a></li><li><a href="/all">Уся таблиця</a></li><li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Учасники <span class="caret"></span></a><ul class="dropdown-menu"><li><a href="/secretary">Секретарь</a></li><li><a href="/accountant">Бухгалтер</a></li><li><a href="/lawyer">Юрист</a></li><li role="separator" class="divider"></li><li><a href="/calculator">Кошторисник</a></li><li role="separator" class="divider"></li><li><a href="/business">Деловод</a></li><li><a href="/admin">Адмін</a></li></ul></li></ul><ul class="nav navbar-nav navbar-right"><li><a href="#">Чат</a></li><li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Налаштування <span class="caret"></span></a><ul class="dropdown-menu"><li><a href="/profile">Мій профіль</a></li><li><a href="/profile">Мій профіль</a></li><li><li role="separator" class="divider"></li><li><a href="/account/logout">Вийти</a></li></ul></li></ul></div>';
     echo '<div class="navbar"><nav class="navbar navbar-inverse"><div class="container-fluid"><div class="navbar-header"><a class="navbar-brand" href="/"><img alt="Brand" src="resource/img/bg.png" width="132px" height="47px"></a></div>'.$Menu.'</div>';
 }
