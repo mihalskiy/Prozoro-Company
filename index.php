@@ -69,6 +69,7 @@ else if ($Page == 'register')  include('page/register.php');
 else if ($Page == 'login') include('page/login.php');
 else if ($Page == 'profile') include('page/profile.php');
 else if ($Page == 'restore') include('page/restore.php');
+else if ($Page == 'chat') include('page/chat.php');
 
 
 else if ($Page == 'calendar') echo include('page/secretary.php');

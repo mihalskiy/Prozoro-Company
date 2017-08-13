@@ -79,7 +79,7 @@ if ($Module == 'restore' and !$Param['code'] and substr($_SESSION['RESTORE'], 0,
 if ($Module == 'restore' and $_SESSION['RESTORE'] and substr($_SESSION['RESTORE'], 0, 4) != 'wait') MessageSend(2, 'Ваш пароль ранее уже был изменен. Для входа используйте нвоый пароль <b>'.$_SESSION['RESTORE'].'</b>', '/login');
 // проверка
 if ($Module == 'restore' and $Param['code']) {
-$Row = mysqli_fetch_assoc(mysqli_query($CONNECT, 'SELECT `email` FROM `users` WHERE `id` = '.str_replace(md5($Row['email']), '', $Param['code'])));
+$Row = mysqli_fetch_assoc(mysqli_query($CONNECT, 'SELECT `login` FROM `users` WHERE `id` = '.str_replace(md5(substr($_SESSION['RESTORE'], 5)), '', $Param['code'])));
 if (!$Row['login']) MessageSend(1, 'Невозможно восстановить пароль.', '/login');
 $Random = RandomString(15);
 $_SESSION['RESTORE'] = $Random;
