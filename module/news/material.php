@@ -1,5 +1,11 @@
 <?php 
-Head('Новини');
+$Param['id'] += 0;
+if ($Param['id'] == 0) MessageSend(1, 'URL адресу вказано не вірно', '/news');
+
+$Row = mysqli_fetch_assoc(mysqli_query($CONNECT, 'SELECT `name`, `added`, `date`, `read`, `text` FROM `news` WHERE `id` = '.$Param['id']));
+if (!$Row['name']) MessageSend(1, 'Такой новости не существует.', '/news');
+mysqli_query($CONNECT, 'UPDATE `news` SET `read` = `read` + 1 WHERE `id` = '.$Param['id']);
+Head($Row['name']);
 ?>
 <body>
 <div class="container">
@@ -20,7 +26,7 @@ Head('Новини');
 <div class="pageNews">
     <?php
        
-     echo 'Новина: '.$Param['id'];
+     echo 'Переглядів: '.($Row['read'] + 1).' | Добавив: '.$Row['added'].' | Дата: '.$Row['date'].'<br><br><b>'.$Row['name'].'</b><br>'.$Row['text']
      
     ?>
 </div>

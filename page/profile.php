@@ -22,7 +22,7 @@ else $Avatar = $_SESSION['USER_AVATAR'].'/'.$_SESSION['USER_ID'];
       <img src="resource/avatar/'.$Avatar.'.jpg" alt="Аватар">
       <div class="caption">
         <h3>Профіль</h3>
-            <h4>Імя</h4> '.$_SESSION['USER_NAME'].'
+            <h4>Імя</h4> '.$_SESSION['USER_NAME'].' ('.userGroup($_SESSION['USER_GROUP']).')
             <h4>Дата реєстрації</h4> '.$_SESSION['USER_REGDATE'].'
             <h4>E-Mail</h4> '.$_SESSION['USER_EMAIL'].'
       </div>

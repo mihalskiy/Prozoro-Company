@@ -22,7 +22,7 @@ $db_conf = array(
 //else echo 'ERROR НЕт ПОКЛЮЧЕНИЯ К БД';
 
 if ($_SESSION['USER_LOGIN_IN'] != 1 and $_COOKIE['user']) {
-$Row = mysqli_fetch_assoc(mysqli_query($CONNECT, "SELECT `id`, `name`, `regdate`, `email`, `login`, `avatar` FROM `users` WHERE `password` = '$_COOKIE[user]'"));
+$Row = mysqli_fetch_assoc(mysqli_query($CONNECT, "SELECT `id`, `name`, `regdate`, `email`, `login`, , `group` `avatar` FROM `users` WHERE `password` = '$_COOKIE[user]'"));
 // присваюем юзерам данние
 $_SESSION['USER_ID'] = $Row['id'];
 $_SESSION['USER_LOGIN'] = $Row['login'];
@@ -30,6 +30,7 @@ $_SESSION['USER_NAME'] = $Row['name'];
 $_SESSION['USER_REGDATE'] = $Row['regdate'];
 $_SESSION['USER_EMAIL'] = $Row['email'];
 $_SESSION['USER_AVATAR'] = $Row['avatar'];
+$_SESSION['USER_GROUP'] = $Row['group'];
 $_SESSION['USER_LOGIN_IN'] = 1;
 }
 
@@ -72,8 +73,10 @@ else if ($Page == 'restore') include('page/restore.php');
 else if ($Page == 'chat') include('page/chat.php');
 
 else if ($Page == 'news') {
-	if(!$Module or $Page == 'main' and $Module == 'category' or $Page == 'news' and $Module == 'main' ) include ('module/news/main.php');
-	else if ($Module == 'material') include ('module/news/material.php');
+if (!$Module or $Page == 'news' and $Module == 'category' or $Page == 'news' and $Module == 'main') include('module/news/main.php');
+	else if ($Module == 'material') include('module/news/material.php');
+	else if ($Module == 'add') include('module/news/add.php');
+	else if ($Module == 'edit') include('module/news/edit.php');
 }
 
 else if ($Page == 'calendar') echo include('page/secretary.php');
@@ -110,6 +113,24 @@ echo $Message;
 $_SESSION['message'] = array();
 }
 
+// групи пользователей 
+function userGroup ($p1) {
+	if ($p1 == 0) return 'Гість';
+	else if ($p1 == 1) return 'Кошторисник';
+	else if ($p1 == 2) return 'Секретарь';
+	else if ($p1 == 3) return 'Бухгалтер';
+	else if ($p1 == 4) return 'Юрист';
+	else if ($p1 == 5) return 'Деловод';
+	else if ($p1 == 6) return 'Модератор';
+	else if ($p1 == 7) return 'Адміністратор';
+	else if ($p1 == -1) return 'Заблокований';
+}
+
+// доступ черес ети групи
+function userAccess($p1) {
+	if ($_SESSION['USER_GROUP'] < $p1)  MessageSend (1, 'У вас не має прав доступу для перегляду цієї сторінки', '/');
+}
+
 // функция анти гость
 function ULogin ($p1) {
 	if ($p1 <=0 and $_SESSION['USER_LOGIN_IN'] != $p1) MessageSend (1, 'Данна сторінка доступга тільки для гостей', '/login');
@@ -140,6 +161,29 @@ $Explode = explode('@', $p1);
 return $Explode[0].'@*****';
 }
 
+// функция переключателя страниц
+function PageSelector($p1, $p2, $p3, $p4 = 5) {
+	
+/*
+$p1 - URL (Например: /news/main/page)
+$p2 - Текущая страница (из $Param['page'])
+$p3 - Кол-во новостей
+$p4 - Кол-во записей на странице
+*/
+$Page = ceil($p3[0] / $p4); //делим кол-во новостей на кол-во записей на странице.
+if ($Page > 1) { //А нужен ли переключатель?
+echo '<nav  class="col-md-offset-5" aria-label="Page navigation"><ul class="pagination">';
+for($i = ($p2 - 3); $i < ($Page + 1); $i++) {
+if ($i > 0 and $i <= ($p2 + 3)) {
+if ($p2 == $i) $Swch = 'active';
+else $Swch = 'pagination';
+echo ' <li class="'.$Swch.'"><a  href="'.$p1.$i.'">'.$i.'</a></li>';
+}
+}
+echo '</ul></nav>';
+}
+}
+
 // вставка header на страници
 function Head($p1) {
     echo '<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><title>'.$p1.'</title><link rel="shortcut icon" href="/resource/img/logo.ico" type="image/x-icon"><link href="/resource/css/bootstrap.min.css" rel="stylesheet" type="text/css"><script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script><script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><link href="/resource/css/style.css" type="text/css" rel="stylesheet"></head>';
@@ -147,9 +191,9 @@ function Head($p1) {
 
 function Menu() {
 	if ($_SESSION['USER_AVATAR'] == 0) $Avatar = 0;
-else $Avatar = $_SESSION['USER_AVATAR'].'/'.$_SESSION['USER_ID'];
+	else $Avatar = $_SESSION['USER_AVATAR'].'/'.$_SESSION['USER_ID'];
 	if ($_SESSION['USER_LOGIN_IN'] != 1) $Menu = '<ul class="nav navbar-nav navbar-right"><li><a href="/register">Реєстрація</a></li><li><a href="/login">Вхід</a></li><li><a href="/restore">Відновити пароль</a></li>';
-	else  $Menu = '<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"><ul class="nav navbar-nav"><li class="active"><a href="/">Головна <span class="sr-only">(current)</span></a></li><li><a href="/news">Новини</a></li><li><a href="#">Календарь</a></li><li><a href="#">Графіки робіт</a></li><li><a href="/all">Уся таблиця</a></li><li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Учасники <span class="caret"></span></a><ul class="dropdown-menu"><li><a href="/secretary">Секретарь</a></li><li><a href="/accountant">Бухгалтер</a></li><li><a href="/lawyer">Юрист</a></li><li role="separator" class="divider"></li><li><a href="/calculator">Кошторисник</a></li><li role="separator" class="divider"></li><li><a href="/business">Деловод</a></li><li><a href="/admin">Адмін</a></li></ul></li></ul><ul class="nav navbar-nav navbar-right"><li><a href="/chat">Чат</a></li><li class="dropdown"><a href="#" class="dropdown-toggle navbar-brand " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img alt="Brand" class="foto" src="resource/avatar/'.$Avatar.'.jpg""></a><ul class="dropdown-menu"><li><a href="/profile">Мій профіль</a></li><li><a href="/profile">Мій профіль</a></li><li><li role="separator" class="divider"></li><li><a href="/account/logout">Вийти</a></li></ul></li></ul></div>';
+	else  $Menu = '<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"><ul class="nav navbar-nav"><li class="active"><a href="/">Головна <span class="sr-only">(current)</span></a></li><li><a href="/news">Новини</a></li><li><a href="#">Календарь</a></li><li><a href="#">Графіки робіт</a></li><li><a href="/all">Уся таблиця</a></li><li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Учасники <span class="caret"></span></a><ul class="dropdown-menu"><li><a href="/secretary">Секретарь</a></li><li><a href="/accountant">Бухгалтер</a></li><li><a href="/lawyer">Юрист</a></li><li role="separator" class="divider"></li><li><a href="/calculator">Кошторисник</a></li><li role="separator" class="divider"></li><li><a href="/business">Деловод</a></li><li><a href="/admin">Адмін</a></li></ul></li></ul><ul class="nav navbar-nav navbar-right"><li><a href="/chat">Чат</a></li><li class="dropdown"><a href="#" class="dropdown-toggle navbar-brand " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img alt="Brand" class="foto" src="/resource/avatar/'.$Avatar.'.jpg""></a><ul class="dropdown-menu"><li><a href="/profile">Мій профіль</a></li><li><a href="/profile">Мій профіль</a></li><li><li role="separator" class="divider"></li><li><a href="/account/logout">Вийти</a></li></ul></li></ul></div>';
     echo '<div class="navbar"><nav class="navbar navbar-inverse"><div class="container-fluid"><div class="navbar-header"><a class="navbar-brand" href="/"><img alt="Brand" src="/resource/img/bg.png" width="132px" height="47px"></a></div>'.$Menu.'</div>';
 }
 
@@ -158,4 +202,3 @@ else $Avatar = $_SESSION['USER_AVATAR'].'/'.$_SESSION['USER_ID'];
 
 
 ?>
-

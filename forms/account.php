@@ -126,7 +126,7 @@ if ($Row['login']) MessageSend(1, 'Логін <b>'.$_POST['login'].'</b> вже 
     $Row = mysqli_fetch_assoc(mysqli_query($CONNECT, "SELECT `email` FROM `users` WHERE `email` = '$_POST[email]'"));
 if ($Row['email']) MessageSend(1, 'E-Mail <b>'.$_POST['email'].'</b> вже використовується.');
 // витягиваем данние
-mysqli_query($CONNECT, "INSERT INTO `users`  VALUES ('', '$_POST[login]', '$_POST[password]', '$_POST[name]', NOW(), '$_POST[email]',  0, 0)");
+mysqli_query($CONNECT, "INSERT INTO `users`  VALUES ('', '$_POST[login]', '$_POST[password]', '$_POST[name]', NOW(), '$_POST[email]',  0, 0, 0)");
     // код шифровки данніх
     $Code = substr(base64_encode($_POST['email']), 0, -1);
     $Code = str_replace('=', '', base64_encode($_POST['email']));
@@ -166,7 +166,7 @@ if ($_SESSION['captcha'] != md5($_POST['captcha'])) MessageSend(1, 'Код пе�
     $Row = mysqli_fetch_assoc(mysqli_query($CONNECT, "SELECT `password`, `active` FROM `users` WHERE `login` = '$_POST[login]'"));
 if ($Row['password'] != $_POST['password']) MessageSend(1, 'Не правельний логін чи пароль.');
 if ($Row['active'] == 0) MessageSend(1, 'Аккаунт користувача <b>'.$_POST['login'].'</b> не пітвердженно.');
-    $Row = mysqli_fetch_assoc(mysqli_query($CONNECT, "SELECT `id`, `name`, `regdate`, `email`, `password`, `login`, `avatar` FROM `users` WHERE `login` = '$_POST[login]'"));
+    $Row = mysqli_fetch_assoc(mysqli_query($CONNECT, "SELECT `id`, `name`, `regdate`, `email`, `password`, `login`, `group`, `avatar` FROM `users` WHERE `login` = '$_POST[login]'"));
 // присваюем юзерам данние
     $_SESSION['USER_LOGIN'] = $Row['login'];
     $_SESSION['USER_PASSWORD'] = $Row['password'];
@@ -175,6 +175,7 @@ if ($Row['active'] == 0) MessageSend(1, 'Аккаунт користувача <
     $_SESSION['USER_REGDATE'] = $Row['regdate'];
     $_SESSION['USER_EMAIL'] = $Row['email'];
     $_SESSION['USER_AVATAR'] = $Row['avatar'];
+    $_SESSION['USER_GROUP'] = $Row['group'];
     $_SESSION['USER_LOGIN_IN'] = 1;
 //хранение кукки
 if($_REQUEST['remember'] ) setcookie('user', $_POST['password'], strtotime('+5 days'), '/');
