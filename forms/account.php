@@ -84,7 +84,7 @@ if (!$Row['login']) MessageSend(1, 'Невозможно восстановит�
 $Random = RandomString(15);
 $_SESSION['RESTORE'] = $Random;
 mysqli_query($CONNECT, "UPDATE `users` SET `password` = '".GenPass($Random, $Row['login'])."' WHERE `login` = '$Row[login]'");
-MessageSend(2, 'Пароль успешно изменен, для входа используйте новый пароль <b>'.$Random.'</b>', '/login');
+MessageSend(2, 'Пароль успішно змінено, для входу використайте новий пароль <b>'.$Random.'</b>', '/login');
 }
 //отправка данних
 if ($Module == 'restore' and $_POST['enter']) {

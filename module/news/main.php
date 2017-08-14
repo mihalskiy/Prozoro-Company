@@ -12,7 +12,9 @@ Head('Новини');
         </div>
             <!--content-->
         <div class="content">
-          <ul class="nav nav-tabs">
+            
+    <ul class="nav nav-tabs">
+<?php  if ($_SESSION['USER_GROUP'] == 7) echo '<li><a href="/news/add" class="btn btn-success btn-lg">Добавити новину</a></li>'?>
   <li role="presentation" class="active"><a href="/news">Усі категорії</a></li>
   <li role="presentation"><a href="/news/category/id/1">Категорія 1</a></li>
   <li role="presentation"><a href="/news/category/id/2">Категорія 2</a></li>

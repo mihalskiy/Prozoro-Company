@@ -2,8 +2,8 @@
 $Param['id'] += 0;
 if ($Param['id'] == 0) MessageSend(1, 'URL адресу вказано не вірно', '/news');
 
-$Row = mysqli_fetch_assoc(mysqli_query($CONNECT, 'SELECT `name`, `added`, `date`, `read`, `text` FROM `news` WHERE `id` = '.$Param['id']));
-if (!$Row['name']) MessageSend(1, 'Такой новости не существует.', '/news');
+$Row = mysqli_fetch_assoc(mysqli_query($CONNECT, 'SELECT `name`, `added`, `date`, `readed`, `text` FROM `news` WHERE `id` = '.$Param['id']));
+if (!$Row['name']) MessageSend(1, 'Такї новини не знайдено.', '/news');
 mysqli_query($CONNECT, 'UPDATE `news` SET `read` = `read` + 1 WHERE `id` = '.$Param['id']);
 Head($Row['name']);
 ?>
@@ -25,8 +25,8 @@ Head($Row['name']);
 </ul>
 <div class="pageNews">
     <?php
-       
-     echo 'Переглядів: '.($Row['read'] + 1).' | Добавив: '.$Row['added'].' | Дата: '.$Row['date'].'<br><br><b>'.$Row['name'].'</b><br>'.$Row['text']
+     if ($_SESSION['USER_GROUP'] == 7) $EDIT = '<li><a href="/news/edit/id/'.$Param['id'].'" class="">Редагувати новину</a></li>';
+     echo 'Переглядів: '.($Row['read'] + 1).' | Добавив: '.$Row['added'].' | Дата: '.$Row['date'].' '.$EDIT.'<br><br><b>'.$Row['name'].'</b><br>'.$Row['text']
      
     ?>
 </div>
