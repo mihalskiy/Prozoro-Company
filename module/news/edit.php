@@ -1,5 +1,5 @@
 <?php 
-userAccess(5);
+userAccess(2);
 // проверка на ид обезателен
 $Param['id'] += 0;
 if (!$Param['id']) MessageSend(1, 'Не вказано ID новини', '/news');

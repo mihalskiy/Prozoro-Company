@@ -1,5 +1,6 @@
-<?php 
-userAccess(5);
+<?php
+if ($_SESSION['USER_GROUP'] == 2) $Active = 1;
+else $Active = 0;
 
 // если наши платформи зареестр то будем виполнять таки запросси
 if ($_POST['enter'] and $_POST['text'] and $_POST['name']  and $_POST['cat']) {
@@ -8,8 +9,8 @@ if ($_POST['enter'] and $_POST['text'] and $_POST['name']  and $_POST['cat']) {
     // = number
     $_POST['cat'] += 0;
 // витяговаем данние 
-mysqli_query($CONNECT, "INSERT INTO `news`  VALUES ('', '$_POST[name]', $_POST[cat], 0, '$_SESSION[USER_LOGIN]', '$_POST[text]',  NOW())");
-MessageSend(2, 'Новина добавлена', '/news');
+mysqli_query($CONNECT, "INSERT INTO `news`  VALUES ('', '$_POST[name]', $_POST[cat], 0, '$_SESSION[USER_LOGIN]', '$_POST[text]',  NOW(), $Active)");
+MessageSend(3, 'Новина добавлена', '/news');
 }
 
 Head('Додати новини')?>
@@ -50,9 +51,7 @@ Head('Додати новини')?>
         </div>
     </div>
 </div>
-
             </div>
-
         </div>
 
             <!--footer-->

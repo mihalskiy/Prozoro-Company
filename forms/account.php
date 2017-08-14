@@ -102,7 +102,7 @@ if (!$Row['email'])  MessageSend(1, ' такого логіну не знайд�
 mail($_POST['email'], 'Prozoro-Compay', 'Посилання для відновлення паролю: http:/prozoro-compay/account/restore/code/'.md5($Row['email']).$Row[id], 'From: Prozoro-Compay');
 
 $_SESSION['RESTORE'] == 'wait_'.$Row['email'];
-MessageSend(2, 'На ваш емейл <b>'.HideEmail($Row['email']).'</b> відправленно пітвердження змінни паролю');
+MessageSend(2, 'На ваш емейл <b>'.HideEmail($Row['email']).'</b> відправленно пітвердження змінни паролю', '/login');
 }
 
 

@@ -33,11 +33,6 @@ Head('Сторінка Реєстрації')?>
                     <label for="name">Імя</label>
                     <input type="text" class="form-control" name="name"  placeholder="Імя" maxlength="15" pattern="[А-Яа-яЁё]{3,15}" title="не менше 3 і не більше 15 кирилицею символів або цифр" required>
                 </div>
-                <div class="form-group">
-                    <label for="avatar">Аватар</label>
-                    <input type="file" id="avatar">
-                    <p class="help-block">Завантажте аватар</p>
-                </div>
                 <div class="form-group captcha">
                     <span for="captcha">Введіть код перевірки</span>
                     <input type="text" class="form-control clearfix" name="captcha" pattern="[0-9]{1,5}" title="Тільки номера" id="captcha">  

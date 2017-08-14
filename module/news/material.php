@@ -1,9 +1,11 @@
 <?php 
 $Param['id'] += 0;
 if ($Param['id'] == 0) MessageSend(1, 'URL адресу вказано не вірно', '/news');
-
-$Row = mysqli_fetch_assoc(mysqli_query($CONNECT, 'SELECT `name`, `added`, `date`, `readed`, `text` FROM `news` WHERE `id` = '.$Param['id']));
+$Row = mysqli_fetch_assoc(mysqli_query($CONNECT, 'SELECT `name`, `added`, `date`, `readed`, `text`, `active` FROM `news` WHERE `id` = '.$Param['id']));
 if (!$Row['name']) MessageSend(1, 'Такї новини не знайдено.', '/news');
+
+if(!$Row['active'] and $_SESSION['USER_GROUP'] != 2)  MessageSend(2, 'Новина чекає пітвердження адміністратора', '/news');
+
 mysqli_query($CONNECT, 'UPDATE `news` SET `read` = `read` + 1 WHERE `id` = '.$Param['id']);
 Head($Row['name']);
 ?>
@@ -25,8 +27,9 @@ Head($Row['name']);
 </ul>
 <div class="pageNews">
     <?php
-     if ($_SESSION['USER_GROUP'] == 7) $EDIT = '<li><a href="/news/edit/id/'.$Param['id'].'" class="">Редагувати новину</a></li>';
-     echo 'Переглядів: '.($Row['read'] + 1).' | Добавив: '.$Row['added'].' | Дата: '.$Row['date'].' '.$EDIT.'<br><br><b>'.$Row['name'].'</b><br>'.$Row['text']
+   if (!$Row['active']) $Active = '| <a href="/news/control/id/'.$Param['id'].'/command/active" class="lol">Активировать новость</a>';
+if ($_SESSION['USER_GROUP'] == 2) $EDIT = '| <a href="/news/edit/id/'.$Param['id'].'" class="lol">Редактировать новость</a> | <a href="/news/control/id/'.$Param['id'].'/command/delete" class="lol">Удалить новость</a>'.$Active;
+     echo 'Переглядів: '.($Row['readed'] + 1).' | Добавив: '.$Row['added'].' | Дата: '.$Row['date'].' '.$EDIT.'<br><br><b>'.$Row['name'].'</b><br>'.$Row['text']
      
     ?>
 </div>

@@ -78,6 +78,7 @@ if (!$Module or $Page == 'news' and $Module == 'category' or $Page == 'news' and
 	else if ($Module == 'material') include('module/news/material.php');
 	else if ($Module == 'add') include('module/news/add.php');
 	else if ($Module == 'edit') include('module/news/edit.php');
+	else if ($Module == 'control') include('module/news/control.php');
 }
 
 else if ($Page == 'calendar') echo include('page/secretary.php');
@@ -117,13 +118,8 @@ $_SESSION['message'] = array();
 // групи пользователей 
 function userGroup ($p1) {
 	if ($p1 == 0) return 'Гість';
-	else if ($p1 == 1) return 'Кошторисник';
-	else if ($p1 == 2) return 'Секретарь';
-	else if ($p1 == 3) return 'Бухгалтер';
-	else if ($p1 == 4) return 'Юрист';
-	else if ($p1 == 5) return 'Деловод';
-	else if ($p1 == 6) return 'Модератор';
-	else if ($p1 == 7) return 'Адміністратор';
+	else if ($p1 == 1) return 'Модератор';
+	else if ($p1 == 2) return 'Адміністратор';
 	else if ($p1 == -1) return 'Заблокований';
 }
 
