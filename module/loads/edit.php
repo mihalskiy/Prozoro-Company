@@ -2,11 +2,11 @@
 userAccess(2);
 // проверка на ид обезателен
 $Param['id'] += 0;
-if (!$Param['id']) MessageSend(1, 'Не вказано ID новини', '/news');
+if (!$Param['id']) MessageSend(1, 'Не вказано ID файла', '/loads');
 
 // проверка на существуюющую новость
-$Row = mysqli_fetch_assoc(mysqli_query($CONNECT, "SELECT `cat`,  `name`, `text` FROM `news` WHERE `id` = '$Param[id]'"));
-if (!$Row['name']) MessageSend(1, 'Такої новини не згайдено.', '/news');
+$Row = mysqli_fetch_assoc(mysqli_query($CONNECT, "SELECT `cat`,  `name`, `text`, `dfile`, `dimg` FROM `load` WHERE `id` = '$Param[id]'"));
+if (!$Row['name']) MessageSend(1, 'Такої сторінки не знайдено.', '/loads');
 
 // если наши платформи зареестр то будем виполнять таки запросси
 if ($_POST['enter'] and $_POST['text'] and $_POST['name']  and $_POST['cat']) {
@@ -14,16 +14,19 @@ if ($_POST['enter'] and $_POST['text'] and $_POST['name']  and $_POST['cat']) {
     $_POST['text'] = FormChars($_POST['text']);
     // = number
     $_POST['cat'] += 0;
+
+if ($_FILES['file']['tmp_name']) move_uploaded_file($_FILES['file']['tmp_name'], 'catalog/file/'.$Row['dfile'].'/'.$Param['id'].'.zip');
+if ($_FILES['img']['tmp_name']) move_uploaded_file($_FILES['img']['tmp_name'], 'catalog/img/'.$Row['dimg'].'/'.$Param['id'].'.jpg');
+
+
 // витяговаем данние 
-mysqli_query($CONNECT, "UPDATE `news`  SET `name` = '$_POST[name]', `cat` = $_POST[cat], `text` = '$_POST[text]' WHERE `id` = $Param[id]");
-MessageSend(2, 'Новина змінена', '/news/material/id/'.$Param['id']);
+mysqli_query($CONNECT, "UPDATE `load` SET `name` = '$_POST[name]', `cat` = $_POST[cat], `text` = '$_POST[text]' WHERE `id` = $Param[id]");
+MessageSend(2, 'Файл успішно змінено', '/loads/material/id/'.$Param['id']);
 }
 
 
-
-
-
-Head('Редагувати новини');
+ 
+Head('Редагуваня файлів');
 ?>
 <body>
 <div class="container">
@@ -42,14 +45,14 @@ MessageShow();
         <div class="registerForm">
             <h2> Добавити новину</h2>
 <?php
-    echo '        <form method="POST" action="/news/edit/id/'.$Param['id'].'">
+    echo '        <form method="POST" action="/loads/edit/id/'.$Param['id'].'" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="name">Назва мітеріалу</label>
                     <input type="text" class="form-control" name="name" value="'.$Row['name'].'" placeholder="Назва мітеріалу" required>
                 </div>
                 <div class="form-group">
                     <label for="login">Виберіть каегорію</label>
-                    <select class="form-control" name="cat">'.str_replace('value="'.$Row['cat'], 'selected value="'.$Row['cat'], '<option value="1">Категорія 1</option><option value="2">Категорія 2</option><option value="3">Категорія 3</option>').'</select>
+                    <select class="form-control" name="cat">'.str_replace('value="'.$Row['cat'], 'selected value="'.$Row['cat'], '<option value="1">Юрист</option><option value="2">Бухгалтер</option><option value="3">Кошторисник</option><option value="4">Діловод</option>').'</select>
                 </div>
                 <div class="form-group">
                     <label for="login">Текст</label>

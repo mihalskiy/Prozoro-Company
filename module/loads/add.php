@@ -1,49 +1,50 @@
 <?php
 if ($_SESSION['USER_GROUP'] == 2) $Active = 1;
 else $Active = 0;
+if ($_POST['enter'] and $_POST['text'] and $_POST['name'] and $_POST['cat']) {
+if ($_FILES['img']['type'] != 'image/jpeg') MessageSend(2, 'Не верный тип изображения.');
+$_POST['name'] = FormChars($_POST['name']);
+$_POST['text'] = FormChars($_POST['text']);
+$_POST['link'] = FormChars($_POST['link']);
+$_POST['cat'] += 0;
+if (!$_FILES['file']['tmp_name'] and !$_POST['link']) MessageSend(2, 'Необходимо выбрать файл или указать ссылку.');
 
-// если наши платформи зареестр то будем виполнять таки запросси
-if ($_POST['enter'] and $_POST['text'] and $_POST['name']  and $_POST['cat'] and $_FILES['file']['tmp_name'] and $_FILES['img']['tmp_name']) {
-    if  ($_FILES['img']['type'] != 'image/jpeg') MessageSend(2, 'Не вірний тип забраження');
-    if  ($_FILES['file']['type'] != 'application/octet-stream') MessageSend(2, 'Не вірний тип файлу');
 
-    
-    
-    $_POST['name'] = FormChars($_POST['name']);
-    $_POST['text'] = FormChars($_POST['text']);
-    // = number
-    $_POST['cat'] += 0;
+
+if ($_FILES['file']['tmp_name']) {
+if ($_FILES['file']['type'] != 'application/octet-stream') MessageSend(2, 'Не верный тип файла.');
+$_POST['link'] = 0;
+} else $num_file = 0;
+
 
 $MaxId = mysqli_fetch_row(mysqli_query($CONNECT, 'SELECT max(`id`) FROM `load`'));
-//if ($MaxId[0] == 0) mysqli_query($CONNECT, 'ALTER TABLE `load` AUTO_INCREMENT = 1');
+if ($MaxId[0] == 0) mysqli_query($CONNECT, 'ALTER TABLE `load` AUTO_INCREMENT = 1');
 $MaxId[0] += 1;
 
-// функция записи если foto не вибран
-foreach (glob ('catalog/img/*', GLOB_ONLYDIR) as $num => $Dir) {
+foreach(glob('catalog/img/*', GLOB_ONLYDIR) as $num => $Dir) {
 $num_img ++;
 $Count = sizeof(glob($Dir.'/*.*'));
 if ($Count < 250) {
-    move_uploaded_file($_FILES['img']['tmp_name'], $Dir.'/'.$MaxId[0].'.jpg');
+move_uploaded_file($_FILES['img']['tmp_name'], $Dir.'/'.$MaxId[0].'.jpg');
 break;
 }
 }
 
+MiniIMG('catalog/img/'.$num_img.'/'.$MaxId[0].'.jpg', 'catalog/mini/'.$num_img.'/'.$MaxId[0].'.jpg', 220, 220);
 
-// функция записи если file не вибран
-foreach (glob ('catalog/file/*', GLOB_ONLYDIR) as $num => $Dir) {
+if ($_FILES['file']['tmp_name']) {
+foreach(glob('catalog/file/*', GLOB_ONLYDIR) as $num => $Dir) {
 $num_file ++;
 $Count = sizeof(glob($Dir.'/*.*'));
 if ($Count < 250) {
-    move_uploaded_file($_FILES['file']['tmp_name'], $Dir.'/'.$MaxId[0].'.zip');
+move_uploaded_file($_FILES['file']['tmp_name'], $Dir.'/'.$MaxId[0].'.zip');
 break;
 }
 }
+}
 
-
-
-// витяговаем данние 
-mysqli_query($CONNECT, "INSERT INTO `load`  VALUES ('', '$_POST[name]', $_POST[cat], 0, 0, '$_SESSION[USER_LOGIN]', '$_POST[text]',  NOW(), $Active, $num_img, $num_file)");
-MessageSend(3, 'Файли успішно завантажені в базу', '/loads');
+mysqli_query($CONNECT, "INSERT INTO `load`  VALUES ($MaxId[0], '$_POST[name]', $_POST[cat], 0, 0, '$_SESSION[USER_LOGIN]', '$_POST[text]', NOW(), $Active, $num_img, $num_file, '$_POST[link]')");
+MessageSend(2, 'Файл добавлен', '/loads');
 }
 
 Head('Додати новини')?>
@@ -65,7 +66,7 @@ Head('Додати новини')?>
             <form method="POST" action="/loads/add" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="name">Назва матеріалу</label>
-                    <input type="text" class="form-control" name="name"  placeholder="Назва новини" required>
+                    <input type="text" class="form-control" name="name"  placeholder="Назва матеріалу" required>
                 </div>
                 <div class="form-group">
                     <label for="login">Виберіть каегорію</label>

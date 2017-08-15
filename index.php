@@ -87,6 +87,7 @@ if (!$Module or $Page == 'loads' and $Module == 'category' or $Page == 'loads' a
 	else if ($Module == 'add') include('module/loads/add.php');
 	else if ($Module == 'edit') include('module/loads/edit.php');
 	else if ($Module == 'control') include('module/loads/control.php');
+	else if ($Module == 'download') include('module/loads/download.php');
 }
 
 else if ($Page == 'calendar') echo include('page/secretary.php');
@@ -187,6 +188,23 @@ echo ' <li class="'.$Swch.'"><a  href="'.$p1.$i.'">'.$i.'</a></li>';
 }
 echo '</ul></nav>';
 }
+}
+
+function MiniIMG($p1, $p2, $p3, $p4, $p5 = 50) {
+	/*
+	$p1 - Путь к изображению, которое нужно уменьшить.
+	$p2 - Директория, куда будет сохранена уменьшенная копия.
+	$p3 - Ширина уменьшенной копии.
+	$p4 - Высота уменьшенной копии.
+	$p5 - Качество уменьшенной копии.
+	*/
+	$Scr = imagecreatefromjpeg($p1);
+	$Size = getimagesize($p1);
+	$Tmp = imagecreatetruecolor($p3, $p4);
+	imagecopyresampled($Tmp, $Scr, 0, 0, 0, 0, $p3, $p4, $Size[0], $Size[1]);
+	imagejpeg($Tmp, $p2, $p5);
+	imagedestroy($Scr);
+	imagedestroy($Tmp);
 }
 
 // вставка header на страници
