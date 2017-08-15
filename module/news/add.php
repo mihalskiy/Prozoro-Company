@@ -5,7 +5,7 @@ else $Active = 0;
 // если наши платформи зареестр то будем виполнять таки запросси
 if ($_POST['enter'] and $_POST['text'] and $_POST['name']  and $_POST['cat']) {
     $_POST['name'] = FormChars($_POST['name']);
-    $_POST['name'] = FormChars($_POST['name']);
+    $_POST['text'] = FormChars($_POST['text']);
     // = number
     $_POST['cat'] += 0;
 // витяговаем данние 

@@ -19,6 +19,10 @@ mysqli_query($CONNECT, "UPDATE `news`  SET `name` = '$_POST[name]', `cat` = $_PO
 MessageSend(2, 'Новина змінена', '/news/material/id/'.$Param['id']);
 }
 
+
+
+
+
 Head('Редагувати новини');
 ?>
 <body>
@@ -40,16 +44,26 @@ MessageShow();
 <?php
     echo '        <form method="POST" action="/news/edit/id/'.$Param['id'].'">
                 <div class="form-group">
-                    <label for="name">Назва новини</label>
-                    <input type="text" class="form-control" name="name" value="'.$Row['name'].'" placeholder="Назва новини" required>
+                    <label for="name">Назва мітеріалу</label>
+                    <input type="text" class="form-control" name="name" value="'.$Row['name'].'" placeholder="Назва мітеріалу" required>
                 </div>
                 <div class="form-group">
                     <label for="login">Виберіть каегорію</label>
-                    <select class="form-control" name="cat">'.str_replace('value="'.$Row['cat'], 'selected value="'.$Row['cat'], '<option value="1">Юрист</option><option value="2">Бухгалтер</option><option value="3">Кошторисник</option><option value="4">Діловод</option>').'</select>
+                    <select class="form-control" name="cat">'.str_replace('value="'.$Row['cat'], 'selected value="'.$Row['cat'], '<option value="1">Категорія 1</option><option value="2">Категорія 2</option><option value="3">Категорія 3</option>').'</select>
                 </div>
                 <div class="form-group">
-                    <label for="login">Текст новини</label>
+                    <label for="login">Текст</label>
                     <textarea name="text" class="form-control" rows="3"  placeholder="текст..." required>'.$Row['text'].'</textarea>
+                </div>
+                <div class="form-group">
+                    <label for="avatar">Завантаження файлів</label>
+                    <input type="file" name="file">
+                    <p class="help-block">Завантажте файл формату .zip</p>
+                </div>
+                <div class="form-group">
+                    <label for="avatar">Завантаження зображення</label>
+                    <input type="file" name="img">
+                    <p class="help-block">Завантажте фото</p>
                 </div>
                 <input type="submit" name="enter" class="btn btn-success" value="Зберігти">
             </form>'
