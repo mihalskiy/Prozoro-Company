@@ -9,6 +9,10 @@ body {
     background-color: #bfbfbf;
 }
 
+.panel {
+    margin-bottom: 0!important;
+}
+
 
 .navbar-brand img {
     position: relative;

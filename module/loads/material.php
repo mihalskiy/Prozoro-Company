@@ -1,12 +1,12 @@
 <?php 
 $Param['id'] += 0;
 if ($Param['id'] == 0) MessageSend(1, 'URL адресу вказано не вірно', '/loads');
-$Row = mysqli_fetch_assoc(mysqli_query($CONNECT, 'SELECT `name`, `added`, `date`, `readed`, `text`, `active` , `download`, `dimg`, `dfile` FROM `load` WHERE `id` = '.$Param['id']));
+$Row = mysqli_fetch_assoc(mysqli_query($CONNECT, 'SELECT `name`, `added`, `date`, `readed`, `text`, `active` , `download`, `dfile` FROM `load` WHERE `id` = '.$Param['id']));
 if (!$Row['name']) MessageSend(1, 'Такї новини не знайдено.', '/loads');
 
 if(!$Row['active'] and $_SESSION['USER_GROUP'] != 2)  MessageSend(2, 'Новина чекає пітвердження адміністратора', '/loads');
 
-mysqli_query($CONNECT, 'UPDATE `load` SET `read` = `read` + 1 WHERE `id` = '.$Param['id']);
+mysqli_query($CONNECT, 'UPDATE `load` SET `readed` = `read` + 1 WHERE `id` = '.$Param['id']);
 Head($Row['name']);
 ?>
 <body>
@@ -28,9 +28,17 @@ Head($Row['name']);
 </ul>
 <div class="pageNews">
     <?php
-   if (!$Row['active']) $Active = '| <a href="/loads/control/id/'.$Param['id'].'/command/active" class="lol">Активировать новость</a>';
-if ($_SESSION['USER_GROUP'] == 2) $EDIT = '| <a href="/loads/edit/id/'.$Param['id'].'" class="lol">Редагувати</a> | <a href="/loads/control/id/'.$Param['id'].'/command/delete" class="lol">Видалити</a>'.$Active;
-     echo '<a href="/loads/download/id/'.$Param['id'].'" class="lol">Завантажити файл</a> | Переглядів: '.($Row['readed'] + 1).' | Завантажень: '.($Row['download'] + 1).' |  Добавив: '.$Row['added'].' | Дата: '.$Row['date'].' '.$EDIT.'<br><br><b>'.$Row['name'].'</b><br><img src="/catalog/img/'.$Row['dimg'].'/'.$Param['id'].'.jpg" alt="'.$Row['name'].'"><br>'.$Row['text'];
+   if (!$Row['active']) $Active = '| <a href="/loads/control/id/'.$Param['id'].'/command/active"class="list-group-item-success">Активувати новину</a>';
+if ($_SESSION['USER_GROUP'] == 2) $EDIT = '| <a href="/loads/edit/id/'.$Param['id'].'"class="list-group-item-success">Редагувати</a> | <a href="/loads/control/id/'.$Param['id'].'/command/delete" class="list-group-item-success">Видалити</a>'.$Active;
+     echo '
+     <p class="">
+             Переглядів: '.($Row['readed'] + 1).' 
+            | Завантажень: '.($Row['download'] + 1).' 
+            | Добавив: '.$Row['added'].' 
+            | Дата: '.$Row['date'].' 
+            '.$EDIT.'
+            </p><div class="jumbotron">
+            <h1>'.$Row['name'].'</h1><p>'.$Row['text'].'</p><p><a href="/loads/download/id/'.$Param['id'].'" class="btn btn-primary btn-lg">Завантажити файл</a></p></div>';
      
     ?>
 </div>

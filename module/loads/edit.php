@@ -5,7 +5,7 @@ $Param['id'] += 0;
 if (!$Param['id']) MessageSend(1, 'Не вказано ID файла', '/loads');
 
 // проверка на существуюющую новость
-$Row = mysqli_fetch_assoc(mysqli_query($CONNECT, "SELECT `cat`,  `name`, `text`, `dfile`, `dimg` FROM `load` WHERE `id` = '$Param[id]'"));
+$Row = mysqli_fetch_assoc(mysqli_query($CONNECT, "SELECT `cat`,  `name`, `text`, `dfile` FROM `load` WHERE `id` = '$Param[id]'"));
 if (!$Row['name']) MessageSend(1, 'Такої сторінки не знайдено.', '/loads');
 
 // если наши платформи зареестр то будем виполнять таки запросси
@@ -16,7 +16,6 @@ if ($_POST['enter'] and $_POST['text'] and $_POST['name']  and $_POST['cat']) {
     $_POST['cat'] += 0;
 
 if ($_FILES['file']['tmp_name']) move_uploaded_file($_FILES['file']['tmp_name'], 'catalog/file/'.$Row['dfile'].'/'.$Param['id'].'.zip');
-if ($_FILES['img']['tmp_name']) move_uploaded_file($_FILES['img']['tmp_name'], 'catalog/img/'.$Row['dimg'].'/'.$Param['id'].'.jpg');
 
 
 // витяговаем данние 
@@ -62,11 +61,6 @@ MessageShow();
                     <label for="avatar">Завантаження файлів</label>
                     <input type="file" name="file">
                     <p class="help-block">Завантажте файл формату .zip</p>
-                </div>
-                <div class="form-group">
-                    <label for="avatar">Завантаження зображення</label>
-                    <input type="file" name="img">
-                    <p class="help-block">Завантажте фото</p>
                 </div>
                 <input type="submit" name="enter" class="btn btn-success" value="Зберігти">
             </form>'

@@ -62,7 +62,7 @@ Head('Архів файлів');
 while ($Row = mysqli_fetch_assoc($Result)) {
 if (!$Row['active']) $Row['name'] .= ' (Очікує пітвердження)';
 
-echo '<a href="/loads/material/id/'.$Row['id'].'"><div class="ChatBlock"><span>Добавив: '.$Row['added'].' | '.$Row['date'].'</span>'.$Row['name'].'</div></a>';
+echo '<a href="/loads/material/id/'.$Row['id'].'"><div class="panel panel-success"><div class="panel-heading"> Добавив: '.$Row['added'].' | '.$Row['date'].'<h4>'.$Row['name'].'</h4></div></div></a>';
 }
     PageSelector($Param4, $Param['page'], $Count);
     ?>
