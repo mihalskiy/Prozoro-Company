@@ -103,15 +103,17 @@ else if ($Page == 'select') include('page/dbSelect.php');
 
 else if ($Page == 'account')  include('forms/account.php');
 
+else if ($Page == 'test')  include('test.php');
+
 
 
 
 // функция отправки сообщения
 function MessageSend($p1, $p2, $p3 = '') {
-if ($p1 == 1) $p1 = 'Помилка';
-else if ($p1 == 2) $p1 = 'Підсказка';
-else if ($p1 == 3) $p1 = 'Інформація';
-$_SESSION['message'] = '<div class="messageBlock"><b>'.$p1.'</b>: '.$p2.'</div>';
+if ($p1 == 1) $p1 = 'Помилка' and $_SESSION['message'] = '<div class="alert alert-danger alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong>'.$p1.'!</strong> '.$p2.'</div>';
+else if ($p1 == 2) $p1 = 'Підсказка'and $_SESSION['message'] = '<div class="alert alert-success" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong>'.$p1.'!</strong> '.$p2.'</div>';
+else if ($p1 == 3) $p1 = 'Інформація'and $_SESSION['message'] = '<div class="alert alert-info" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong>'.$p1.'!</strong> '.$p2.'</div>';
+//;
 // переход на страницу
 if ($p3) $_SERVER['HTTP_REFERER'] = $p3;
 exit(header('Location: '.$_SERVER['HTTP_REFERER']));

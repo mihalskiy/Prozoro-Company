@@ -1,5 +1,5 @@
 <?php
-//userAccess(2);
+userAccess(2);
 
 if ($Param['id'] and $Param['command']) {
 

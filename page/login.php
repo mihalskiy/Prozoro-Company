@@ -7,12 +7,12 @@ Head('Вхід в систему')?>
     <div class="row">
             <!-- Menu -->
         <div class="innerMenu">
-            <?php Menu();
-              MessageShow()?>  
+            <?php Menu()?>  
         </div>
             <!--content-->
         <div class="content">
-            <div class="row">                  
+            <div class="row"> 
+             <?php  MessageShow() ?>                 
                    <div class="container">
                        <!-- <div class="col-xs-12 col-md-8">
                            <div class="row"><p>dfef</p></div>

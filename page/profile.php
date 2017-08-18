@@ -6,12 +6,11 @@ ULogin(1);
     <div class="row">
             <!-- Menu -->
         <div class="innerMenu">
-            <?php Menu();
-              MessageShow()?>  
+            <?php Menu()?>  
         </div>
             <!--content-->
         <div class="content">
-
+ <?php  MessageShow() ?>
             <?php
 if ($_SESSION['USER_AVATAR'] == 0) $Avatar = 0;
 else $Avatar = $_SESSION['USER_AVATAR'].'/'.$_SESSION['USER_ID'];

@@ -247,7 +247,7 @@ function custom_export($param)
 <div class="container">
     <div class="row">
             <!-- Menu -->
-        <div class="innerMenu">
+        <div class="innerMenu ">
               <?php Menu() ?>  
         </div>
             <!--content-->

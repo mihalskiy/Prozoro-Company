@@ -6,7 +6,7 @@ if (!$Param['id']) MessageSend(1, 'Не вказано ID новини', '/news'
 
 // проверка на существуюющую новость
 $Row = mysqli_fetch_assoc(mysqli_query($CONNECT, "SELECT `cat`,  `name`, `text` FROM `news` WHERE `id` = '$Param[id]'"));
-if (!$Row['name']) MessageSend(1, 'Такої новини не згайдено.', '/news');
+if (!$Row['name']) MessageSend(1, 'Такої новини не знайдено.', '/news');
 
 // если наши платформи зареестр то будем виполнять таки запросси
 if ($_POST['enter'] and $_POST['text'] and $_POST['name']  and $_POST['cat']) {
@@ -27,13 +27,13 @@ Head('Редагувати новини');
             <!-- Menu -->
         <div class="innerMenu">
 <?php 
-Menu();
-MessageShow();
+Menu()
 ?>  
         </div>
             <!--content-->
         <div class="content">
             <div class="row">
+             <?php  MessageShow() ?>
                    <div class="container ">
         <div class="registerForm">
             <h2> Добавити новину</h2>
@@ -77,6 +77,6 @@ MessageShow();
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="resource/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="/resource/js/bootstrap.min.js" type="text/javascript"></script>
 </body>
 </html>

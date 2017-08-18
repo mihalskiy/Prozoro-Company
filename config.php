@@ -28,4 +28,4 @@ define("PHPGRID_LIBPATH",dirname(__FILE__).DIRECTORY_SEPARATOR."lib".DIRECTORY_S
 // $CODE_PATH = "../../../../php/PHPSuito/"; // the physical path to the php files
 
 
-
+?>

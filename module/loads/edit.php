@@ -33,13 +33,13 @@ Head('Редагуваня файлів');
             <!-- Menu -->
         <div class="innerMenu">
 <?php 
-Menu();
-MessageShow();
+Menu()
 ?>  
         </div>
             <!--content-->
         <div class="content">
             <div class="row">
+             <?php  MessageShow() ?>
                    <div class="container ">
         <div class="registerForm">
             <h2> Добавити новину</h2>
@@ -88,6 +88,6 @@ MessageShow();
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="resource/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="/resource/js/bootstrap.min.js" type="text/javascript"></script>
 </body>
 </html>

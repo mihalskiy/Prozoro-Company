@@ -36,7 +36,7 @@ break;
 }
 
 mysqli_query($CONNECT, "INSERT INTO `load`  VALUES ($MaxId[0], '$_POST[name]', $_POST[cat], 0, 0, '$_SESSION[USER_LOGIN]', '$_POST[text]', NOW(), $Active, $num_file)");
-MessageSend(2, 'Файл добавлен', '/loads');
+MessageSend(2, 'Файл успішно добавлено в базу', '/loads');
 }
 
 Head('Додати файл')?>
@@ -45,13 +45,12 @@ Head('Додати файл')?>
     <div class="row">
             <!-- Menu -->
         <div class="innerMenu">
-              <?php Menu();
-              MessageShow()?>  
+              <?php Menu()?>  
         </div>
             <!--content-->
         <div class="content">
             <div class="row">
-                   
+                    <?php  MessageShow() ?>
                    <div class="container ">
         <div class="registerForm">
             <h2> Добавити файли</h2>
@@ -101,6 +100,6 @@ Head('Додати файл')?>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="resource/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="/resource/js/bootstrap.min.js" type="text/javascript"></script>
 </body>
 </html>

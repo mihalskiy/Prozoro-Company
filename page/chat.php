@@ -14,12 +14,12 @@ Head('Чат');
     <div class="row">
             <!-- Menu -->
         <div class="innerMenu">
-            <?php Menu();
-              MessageShow()?>  
+            <?php Menu()?>  
         </div>
             <!--content-->
         <div class="content">
             <div class="row col-md-offset-5">
+             <?php  MessageShow() ?>
                 <div class="chatBox">
                     <?php
                     // извлекаем всю тиблицу чат сортировка по времени с лимитом показа сообщений 50

@@ -14,12 +14,13 @@ Head($Row['name']);
     <div class="row">
             <!-- Menu -->
         <div class="innerMenu">
-            <?php Menu();
-              MessageShow()?>  
+            <?php Menu()?>  
         </div>
             <!--content-->
         <div class="content">
+         <?php  MessageShow() ?>
           <ul class="nav nav-tabs">
+
   <li role="presentation" class="active"><a href="/loads">Усі категорії</a></li>
   <li role="presentation"><a href="/loads/category/id/1">Юрист</a></li>
   <li role="presentation"><a href="/loads/category/id/2">Бухгалтер</a></li>
@@ -38,7 +39,9 @@ if ($_SESSION['USER_GROUP'] == 2) $EDIT = '| <a href="/loads/edit/id/'.$Param['i
             | Дата: '.$Row['date'].' 
             '.$EDIT.'
             </p><div class="jumbotron">
-            <h1>'.$Row['name'].'</h1><p>'.$Row['text'].'</p><p><a href="/loads/download/id/'.$Param['id'].'" class="btn btn-primary btn-lg">Завантажити файл</a></p></div>';
+            <h1>'.$Row['name'].'</h1>
+            <p>'.$Row['text'].'</p>
+            <p><a href="/loads/download/id/'.$Param['id'].'" class="btn btn-primary btn-lg">Завантажити файл</a></p></div>';
      
     ?>
 </div>

@@ -6,13 +6,12 @@ Head('Сторінка Реєстрації')?>
     <div class="row">
             <!-- Menu -->
         <div class="innerMenu">
-              <?php Menu();
-              MessageShow()?>  
+              <?php Menu()?>  
         </div>
             <!--content-->
         <div class="content">
             <div class="row">
-                   
+                    <?php  MessageShow() ?>
                    <div class="container ">
         <div class="registerForm">
             <h2> Сторінка реєстрації</h2>

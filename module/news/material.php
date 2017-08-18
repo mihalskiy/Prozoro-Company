@@ -14,11 +14,11 @@ Head($Row['name']);
     <div class="row">
             <!-- Menu -->
         <div class="innerMenu">
-            <?php Menu();
-              MessageShow()?>  
+            <?php Menu()?>  
         </div>
             <!--content-->
         <div class="content">
+         <?php  MessageShow() ?>
           <ul class="nav nav-tabs">
   <li role="presentation" class="active"><a href="/news">Усі категорії</a></li>
   <li role="presentation"><a href="/news/category/id/1">Категорія 1</a></li>
@@ -27,8 +27,8 @@ Head($Row['name']);
 </ul>
 <div class="pageNews">
     <?php
-   if (!$Row['active']) $Active = '| <a href="/news/control/id/'.$Param['id'].'/command/active" class="lol">Активировать новость</a>';
-if ($_SESSION['USER_GROUP'] == 2) $EDIT = '| <a href="/news/edit/id/'.$Param['id'].'" class="lol">Редактировать новость</a> | <a href="/news/control/id/'.$Param['id'].'/command/delete" class="lol">Удалить новость</a>'.$Active;
+   if (!$Row['active']) $Active = '| <a href="/news/control/id/'.$Param['id'].'/command/active" class="lol">Активувати новину</a>';
+if ($_SESSION['USER_GROUP'] == 2) $EDIT = '| <a href="/news/edit/id/'.$Param['id'].'" class="lol">Рудагувати новину</a> | <a href="/news/control/id/'.$Param['id'].'/command/delete" class="lol">Видалити новину</a>'.$Active;
      echo 'Переглядів: '.($Row['readed'] + 1).' | Добавив: '.$Row['added'].' | Дата: '.$Row['date'].' '.$EDIT.'<br><br><b>'.$Row['name'].'</b><br>'.$Row['text']
      
     ?>

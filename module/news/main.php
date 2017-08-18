@@ -8,12 +8,11 @@ Head('Новини');
     <div class="row">
             <!-- Menu -->
         <div class="innerMenu">
-            <?php Menu();
-              MessageShow()?>  
+            <?php Menu()?>  
         </div>
             <!--content-->
         <div class="content">
-            
+             <?php  MessageShow() ?>
     <ul class="nav nav-tabs">
 <?php  if ($_SESSION['USER_LOGIN_IN']) echo '<li><a href="/news/add" class="btn btn-success btn-lg">Добавити новину</a></li>'?>
   <li role="presentation" class="active"><a href="/news">Усі категорії</a></li>
@@ -81,6 +80,6 @@ echo '<a href="/news/material/id/'.$Row['id'].'"><div class="ChatBlock"><span>Д
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="resource/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="/resource/js/bootstrap.min.js" type="text/javascript"></script>
 </body>
 </html>
