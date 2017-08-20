@@ -262,7 +262,7 @@ function custom_export($param)
         <div class="footer">
             <div class="row">
                 <footer>
-
+                   
                 </footer>
             </div>
         </div>
@@ -275,15 +275,6 @@ function custom_export($param)
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="resource/js/bootstrap.min.js" type="text/javascript"></script>
 
-<!-- <script>
-function edit_as_radio(o)
-{
-    setTimeout(function(){
-        jQuery(o).hide();
-        jQuery(o).parent().append('<input title="0" type="radio" name="rd_closed" value="0" onclick="jQuery(\'#total\').val(0);"/> 0 <input title="5" type="radio" name="rd_closed" value="5" onclick="jQuery(\'#total\').val(5);"/> 5 <input title="10" type="radio" name="rd_closed" value="10" onclick="jQuery(\'#total\').val(10);"/> 10');
-    },100);
-}
-</script> -->
 
 </body>
 </html>

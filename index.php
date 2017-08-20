@@ -7,7 +7,7 @@ include_once 'setting.php';
 session_start();
 
 // old link
-$CONNECT = mysqli_connect(HOST, USER, PASS, DB);
+$CONNECT = mysqli_connect($host, $user, $password, $database);
 
 $db_conf = array( 	
 					"type" 		=> PHPGRID_DBTYPE, 
@@ -92,12 +92,7 @@ if (!$Module or $Page == 'loads' and $Module == 'category' or $Page == 'loads' a
 	else if ($Module == 'download') include('module/loads/download.php');
 }
 
-else if ($Page == 'all') {
-if (!$Module or $Page == 'all' and $Module == 'readRecords' or $Page == 'all') include('all_table/all_table.php');
 
-else if ($Module == 'readRecords') include('all_table/ajax/readRecords.php');
-else if ($Module == 'readRecords') include('all_table/ajax/db_connection.php');
-}
 
 else if ($Page == 'calendar') echo include('page/secretary.php');
 else if ($Page == 'graphic') include('page/graphic.php');
@@ -107,8 +102,9 @@ else if ($Page == 'lawyer') include('page/lawyer.php');
 else if ($Page == 'accountant') include('page/accountant.php');
 else if ($Page == 'business') include('page/business.php');
 else if ($Page == 'admin') include('page/adminTable.php');
-else if ($Page == 'all') include('all_table/all_table.php');
 
+else if ($Page == 'all') include('page/all_table/allTable.php');
+else if ($Page == 'insert') include('page/all_table/insert.php');
 
 else if ($Page == 'select') include('page/dbSelect.php');
 
