@@ -12,9 +12,13 @@ if (!$_FILES['file']['tmp_name'] and !$_POST['link']) MessageSend(2, 'Необх
 
 
 if ($_FILES['file']['tmp_name']) {
-if ($_FILES['file']['type'] != 'application/octet-stream') MessageSend(2, 'Не верный тип файла.');
+if ($_FILES['file']['type'] != 'application/octet-stream') MessageSend(2, 'Не вірниий формат. Потрібний формат <b>.zip</b>');
+elseif ($_FILES['file']['type'][$k] == 'application/x-rar-compressed') { $apend .=".rar"; }
+//if ($_FILES['file']['type'] != "application/x-rar-compressed") MessageSend(2, 'Не вірниий формат. Потрібний формат <b>.zip</b> або <b>.rar</b>');
 $_POST['link'] = 0;
 } else $num_file = 0;
+
+
 
 
 $MaxId = mysqli_fetch_row(mysqli_query($CONNECT, 'SELECT max(`id`) FROM `load`'));
@@ -22,16 +26,27 @@ if ($MaxId[0] == 0) mysqli_query($CONNECT, 'ALTER TABLE `load` AUTO_INCREMENT = 
 $MaxId[0] += 1;
 
 
+ 
 
+// if ($_FILES['file']['tmp_name']) {
+// foreach(glob('catalog/rar/*', GLOB_ONLYDIR) as $num => $Dir) {
+// $num_file ++;
+// $Count = sizeof(glob($Dir.'/*.*'));
+// if ($Count < 250) { 
+// move_uploaded_file($_FILES['file']['tmp_name'], $Dir.'/'.$MaxId[0].'.rar');
+// break;
+// } 
+// }
+// }
 
 if ($_FILES['file']['tmp_name']) {
 foreach(glob('catalog/file/*', GLOB_ONLYDIR) as $num => $Dir) {
 $num_file ++;
 $Count = sizeof(glob($Dir.'/*.*'));
-if ($Count < 250) {
+if ($Count < 250) { 
 move_uploaded_file($_FILES['file']['tmp_name'], $Dir.'/'.$MaxId[0].'.zip');
 break;
-}
+} 
 }
 }
 
@@ -74,7 +89,7 @@ Head('Додати файл')?>
                 </div>
                 <div class="form-group">
                     <label for="avatar">Завантаження файлів</label>
-                    <input type="file" name="file">
+                    <input type="file" name="file" multiple='true'>
                     <p class="help-block">Завантажте файл формату .zip</p>
                 </div>
                 <input type="submit" name="enter" class="btn btn-success" value="Опоблікувати">

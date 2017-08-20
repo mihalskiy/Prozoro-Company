@@ -3,6 +3,7 @@ include_once 'config.php';
 include_once 'setting.php';
 
 
+
 session_start();
 
 // old link
@@ -16,6 +17,7 @@ $db_conf = array(
 					"database" 	=> PHPGRID_DBNAME
 );
 
+    
 
 
 // проверка соиденение
@@ -90,6 +92,13 @@ if (!$Module or $Page == 'loads' and $Module == 'category' or $Page == 'loads' a
 	else if ($Module == 'download') include('module/loads/download.php');
 }
 
+else if ($Page == 'all') {
+if (!$Module or $Page == 'all' and $Module == 'readRecords' or $Page == 'all') include('all_table/all_table.php');
+
+else if ($Module == 'readRecords') include('all_table/ajax/readRecords.php');
+else if ($Module == 'readRecords') include('all_table/ajax/db_connection.php');
+}
+
 else if ($Page == 'calendar') echo include('page/secretary.php');
 else if ($Page == 'graphic') include('page/graphic.php');
 else if ($Page == 'secretary') include('page/secretary.php');
@@ -98,7 +107,9 @@ else if ($Page == 'lawyer') include('page/lawyer.php');
 else if ($Page == 'accountant') include('page/accountant.php');
 else if ($Page == 'business') include('page/business.php');
 else if ($Page == 'admin') include('page/adminTable.php');
-else if ($Page == 'all') include('page/allTable.php');
+else if ($Page == 'all') include('all_table/all_table.php');
+
+
 else if ($Page == 'select') include('page/dbSelect.php');
 
 else if ($Page == 'account')  include('forms/account.php');
@@ -223,9 +234,5 @@ function Menu() {
 	else  $Menu = '<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"><ul class="nav navbar-nav"><li class="active"><a href="/">Головна <span class="sr-only">(current)</span></a></li><li><a href="/news">Новини</a></li><li><a href="#">Календарь</a></li><li><a href="#">Графіки робіт</a></li><li><a href="/loads">Архів файлів</a></li><li><a href="/all">Уся таблиця</a></li><li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Учасники <span class="caret"></span></a><ul class="dropdown-menu"><li><a href="/secretary">Секретарь</a></li><li><a href="/accountant">Бухгалтер</a></li><li><a href="/lawyer">Юрист</a></li><li role="separator" class="divider"></li><li><a href="/calculator">Кошторисник</a></li><li role="separator" class="divider"></li><li><a href="/business">Деловод</a></li><li><a href="/admin">Адмін</a></li></ul></li></ul><ul class="nav navbar-nav navbar-right"><li><a href="/chat">Чат</a></li><li class="dropdown"><a href="#" class="dropdown-toggle navbar-brand " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img alt="Brand" class="foto" src="/resource/avatar/'.$Avatar.'.jpg""></a><ul class="dropdown-menu"><li><a href="/profile">Мій профіль</a></li><li><li role="separator" class="divider"></li><li><a href="/account/logout">Вийти</a></li></ul></li></ul></div>';
     echo '<div class="navbar"><nav class="navbar navbar-inverse"><div class="container-fluid"><div class="navbar-header"><a class="navbar-brand" href="/"><img alt="Brand" src="/resource/img/bg.png" width="132px" height="47px"></a></div>'.$Menu.'</div>';
 }
-
-
-
-
 
 ?>

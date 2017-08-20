@@ -1,16 +1,15 @@
 <?php
 
 //PHP Grid database connection settings, Only need to update these in new project
+// define("PHPGRID_DBTYPE","mysqli"); // mysql,oci8(for oracle),mssql,postgres,sybase
+// define("PHPGRID_DBHOST","localhost");
+// define("PHPGRID_DBUSER","root");
+// define("PHPGRID_DBPASS","");
+// define("PHPGRID_DBNAME","prozoro");
+// define('PHPGRID_DB_CHARSET','utf8');
 
-define("PHPGRID_DBTYPE","mysqli"); // mysql,oci8(for oracle),mssql,postgres,sybase
-define("PHPGRID_DBHOST","localhost");
-define("PHPGRID_DBUSER","root");
-define("PHPGRID_DBPASS","");
-define("PHPGRID_DBNAME","prozoro");
-define('PHPGRID_DB_CHARSET','utf8');
-
-// Basepath for lib
-define("PHPGRID_LIBPATH",dirname(__FILE__).DIRECTORY_SEPARATOR."lib".DIRECTORY_SEPARATOR);
+// // Basepath for lib
+// define("PHPGRID_LIBPATH",dirname(__FILE__).DIRECTORY_SEPARATOR."lib".DIRECTORY_SEPARATOR);
 
 
 // ** MySQL settings ** //
@@ -27,5 +26,16 @@ define("PHPGRID_LIBPATH",dirname(__FILE__).DIRECTORY_SEPARATOR."lib".DIRECTORY_S
 // $SELF_PATH = "";    // the web path to the project without http
 // $CODE_PATH = "../../../../php/PHPSuito/"; // the physical path to the php files
 
+// Connection variables 
+$host = "localhost"; // MySQL host name eg. localhost
+$user = "root"; // MySQL user. eg. root ( if your on localserver)
+$password = ""; // MySQL user password  (if password is not set for your root user then keep it empty )
+$database = "prozoro"; // MySQL Database name
+
+// Connect to MySQL Database 
+$db = mysql_connect($host, $user, $password) or die("Could not connect to database");
+
+// Select MySQL Database 
+mysql_select_db($database, $db);
 
 ?>

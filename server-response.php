@@ -1,6 +1,4 @@
 <?php
-
-include_once 'setting.php';
     /*
      * Script:    DataTables server-side script for PHP and MySQL
      * Copyright: 2010 - Allan Jardine, 2012 - Chris Wright
@@ -17,16 +15,16 @@ include_once 'setting.php';
     $aColumns = array( 'message', 'user', 'time');
      
     /* Indexed column (used for fast and accurate table cardinality) */
-    //$sIndexColumn = "id";
+    $sIndexColumn = "id";
      
     /* DB table to use */
-    $sTable = "office";
+    $sTable = "chat";
      
     /* Database connection information */
-    $gaSql['USER']       = "root";
-    $gaSql['PASS']         = "";
-    $gaSql['DB']         = "prozoro";
-    $gaSql['HOST']     = "localhost";
+    $gaSql['user']       = "root";
+    $gaSql['password']   = "";
+    $gaSql['db']         = "prozoro";
+    $gaSql['server']     = "localhost";
      
      
     /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
