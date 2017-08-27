@@ -1,0 +1,29 @@
+# ignore all logs
+*.log
+# ignore the file literally named foo[01].txt
+foo\[01\].txt
+ touch ~/.gitignore
+ git config --global core.excludesFile ~/.gitignore
+
+$ git check-ignore -v debug.log
+.gitignore:3:*.log debug.log
+
+$ echo !debug.log >> .gitignore
+$ cat .gitignore
+*.log
+!debug.log
+$ git add debug.log
+$ git commit -m "Adding debug.log"
+
+$ cat .gitignore
+*.log
+$ git add -f debug.log
+$ git commit -m "Force adding debug.log"
+
+$ echo debug.log >> .gitignore
+$ git rm --cached debug.log
+rm 'debug.log'
+$ git commit -m "Start ignoring debug.log"
+
+$ touch ~/.gitignore
+$ git config --global core.excludesFile ~/.gitignore

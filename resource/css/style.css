@@ -1,13 +1,18 @@
+@font-face {
+    font-family: 9581; /* Имя шрифта */
+    src: url(/resource/fonts/font.ttf); /* Путь к файлу со шрифтом */
+   }
+
 
 * {
     margin: 0;
     padding: 0
 }
 
-body {
+/* body {
     width: 100%;
     background-color: #bfbfbf;
-}
+} */
 
 .panel {
     margin-bottom: 0!important;
@@ -108,6 +113,45 @@ li a img {
     height: 40px;
     resize: none;
     padding: 5px;
+}
+
+/*select table*/
+  #feedback { font-size: 1.4em; }
+  #selectable .ui-selecting { background: #FECA40; }
+  #selectable .ui-selected { background: #F39814; color: white; }
+  #selectable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
+  #selectable li { margin: 3px; padding: 0.4em; font-size: 1.4em; height: 18px; }
+
+  /* //progres bar download */
+    #progressbar {
+    margin-top: 20px;
+  }
+ 
+  .progress-label {
+    font-weight: bold;
+    text-shadow: 1px 1px 0 #fff;
+  }
+ 
+  .ui-dialog-titlebar-close {
+    display: none;
+  }
+
+.allTable {
+    background-color: white;
+    font-family: font;
+    font-size: 10px;
+    vertical-align: top;
+    
+    
+}
+
+.allTable th {
+    text-align: center;
+    padding: 6px !important;
+}
+
+.logick {
+    background-color: red;
 }
 
 

@@ -69,7 +69,8 @@ Head('Додати файл')?>
                    <div class="container ">
         <div class="registerForm">
             <h2> Добавити файли</h2>
-            <form method="POST" action="/loads/add" enctype="multipart/form-data">
+
+            <form method="POST" id="upload" action="/loads/add" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="name">Назва матеріалу</label>
                     <input type="text" class="form-control" name="name"  placeholder="Назва матеріалу" required>
@@ -87,13 +88,14 @@ Head('Додати файл')?>
                     <label for="login">Текст </label>
                     <textarea name="text" class="form-control" rows="3"  placeholder="текст..." required></textarea>
                 </div>
-                <div class="form-group">
-                    <label for="avatar">Завантаження файлів</label>
-                    <input type="file" name="file" multiple='true'>
-                    <p class="help-block">Завантажте файл формату .zip</p>
+                <div  class="form-group">
+                    <label  for="avatar">Завантаження файлів</label>
+                    <input  type="file" name="file" multiple='true'>
+                    <p  class="help-block">Завантажте файл формату .zip</p>
                 </div>
-                <input type="submit" name="enter" class="btn btn-success" value="Опоблікувати">
+                <input type="submit"  name="enter" class="btn btn-success" value="Завантажити">
             </form>
+            <progress id="progressbar" max="100" value="0" style="display:none;"></progress>
         </div>
     </div>
 </div>
@@ -113,7 +115,7 @@ Head('Додати файл')?>
 </div>
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="/resource/js/script.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="/resource/js/bootstrap.min.js" type="text/javascript"></script>
 </body>

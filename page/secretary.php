@@ -96,14 +96,6 @@ $col["export"] = true;
 $cols[] = $col; 
 
 $col = array(); 
-$col["title"] = "Вартість робіт по оголошенню, тис.грн"; // caption of column 
-$col["name"] = "secretaryPrice"; // grid column name, must be exactly same as returned column-name from sql (tablefield or field-alias) 
-$col["editable"] = true; 
-$col["search"] = false;
-$col["export"] = true;
-$cols[] = $col; 
-
-$col = array(); 
 $col["title"] = "Наша вхідна ціна, тис.грн"; // caption of column 
 $col["name"] = "secretaryInputPrice"; // grid column name, must be exactly same as returned column-name from sql (tablefield or field-alias) 
 $col["editable"] = true;
