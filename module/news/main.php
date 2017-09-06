@@ -19,6 +19,7 @@ Head('Новини');
   <li role="presentation"><a href="/news/category/id/1">Категорія 1</a></li>
   <li role="presentation"><a href="/news/category/id/2">Категорія 2</a></li>
   <li role="presentation"><a href="/news/category/id/3">Категорія 3</a></li>
+  <?php  searcForm() ?>
 </ul>
 <div class="pageNews">
     <?php
@@ -77,9 +78,5 @@ echo '<a href="/news/material/id/'.$Row['id'].'"><div class="ChatBlock"><span>Д
     </div>
 </div>
 
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="/resource/js/bootstrap.min.js" type="text/javascript"></script>
-</body>
-</html>
+
+<?php footer() ?>

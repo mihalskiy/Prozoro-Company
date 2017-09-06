@@ -58,9 +58,4 @@ if ($_SESSION['USER_GROUP'] == 2) $EDIT = '| <a href="/loads/edit/id/'.$Param['i
     </div>
 </div>
 
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="/resource/js/script.js"></script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="/resource/js/bootstrap.min.js" type="text/javascript"></script>
-</body>
-</html>
+<?php footer() ?>

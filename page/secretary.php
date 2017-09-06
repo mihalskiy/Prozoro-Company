@@ -166,6 +166,14 @@ $col["export"] = true;
 $cols[] = $col; 
 
 $col = array(); 
+$col["title"] = "Залишилось"; // caption of column 
+$col["name"] = "secretaryTimerDay"; // grid column name, must be exactly same as returned column-name from sql (tablefield or field-alias) 
+$col["editable"] = true; 
+$col["search"] = false;
+$col["export"] = true;
+$cols[] = $col;
+
+$col = array(); 
 $col["title"] = "Результати ауккціону після кваліфікації"; // caption of column 
 $col["name"] = "secretaryResultActionAbout"; // grid column name, must be exactly same as returned column-name from sql (tablefield or field-alias) 
 $col["editable"] = true; 
@@ -262,11 +270,4 @@ function custom_export($param)
     </div>
 </div>
 
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="resource/js/bootstrap.min.js" type="text/javascript"></script>
-
-
-</body>
-</html>
+<?php footer() ?>

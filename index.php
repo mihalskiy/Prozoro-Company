@@ -110,7 +110,7 @@ else if ($Page == 'select') include('page/dbSelect.php');
 
 else if ($Page == 'account')  include('forms/account.php');
 
-else if ($Page == 'test')  include('test.php');
+else if ($Page == 'search')  include('page/search.php');
 
 
 
@@ -124,6 +124,12 @@ else if ($p1 == 3) $p1 = 'Інформація'and $_SESSION['message'] = '<div 
 // переход на страницу
 if ($p3) $_SERVER['HTTP_REFERER'] = $p3;
 exit(header('Location: '.$_SERVER['HTTP_REFERER']));
+}
+
+// функция поиска
+function searcForm () {
+	global $Page;
+	echo '<nav class="nav navbar-nav navbar-right"><form form method="POST" action="/search'.$Page.'" class="form-inline my-2 my-lg-0 search"><input class="form-control mr-sm-2 nav-item" type="text" placeholder="Search"><button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button></form></nav>';
 }
 
 // функция показа сообщения
@@ -223,17 +229,20 @@ function read () {
 
 // вставка header на страници
 function Head($p1) {
-    echo '<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><title>'.$p1.'</title><link rel="shortcut icon" href="/resource/img/logo.ico" type="image/x-icon"><link href="/resource/css/bootstrap.min.css" rel="stylesheet" type="text/css"><script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script><script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><link href="/resource/css/style.css" type="text/css" rel="stylesheet"><link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"></head><script src="https://code.jquery.com/jquery-1.12.4.js"></script><script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>';
+    echo '<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><title>'.$p1.'</title><link rel="shortcut icon" href="/resource/img/logo.ico" type="image/x-icon"><link href="/resource/css/style.css" type="text/css" rel="stylesheet"><link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"><link rel="stylesheet" href="/resource/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous"><script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script><script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script></head>';
 }
-
 function Menu() {
 	//avatar
 	if ($_SESSION['USER_AVATAR'] == 0) $Avatar = 0;
 	else $Avatar = $_SESSION['USER_AVATAR'].'/'.$_SESSION['USER_ID'];
 
-	if ($_SESSION['USER_LOGIN_IN'] != 1) $Menu = '<ul class="nav navbar-nav navbar-right"><li><a href="/register">Реєстрація</a></li><li><a href="/login">Вхід</a></li><li><a href="/restore">Відновити пароль</a></li>';
-	else  $Menu = '<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"><ul class="nav navbar-nav"><li class="active"><a href="/">Головна <span class="sr-only">(current)</span></a></li><li><a href="/news">Новини</a></li><li><a href="#">Календарь</a></li><li><a href="#">Графіки робіт</a></li><li><a href="/loads">Архів файлів</a></li><li><a href="/all">Уся таблиця</a></li><li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Учасники <span class="caret"></span></a><ul class="dropdown-menu"><li><a href="/secretary">Секретарь</a></li><li><a href="/accountant">Бухгалтер</a></li><li><a href="/lawyer">Юрист</a></li><li role="separator" class="divider"></li><li><a href="/calculator">Кошторисник</a></li><li role="separator" class="divider"></li><li><a href="/business">Деловод</a></li><li><a href="/admin">Адмін</a></li></ul></li></ul><ul class="nav navbar-nav navbar-right"><li><a href="/chat">Чат</a></li><li class="dropdown"><a href="#" class="dropdown-toggle navbar-brand " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img alt="Brand" class="foto" src="/resource/avatar/'.$Avatar.'.jpg""></a><ul class="dropdown-menu"><li><a href="/profile">Мій профіль</a></li><li><li role="separator" class="divider"></li><li><a href="/account/logout">Вийти</a></li></ul></li></ul></div>';
-    echo '<div class="navbar"><nav class="navbar navbar-inverse"><div class="container-fluid"><div class="navbar-header"><a class="navbar-brand" href="/"><img alt="Brand" src="/resource/img/bg.png" width="132px" height="47px"></a></div>'.$Menu.'</div>';
+	if ($_SESSION['USER_LOGIN_IN'] != 1) $Menu = '<ul class="nav navbar-nav navbar-right"><li class="nav-item"><a class="nav-link" href="/register"><span class="glyphicon glyphicon-log-in"></span> Реєстрація</a></li><li class="nav-item"><a class="nav-link" href="/login"><span class="glyphicon glyphicon-user"></span> Вхід</a></li><li class="nav-item"><a class="nav-link" href="/restore">Відновити пароль</a></li></ul>';
+	else  $Menu = '<ul class="navbar-nav"><li class="nav-item active"><a class="nav-link" href="/">Головна<span class="sr-only">(current)</span></a></li><li class="nav-item"><a class="nav-link" href="/news">Новини</a></li><li class="nav-item"><a class="nav-link" href="#">Календарь</a></li><li class="nav-item"><a class="nav-link" href="#">Графіки робіт</a></li><li class="nav-item"><a class="nav-link" href="/loads">Архів файлів</a></li><li class="nav-item"><a class="nav-link" href="/all">Уся таблиця</a></li><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Учасники</a><div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink"><a class="dropdown-item" href="/secretary">Секретарь</a><a class="dropdown-item" href="/accountant">Бухгалтер</a><a class="dropdown-item" href="/lawyer">Юрист</a><a class="dropdown-item" href="/calculator">Кошторисник</a><a class="dropdown-item" href="/business">Деловод</a><a class="dropdown-item" href="/admin">Адмін</a></div></li><li class="nav-item active"><a class="nav-link" href="/chat">Чат</a></li><li class="dropdown"><a href="#" class="dropdown-toggle navbar-brand " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img alt="Brand" class="foto" src="/resource/avatar/'.$Avatar.'.jpg""></a><ul class="dropdown-menu"><li><a href="/profile">Мій профіль</a></li><li><li role="separator" class="divider"></li><li><a href="/account/logout">Вийти</a></li></ul></li></ul>';
+    echo '<nav class="navbar navbar-toggleable-md navbar-light navbar-inverse bg-inverse"><button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button><div class="navbar-header"><a class="navbar-brand" href="/"><img alt="Brand" src="/resource/img/bg.png" width="132px" height="47px"></a></div><div class="collapse navbar-collapse" id="navbarNavDropdown">'.$Menu.'</div></nav>';
+}
+
+function footer() {
+	echo '<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script><script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script></body></html>';
 }
 
 ?>
