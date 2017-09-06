@@ -1,12 +1,13 @@
 @font-face {
     font-family: 9581; /* Имя шрифта */
-    src: url(/resource/fonts/font.ttf); /* Путь к файлу со шрифтом */
+    src: url(/resource/fonts/Journalism.ttf); /* Путь к файлу со шрифтом */
    }
 
 
 * {
     margin: 0;
-    padding: 0
+    padding: 0;
+    font-family: Journalism;
 }
 
 /* body {
@@ -28,7 +29,6 @@
     margin-top: 5px;
     width: 100%;
     background-color: #ffffff;
-
 }
 
 /* .navbar-brand  a img {
