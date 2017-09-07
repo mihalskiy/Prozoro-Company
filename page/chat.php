@@ -3,14 +3,13 @@ ULogin(1);
 
 if ($_POST['enter'] and $_POST['text']) {
 $_POST['text'] = FormChars($_POST['text']);
-mysqli_query($CONNECT, "INSERT INTO `chat`  VALUES ('', '$_POST[text]', '$_SESSION[USER_LOGIN]', NOW())");
+mysqli_query($CONNECT, "INSERT INTO `chat`  VALUES ('', '$_POST[text]', '$_SESSION[USER_LOGIN]', '$_SESSION[USER_AVATAR]', NOW())");
 exit(header('location: /chat'));
 }
 
 Head('Чат');
 ?>
 <body>
-<div class="container">
             <!-- Menu -->
         <div class="innerMenu">
             <?php Menu()?>  
@@ -21,9 +20,11 @@ Head('Чат');
              <?php  MessageShow() ?>
                 <div class="chatBox">
                     <?php
+                    //if ($_SESSION['USER_AVATAR'] == 0) $Avatar = 0;
+	                //else $Avatar = $_SESSION['USER_AVATAR'].'/'.$_SESSION['USER_ID'];
                     // извлекаем всю тиблицу чат сортировка по времени с лимитом показа сообщений 50
                     $Query = mysqli_query($CONNECT, 'SELECT * FROM `chat` ORDER By `time` DESC LIMIT 50');
-                    while ($Row = mysqli_fetch_assoc($Query)) echo  '<div class="chatBlock"><span>'.$Row['user'].' | '.$Row['time'].'</span>'.$Row['message'].'</div>';
+                    while ($Row = mysqli_fetch_assoc($Query)) echo  '<div class="chatBlock"><img alt="Brand" class="foto" src="/resource/avatar/'.$Avatar.'.jpg"">'.$Row['avatar'].'<span>|'.$Row['user'].' | '.$Row['time'].'</span>'.$Row['message'].'</div>';
                     ?>
                     
                 </div>
@@ -39,7 +40,5 @@ Head('Чат');
                     </div>                 
                 </div>
         </div>
-
-</div>
 
 <?php footer() ?>

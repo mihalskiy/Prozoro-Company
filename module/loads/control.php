@@ -11,9 +11,9 @@ mysqli_query($CONNECT, "DELETE FROM `load` WHERE `id` = $Param[id]");
 if ($Row['dfile']) unlink('catalog/file/'.$Row['dfile'].'/'.$Param['id'].'.zip');
 MessageSend(3, 'Файл видалено із бази даних.', '/loads');
 
-} else if ($Param['command'] == 'active') {
-mysqli_query($CONNECT, "UPDATE `load` SET `active` = 1 WHERE `id` = $Param[id]");
-MessageSend(3, 'Файл активований.', '/loads/material/id/'.$Param['id']);
+// } else if ($Param['command'] == 'active') {
+// mysqli_query($CONNECT, "UPDATE `load` SET `active` = 1 WHERE `id` = $Param[id]");
+// MessageSend(3, 'Файл активований.', '/loads/material/id/'.$Param['id']);
 }
 
 

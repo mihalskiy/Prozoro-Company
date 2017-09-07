@@ -129,7 +129,7 @@ exit(header('Location: '.$_SERVER['HTTP_REFERER']));
 // функция поиска
 function searcForm () {
 	global $Page;
-	echo '<nav class="nav navbar-nav navbar-right"><form form method="POST" action="/search'.$Page.'" class="form-inline my-2 my-lg-0 search"><input class="form-control mr-sm-2 nav-item" type="text" placeholder="Search"><button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button></form></nav>';
+	echo '<li><form form method="POST" action="/search'.$Page.'" class="form-inline my-2 my-lg-0 search"><div class="form-group"><input class="form-control mr-sm-2 nav-item" type="text" placeholder="Знайти ..."></div><div class="form-group"><button class="btn btn-outline-success my-2 my-sm-0" type="submit">Пошук</button> </div></form></li>';
 }
 
 // функция показа сообщения
@@ -154,8 +154,8 @@ function userAccess($p1) {
 
 // функция анти гость
 function ULogin ($p1) {
-	if ($p1 <=0 and $_SESSION['USER_LOGIN_IN'] != $p1) MessageSend (1, 'Данна сторінка доступга тільки для гостей', '/login');
-	else if ($_SESSION['USER_LOGIN_IN'] != $p1)  MessageSend (1, 'Для перегляду сторінки зареєструйтеся будь-ласка!', '/register');
+	if ($p1 <=0 and $_SESSION['USER_LOGIN_IN'] != $p1) MessageSend (1, 'Данна сторінка доступна тільки для зареєстрованих', '/login');
+	else if ($_SESSION['USER_LOGIN_IN'] != $p1)  MessageSend (1, 'Для перегляду сторінки зареєструйтеся будь-ласка! або війдіть на сайт', '/login');
 }
 
 
@@ -183,7 +183,7 @@ return $Explode[0].'@*****';
 }
 
 // функция переключателя страниц
-function PageSelector($p1, $p2, $p3, $p4 = 5) {
+function PageSelector($p1, $p2, $p3, $p4 = 12) {
 	
 /*
 $p1 - URL (Например: /news/main/page)
@@ -237,8 +237,8 @@ function Menu() {
 	else $Avatar = $_SESSION['USER_AVATAR'].'/'.$_SESSION['USER_ID'];
 
   if ($_SESSION['USER_LOGIN_IN'] != 1) $Menu = '<ul class="nav navbar-nav navbar-right"><li class="nav-item"><a class="nav-link" href="/register"><span class="glyphicon glyphicon-log-in"></span> Реєстрація</a></li><li class="nav-item"><a class="nav-link" href="/login"><span class="glyphicon glyphicon-user"></span> Вхід</a></li><li class="nav-item"><a class="nav-link" href="/restore">Відновити пароль</a></li></ul>';
-	else  $Menu = '<div class="collapse navbar-collapse" id="myNavbar"><ul class="nav navbar-nav"><li><a href="#"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>Файли</a></li>         <li><a href="#"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>Таблиці</a></li><li><a href="#"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span>Чат</a></li></ul><ul class="nav navbar-nav navbar-right"><li><a href="#"><span class="glyphicon glyphicon-bell" aria-hidden="true"></span>Повідомлення</a></li><li class="dropdown"><a href="#" class="dropdown-toggle navbar-brand " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img alt="Brand" class="foto" src="/resource/avatar/'.$Avatar.'.jpg""></a><ul class="dropdown-menu"><li><a href="/profile">Мій профіль</a></li><li><li role="separator" class="divider"></li><li><a href="/account/logout">Вийти</a></li></ul>';
-    echo '<nav class="navbar navbar-inverse"><div class="container-fluid"><div class="navbar-header"><button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar"><span class="icon-bar"></span><span class="icon-bar"></span<span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img alt="Brand" src="/resource/img/bg.png" width="132px" height="47px"></a></div>'.$Menu.'</div></nav>';
+	else  $Menu = '<div class="collapse navbar-collapse" id="myNavbar"><ul class="nav navbar-nav"><li><a href="/loads"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> Файли</a></li><li><a href="/tables"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Таблиці</a></li><li><a href="/chat"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Чат</a></li></ul><ul class="nav navbar-nav navbar-right"><li><a href="#"><span class="glyphicon glyphicon-bell" aria-hidden="true"></span> Повідомлення</a></li><li class="dropdown"><a href="#" class="dropdown-toggle navbar-brand " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img alt="Brand" class="foto" src="/resource/avatar/'.$Avatar.'.jpg""></a><ul class="dropdown-menu"><li><a href="/profile">Мій профіль</a></li><li><li role="separator" class="divider"></li><li><a href="/account/logout">Вийти</a></li></ul>';
+    echo '<nav class="navbar navbar-inverse"><div class="container-fluid"><div class="navbar-header"><button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img alt="Brand" src="/resource/img/bg.png" width="132px" height="47px"></a></div>'.$Menu.'</div></nav>';
 }
 
 function footer() {

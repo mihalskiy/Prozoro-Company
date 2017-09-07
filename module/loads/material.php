@@ -1,7 +1,7 @@
 <?php 
 $Param['id'] += 0;
 if ($Param['id'] == 0) MessageSend(1, 'URL адресу вказано не вірно', '/loads');
-$Row = mysqli_fetch_assoc(mysqli_query($CONNECT, 'SELECT `name`, `added`, `date`, `readed`, `text`, `active` , `download`, `dfile` FROM `load` WHERE `id` = '.$Param['id']));
+$Row = mysqli_fetch_assoc(mysqli_query($CONNECT, 'SELECT `name`, `added`, `date`, `readed`, `text`,  `download`, `dfile` FROM `load` WHERE `id` = '.$Param['id']));
 if (!$Row['name']) MessageSend(1, 'Такї новини не знайдено.', '/loads');
 
 if(!$Row['active'] and $_SESSION['USER_GROUP'] != 2)  MessageSend(2, 'Новина чекає пітвердження адміністратора', '/loads');
@@ -10,8 +10,6 @@ mysqli_query($CONNECT, 'UPDATE `load` SET `readed` = `read` + 1 WHERE `id` = '.$
 Head($Row['name']);
 ?>
 <body>
-<div class="container">
-    <div class="row">
             <!-- Menu -->
         <div class="innerMenu">
             <?php Menu()?>  
@@ -46,16 +44,4 @@ if ($_SESSION['USER_GROUP'] == 2) $EDIT = '| <a href="/loads/edit/id/'.$Param['i
     ?>
 </div>
         </div>
-            <!--footer-->
-        <div class="footer">
-            <div class="row">
-                <footer>
-
-                </footer>
-            </div>
-        </div>
-
-    </div>
-</div>
-
 <?php footer() ?>

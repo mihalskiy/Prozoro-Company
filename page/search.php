@@ -23,8 +23,12 @@ Head('Чат');
             </div>
                 <div class="row">                  
                     <div class="container">
-                            <form form method="POST" action="/chat" class="col-md-4 col-md-offset-5"> 
-                                <input type="text" name="text" placehodlder="" require><input type="submit" name="enter" class="btn btn-success" value="Пошук">   
+                            <form form method="POST" action="/chat"  class="form-inline">
+                                <div class="form-group">
+                                    <label for="inputPassword2" class="sr-only">Password</label>
+                                    <input type="text" name="text" placehodlder="" require>>
+                                </div>
+                                <input type="submit" name="enter" class="btn btn-success" value="Пошук">
                             </form>
                     </div>                 
                 </div>
