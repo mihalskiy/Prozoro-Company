@@ -3,7 +3,6 @@ ULogin(0);
 Head('Сторінка Реєстрації')?>
 <body>
 <div class="container">
-    <div class="row">
             <!-- Menu -->
         <div class="innerMenu">
               <?php Menu()?>  
@@ -47,16 +46,6 @@ Head('Сторінка Реєстрації')?>
 
         </div>
 
-            <!--footer-->
-        <div class="footer">
-            <div class="row">
-                <footer>
-
-                </footer>
-            </div>
-        </div>
-
-    </div>
 </div>
 
 <?php footer() ?>

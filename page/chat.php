@@ -11,7 +11,6 @@ Head('Чат');
 ?>
 <body>
 <div class="container">
-    <div class="row">
             <!-- Menu -->
         <div class="innerMenu">
             <?php Menu()?>  
@@ -40,16 +39,7 @@ Head('Чат');
                     </div>                 
                 </div>
         </div>
-            <!--footer-->
-        <div class="footer">
-            <div class="row">
-                <footer>
 
-                </footer>
-            </div>
-        </div>
-
-    </div>
 </div>
 
 <?php footer() ?>

@@ -4,47 +4,18 @@
   <title>Bootstrap Example</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="/resource/css/bootstrap.min.css">
-  <link rel="stylesheet" href="/resource/css/style.css">
-  <script src="/resource/js/jquery.min.js"></script>
-  <script src="/resource/js/bootstrap.min.js"></script>
-  <style>
-    /* Remove the navbar's default margin-bottom and rounded borders */ 
-    .navbar {
-      margin-bottom: 0;
-      border-radius: 0;
-    }
-    
-    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
-    .row.content {height: 450px}
-    
-    /* Set gray background color and 100% height */
-    .sidenav {
-      padding-top: 20px;
-      background-color: #f1f1f1;
-      height: 100%;
-    }
-    
-    /* Set black background color, white text and some padding */
-    footer {
-      background-color: #555;
-      color: white;
-      padding: 15px;
-    }
-    
-    /* On small screens, set height to 'auto' for sidenav and grid */
-    @media screen and (max-width: 767px) {
-      .sidenav {
-        height: auto;
-        padding: 15px;
-      }
-      .row.content {height:auto;} 
-    }
-  </style>
+  <link rel="stylesheet" href="resource/css/bootstrap.min.css">
+  <script src="resource/js/jquery.min.js"></script>
+  <script src="resource/js/bootstrap.min.js"></script>
 </head>
 <body>
+<?php
+  if ($_SESSION['USER_LOGIN_IN'] != 1) $Menu = '<ul class="nav navbar-nav navbar-right"><li class="nav-item"><a class="nav-link" href="/register"><span class="glyphicon glyphicon-log-in"></span> Реєстрація</a></li><li class="nav-item"><a class="nav-link" href="/login"><span class="glyphicon glyphicon-user"></span> Вхід</a></li><li class="nav-item"><a class="nav-link" href="/restore">Відновити пароль</a></li></ul>';
+	else  $Menu = '<div class="collapse navbar-collapse" id="myNavbar"><ul class="nav navbar-nav"><li><a href="#"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>Файли</a></li>         <li><a href="#"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>Таблиці</a></li><li><a href="#"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span>Чат</a></li></ul><ul class="nav navbar-nav navbar-right"><li><a href="#"><span class="glyphicon glyphicon-bell" aria-hidden="true"></span>Повідомлення</a></li><li class="dropdown"><a href="#" class="dropdown-toggle navbar-brand " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img alt="Brand" class="foto" src="/resource/avatar/'.$Avatar.'.jpg""></a><ul class="dropdown-menu"><li><a href="/profile">Мій профіль</a></li><li><li role="separator" class="divider"></li><li><a href="/account/logout">Вийти</a></li></ul>';
+    echo '<nav class="navbar navbar-inverse"><div class="container-fluid"><div class="navbar-header"><button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar"><span class="icon-bar"></span><span class="icon-bar"></span<span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img alt="Brand" src="/resource/img/bg.png" width="132px" height="47px"></a></div>'.$Menu.'</div></nav>';
 
-<nav class="navbar navbar-inverse">
+?>
+<!-- <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -56,39 +27,17 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Головна</a></li>
-        <li>
-        <a href="#">
-        <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>
-         Файли
-        </a>
-        </li>
-        <li>
-        <a href="#">
-        <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
-         Таблиці
-        </a>
-        </li>
-        <li>
-        <a href="#">
-        <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
-         Чат
-        </a>
-        </li>
+        <li class="active"><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Projects</a></li>
+        <li><a href="#">Contact</a></li>
       </ul>
->
       <ul class="nav navbar-nav navbar-right">
-        <li>
-        <a href="#">
-        <span class="glyphicon glyphicon-bell" aria-hidden="true"></span>
-         Повідомлення
-        </a>
-        </li
+        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
       </ul>
     </div>
   </div>
-</nav>
-  
+</nav> -->
 <div class="container-fluid text-center">    
   <div class="row content">
     <div class="col-sm-2 sidenav">
