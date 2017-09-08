@@ -103,7 +103,14 @@ else if ($Page == 'accountant') include('page/accountant.php');
 else if ($Page == 'business') include('page/business.php');
 else if ($Page == 'admin') include('page/adminTable.php');
 
-else if ($Page == 'all') include('page/all_table/allTable.php');
+else if ($Page == 'all') {
+if (!$Module or $Page == 'all' and $Module == 'pagination' or $Page == 'all' and $Module == 'allTable') include('page/all_table/allTable.php');
+	else if ($Module == 'pagination') include('module/loads/pagination.php');
+}
+
+// else if ($Page == 'all') include('page/all_table/allTable.php');
+// else if ($Page == 'pagination') include('page/all_table/pagination.php');
+
 else if ($Page == 'insert') include('page/all_table/insert.php');
 
 else if ($Page == 'select') include('page/dbSelect.php');
@@ -204,6 +211,8 @@ echo ' <li class="'.$Swch.'"><a  href="'.$p1.$i.'">'.$i.'</a></li>';
 echo '</ul></nav>';
 }
 }
+
+
 
 function MiniIMG($p1, $p2, $p3, $p4, $p5 = 50) {
 	/*
