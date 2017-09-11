@@ -2,8 +2,6 @@
 ULogin(1);
  Head('Профіль користувача')?>
 <body>
-<div class="container">
-    <div class="row">
             <!-- Menu -->
         <div class="innerMenu">
             <?php Menu()?>  
@@ -66,13 +64,5 @@ else $Avatar = $_SESSION['USER_AVATAR'].'/'.$_SESSION['USER_ID'];
 
         </div>
             <!--footer-->
-        <div class="footer">
-            <footer>
-
-            </footer>
-        </div>
-
-    </div>
-</div>
 
 <?php footer() ?>

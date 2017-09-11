@@ -1,6 +1,6 @@
 <?php 
 include('header.php');
-nclude_once("db_connect.php");
+include_once("db_connect.php");
 ?>
 <title>phpzag.com : Demo Pagination with PHP, MySQL and jQuery</title>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.0/jquery.min.js"></script>
@@ -13,7 +13,7 @@ nclude_once("db_connect.php");
 	$per_page = 5;
 	//Calculating no of pages
 	$sql = "SELECT id, employee_name, employee_salary, employee_age FROM employee";
-	$result = mysqli_query($CONNECT, $sql);
+	$result = mysqli_query($conn, $sql);
 	$count = mysqli_num_rows($result);
 	$pages = ceil($count/$per_page)
 	?>			

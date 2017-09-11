@@ -1,0 +1,32 @@
+/* CSS Document */
+.pagination{
+	float:left;
+	width:100%;
+}
+.botoom_link{
+	float:left;
+	width:100%;
+}
+.content{
+float:left;
+	width:100%;
+}
+ul {
+    list-style: none;
+	float:left;
+	margin:0;
+    padding: 0;
+}
+li{
+	list-style: none;
+	float: left;
+	margin-right: 16px;
+	padding:5px;
+	border:solid 1px #dddddd;
+	color:#0063DC;
+}
+li:hover{
+	color:#FF0084;
+	cursor: pointer;
+}
+

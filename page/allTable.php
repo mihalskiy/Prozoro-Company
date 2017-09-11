@@ -36,7 +36,7 @@ $col = array();
 $col["title"] = "№";  
 $col["name"] = "id"; 
 $col["editable"] = false; 
-$col["width"] = "30"; 
+$col["width"] = "80"; 
 $col["editable"] = false; // this column is not editable 
 $col["search"] = true; 
 $col["editable"] = true; 
@@ -47,6 +47,7 @@ $col = array();
 $col["title"] = "Сайт";  
 $col["name"] = "secretarySite";  
 $col["editable"] = true; 
+$col["width"] = "400";
 $col["formatter"] = "function(cellval,options,rowdata){ return '<a target=\"_blank\" href=\"http://'+cellval+'\">'+cellval+'</a>'; }";
 $col["unformat"] = "function(cellval,options,cell){ return $('a', cell).attr('href').replace('http://',''); }";
 $cols[] = $col; 
@@ -55,48 +56,56 @@ $col = array();
 $col["title"] = "Форма проведення закупівлі";  
 $col["name"] = "secretaryForm";  
 $col["editable"] = true; 
+$col["width"] = "200";
 $cols[] = $col; 
 
 $col = array(); 
 $col["title"] = "Адреса обєкту";  
 $col["name"] = "secretaryAddres";  
 $col["editable"] = true; 
+$col["width"] = "200";
 $cols[] = $col; 
 
 $col = array(); 
 $col["title"] = "Види робіт";  
 $col["name"] = "secretaryWork";  
 $col["editable"] = true; 
+$col["width"] = "200";
 $cols[] = $col; 
 
 $col = array(); 
 $col["title"] = "Замовник";  
 $col["name"] = "secretaryCustomer";  
 $col["editable"] = true; 
+$col["width"] = "200";
 $cols[] = $col; 
 
 $col = array(); 
 $col["title"] = "Вартість робіт по оголошенню, тис.грн";  
 $col["name"] = "secretaryPrice";  
 $col["editable"] = true; 
+$col["width"] = "200";
 $cols[] = $col; 
 
 $col = array(); 
 $col["title"] = "Наша вхідна ціна, тис.грн";  
 $col["name"] = "secretaryInputPrice";  
 $col["editable"] = true; 
+$col["width"] = "200";
 $cols[] = $col; 
 
 $col = array(); 
 $col["title"] = "Банківська гарантія тендерної пропозиції";  
 $col["name"] = "secretaryBank";  
 $col["editable"] = true; 
+$col["width"] = "200";
 $cols[] = $col; 
 
 $col = array(); 
 $col["title"] = "Банківська гарантія виконання дговору";  
 $col["name"] = "secretaryBankWork";  
 $col["editable"] = true; 
+$col["width"] = "200";
 $cols[] = $col; 
 
 $col = array(); 
@@ -138,6 +147,7 @@ $cols[] = $col;
 $col = array(); 
 $col["title"] = "Дата завершення прийому пропозицій";  
 $col["name"] = "secretaryDateOver";  
+$col["width"] = "200";
 $col["editable"] = true; 
 $cols[] = $col; 
 
@@ -145,24 +155,28 @@ $col = array();
 $col["title"] = "Дата аукціону";  
 $col["name"] = "secretaryDateAuction";  
 $col["editable"] = true; 
+$col["width"] = "200";
 $cols[] = $col; 
 
 $col = array(); 
 $col["title"] = "Результати аукціону";  
 $col["name"] = "secretaryResultAction";  
 $col["editable"] = true; 
+$col["width"] = "200";
 $cols[] = $col; 
 
 $col = array(); 
 $col["title"] = "Сума перемоги тис.грн";  
 $col["name"] = "secretarySumWinner";  
 $col["editable"] = true; 
+$col["width"] = "200";
 $cols[] = $col;
 
 $col = array(); 
 $col["title"] = "Завантаження докуентів кошторисника для кваліфікації";  
 $col["name"] = "calculatorDownloadFile";  
 $col["editable"] = true;
+$col["width"] = "200";
 $col["formatter"] = "function(cellval,options,rowdata){ return '<a target=\"_blank\" href=\"http://'+cellval+'\">'+cellval+'</a>'; }";
 $col["unformat"] = "function(cellval,options,cell){ return $('a', cell).attr('href').replace('http://',''); }"; 
 $cols[] = $col; 
@@ -173,18 +187,21 @@ $col["name"] = "lawyerDownloadDocument";
 $col["formatter"] = "function(cellval,options,rowdata){ return '<a target=\"_blank\" href=\"http://'+cellval+'\">'+cellval+'</a>'; }";
 $col["unformat"] = "function(cellval,options,cell){ return $('a', cell).attr('href').replace('http://',''); }"; 
 $col["editable"] = true; 
+$col["width"] = "400";
 $cols[] = $col; 
 
 $col = array(); 
 $col["title"] = "Результати аукціону після кваліфікації";  
 $col["name"] = "secretaryResultActionAbout";  
 $col["editable"] = true; 
+$col["width"] = "200";
 $cols[] = $col; 
 
 $col = array(); 
 $col["title"] = "Банківська гарантія для заключення дговору";  
 $col["name"] = "accountantBankGarant";  
 $col["editable"] = true; 
+$col["width"] = "200";
 $cols[] = $col; 
 
 
@@ -192,12 +209,14 @@ $cols[] = $col;
 $col = array(); 
 $col["title"] = "Документація для заключення договору";  
 $col["name"] = "businessDocumentOver";  
+$col["width"] = "200";
 $col["editable"] = true; 
 $cols[] = $col; 
 
 $col = array(); 
 $col["title"] = "Дата укладення договору";  
 $col["name"] = "adminDateagreement";  
+$col["width"] = "200";
 $col["editable"] = true; 
 $cols[] = $col; 
 
@@ -205,17 +224,20 @@ $col = array();
 $col["title"] = "Орієнтовна дата початку робіт";  
 $col["name"] = "adminDateStartWork";  
 $col["editable"] = true; 
+$col["width"] = "200";
 $cols[] = $col; 
 
 $col = array(); 
 $col["title"] = "Орієнтовний термін закінчення робіт";  
-$col["name"] = "adminDateFinishWork";  
+$col["name"] = "adminDateFinishWork"; 
+$col["width"] = "200"; 
 $col["editable"] = true; 
 $cols[] = $col; 
 
 $col = array(); 
 $col["title"] = "Дата закриття банківської гарантії тендерної пропозиції";  
-$col["name"] = "accountantDateBankGarante";  
+$col["name"] = "accountantDateBankGarante"; 
+$col["width"] = "200"; 
 $col["editable"] = true; 
 $cols[] = $col; 
 
@@ -245,14 +267,15 @@ $out = $g->render("list1");
     <link rel='stylesheet' type='text/css' href='resource/js/jqgrid/css/ui.jqgrid.css' />	
     <link href="resource/css/style.css" type="text/css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="resource/css/bootstrap.min.css">
+      <script src="/resource/js/jquery.min.js"></script>   
+    <script src="/resource/js/bootstrap.min.js"></script>
 	<script type='text/javascript' src="resource/js/jquery.min.js"></script>
 	<script type='text/javascript' src='resourdce/js/themes/jquery-ui.custom.min.js'></script>        
     <script type='text/javascript' src='resource/js/jqgrid/js/i18n/grid.locale-ua.js'></script>
     <script type='text/javascript' src='resource/js/jqgrid/js/jquery.jqGrid.js'></script>
 </head>
 <body>
-<div class="container">
-    <div class="row">
+
             <!-- Menu -->
         <div class="innerMenu">
               <?php Menu() ?>  
@@ -265,18 +288,4 @@ $out = $g->render("list1");
         </div>
 
     </div>
-
-            <!--footer-->
-        <div class="footer">
-            <div class="row">
-                <footer>
-
-                </footer>
-            </div>
-        </div>
-
-    </div>
-</div>
-<script src="resource/js/bootstrap.min.js" type="text/javascript"></script>
-</body>
-</html>
+<?php footer() ?>

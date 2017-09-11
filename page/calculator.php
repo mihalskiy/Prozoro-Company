@@ -20,21 +20,16 @@ $db_conf = array(
 					"database" 	=> PHPGRID_DBNAME
 				);
 
-
 $g = new jqgrid($db_conf); 
-
-
 
 // set table for CRUD operations 
 $g->table = "office"; 
-
-
      
-$grid["caption"] = "Кошторисник"; 
+$grid["caption"] = "Юрист"; 
 $grid["autowidth"] = true; 
 $grid["toolbar"] = "up"; 
 $grid["autoresize"] = true; // responsive effect 
-$grid["view_options"]['width']='520'; 
+$grid["view_options"]['width']='520';
 $grid["loadtext"] = "Завантаження...";
 $grid["add_options"] = array('width'=>'620');
 $grid["edit_options"] = array('width'=>'620');
@@ -48,8 +43,9 @@ $g->set_options($grid);
 $col = array(); 
 $col["title"] = "№"; // caption of column 
 $col["name"] = "id"; // grid column name, must be exactly same as returned column-name from sql (tablefield or field-alias) 
-$col["editable"] = false; 
+$col["editable"] = true; 
 $col["width"] = "30"; 
+$col["editable"] = false;
 $cols[] = $col; 
 
 $col = array(); 
@@ -73,23 +69,24 @@ $col["editable"] = false;
 $cols[] = $col; 
 
 $col = array(); 
-$col["title"] = "Дата передачі пакету документів юристом"; // caption of column 
-$col["name"] = "lawyerDateFile"; // grid column name, must be exactly same as returned column-name from sql (tablefield or field-alias) 
+$col["title"] = "Дата передачі пакету документів кошторисником"; // caption of column 
+$col["name"] = "calculatorDateTransmission"; // grid column name, must be exactly same as returned column-name from sql (tablefield or field-alias) 
 $col["editable"] = true; 
+$col["required"] = true; 
 $cols[] = $col; 
 
 $col = array(); 
-$col["title"] = "Завантаження документів  для кваліфікації"; // caption of column 
-$col["name"] = "lawyerDownloadDocument"; // grid column name, must be exactly same as returned column-name from sql (tablefield or field-alias) 
+$col["title"] = "Завантаження документів кошторисника для кваліфікації"; // caption of column 
+$col["name"] = "calculatorDownloadFile"; // grid column name, must be exactly same as returned column-name from sql (tablefield or field-alias) 
 $col["editable"] = true; 
-$cols[] = $col; 
+$cols[] = $col;
 
 # Customization of Action column width and other properties
 $col = array();
 $col["title"] = "Редагування";
 $col["name"] = "act";
 $col["width"] = "50";
-$cols[] = $col;
+$cols[] = $col; 
 
 $g->set_columns($cols); 
 
@@ -126,14 +123,15 @@ $out = $g->render("list1");
     <link rel='stylesheet' type='text/css' href='resource/js/jqgrid/css/ui.jqgrid.css' />	
     <link href="resource/css/style.css" type="text/css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="resource/css/bootstrap.min.css">
+        <script src="/resource/js/jquery.min.js"></script>   
+    <script src="/resource/js/bootstrap.min.js"></script>
 	<script type='text/javascript' src="resource/js/jquery.min.js"></script>
 	<script type='text/javascript' src='resourdce/js/themes/jquery-ui.custom.min.js'></script>        
     <script type='text/javascript' src='resource/js/jqgrid/js/i18n/grid.locale-ua.js'></script>
     <script type='text/javascript' src='resource/js/jqgrid/js/jquery.jqGrid.js'></script>
 </head>
 <body>
-<div class="container">
-    <div class="row">
+
             <!-- Menu -->
         <div class="innerMenu">
               <?php Menu() ?>  
@@ -146,70 +144,6 @@ $out = $g->render("list1");
 
         </div>
 
-            <!--footer-->
-        <div class="footer">
-            <div class="row">
-                <footer>
 
-                </footer>
-            </div>
-        </div>
-
-    </div>
-</div>
-
-<?php 
-ULogin(1);
-
-if ($_POST['enter'] and $_POST['text']) {
-$_POST['text'] = FormChars($_POST['text']);
-mysqli_query($CONNECT, "INSERT INTO `chat`  VALUES ('', '$_POST[text]', '$_SESSION[USER_LOGIN]', NOW())");
-exit(header('location: /chat'));
-}
-
-Head('Чат');
-?>
-<body>
-<div class="container">
-    <div class="row">
-            <!-- Menu -->
-        <div class="innerMenu">
-            <?php Menu()?>  
-        </div>
-            <!--content-->
-        <div class="content">
-            <div class="row col-md-offset-5">
-             <?php  MessageShow() ?>
-                <div class="chatBox">
-                    <?php
-                    // извлекаем всю тиблицу чат сортировка по времени с лимитом показа сообщений 50
-                    $Query = mysqli_query($CONNECT, 'SELECT * FROM `chat` ORDER By `time` DESC LIMIT 50');
-                    while ($Row = mysqli_fetch_assoc($Query)) echo  '<div class="chatBlock"><span>'.$Row['user'].' | '.$Row['time'].'</span>'.$Row['message'].'</div>';
-                    ?>
-                    
-                </div>
-            </div>
-                <div class="row">                  
-                    <div class="container">
-                            <form form method="POST" action="/chat" class="col-md-4 col-md-offset-5">
-                                <h2 class="form-signin-heading" >Чат</h2>
-                                <label for="login" class="sr-only">Логін</label>
-                                <textarea  class="form-control ChatMessage" rows="3" name="text" maxlength="15" pattern="[A-Za-z-0-9]{5,15}" title="не менше 5 і не більше 15 латинських символів або цифр" placeholder="Теск повідомлення ..." required></textarea> 
-                                <input type="submit" name="enter" class="btn btn-success" value="Відправити">   
-                            </form>
-                    </div>                 
-                </div>
-        </div>
-            <!--footer-->
-        <div class="footer">
-            <div class="row">
-                <footer>
-
-                </footer>
-            </div>
-        </div>
-
-    </div>
-</div>
 
 <?php footer() ?>

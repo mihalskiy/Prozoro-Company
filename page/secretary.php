@@ -16,7 +16,7 @@ $db_conf = array(
 $g = new jqgrid($db_conf); 
 
 // set table for CRUD operations 
-$g->table = "office"; 
+$g->table = "secretary"; 
      
 $grid["caption"] = "Секретарь"; 
 $grid["autowidth"] = true; 
@@ -27,9 +27,9 @@ $grid["shrinkToFit"] = true;
 $grid["autowidth"] = true; 
 $grid["loadtext"] = "Завантаження...";
 $grid["form"]["position"] = "center";
-$grid["add_options"] = array('width'=>'620');
-$grid["edit_options"] = array('width'=>'620');
-$grid["view_options"] = array('width'=>'620'); 
+$grid["add_options"] = array('width'=>'820');
+$grid["edit_options"] = array('width'=>'820');
+$grid["view_options"] = array('width'=>'820'); 
 $grid["export"] = array("format"=>"pdf", "filename"=>"my-file", "sheetname"=>"test");
 $grid["export"] = array("filename"=>"my-file", "heading"=>"Invoice Details", "orientation"=>"landscape", "paper"=>"a4");
 
@@ -43,9 +43,11 @@ $g->set_options($grid);
 $col = array(); 
 $col["title"] = "№"; // caption of column 
 $col["name"] = "id"; // grid column name, must be exactly same as returned column-name from sql (tablefield or field-alias) 
-$col["editable"] = false; 
-$col["width"] = "30";
+$col["editable"] = true; 
 $col["search"] = false;
+$col["width"] = "50";
+$col["formatter"] = "function(cellval,options,rowdata){ return '<a target=\"_blank\" href=\"http://'+cellval+'\">'+cellval+'</a>'; }";
+$col["unformat"] = "function(cellval,options,cell){ return $('a', cell).attr('href').replace('http://',''); }";
 $col["export"] = true;
 $cols[] = $col; 
 
@@ -54,6 +56,7 @@ $col["title"] = "Сайт"; // caption of column
 $col["name"] = "secretarySite"; // grid column name, must be exactly same as returned column-name from sql (tablefield or field-alias) 
 $col["editable"] = true; 
 $col["search"] = false;
+$col["width"] = "400";
 $col["formatter"] = "function(cellval,options,rowdata){ return '<a target=\"_blank\" href=\"http://'+cellval+'\">'+cellval+'</a>'; }";
 $col["unformat"] = "function(cellval,options,cell){ return $('a', cell).attr('href').replace('http://',''); }";
 $col["export"] = true;
@@ -63,6 +66,7 @@ $col = array();
 $col["title"] = "Форма проведення закупівлі"; // caption of column 
 $col["name"] = "secretaryForm"; // grid column name, must be exactly same as returned column-name from sql (tablefield or field-alias) 
 $col["editable"] = true; 
+$col["width"] = "150";
 $col["search"] = false;
 $col["export"] = true;
 $cols[] = $col; 
@@ -70,7 +74,8 @@ $cols[] = $col;
 $col = array(); 
 $col["title"] = "Адреса об'єкту"; // caption of column 
 $col["name"] = "secretaryAddres"; // grid column name, must be exactly same as returned column-name from sql (tablefield or field-alias) 
-$col["editable"] = true; 
+$col["editable"] = true;
+$col["width"] = "150"; 
 $col["edittype"] = "textarea"; // render as textarea on edit 
 $col["editoptions"] = array("rows"=>2, "cols"=>20); // with these attributes 
 $col["search"] = false;
@@ -83,6 +88,7 @@ $col = array();
 $col["title"] = "Види робіт"; // caption of column 
 $col["name"] = "secretaryWork"; // grid column name, must be exactly same as returned column-name from sql (tablefield or field-alias) 
 $col["editable"] = true; 
+$col["width"] = "150";
 $col["search"] = false;
 $col["export"] = true;
 $cols[] = $col; 
@@ -91,6 +97,7 @@ $col = array();
 $col["title"] = "Замовник"; // caption of column 
 $col["name"] = "secretaryCustomer"; // grid column name, must be exactly same as returned column-name from sql (tablefield or field-alias) 
 $col["editable"] = true; 
+$col["width"] = "150";
 $col["search"] = false;
 $col["export"] = true;
 $cols[] = $col; 
@@ -99,6 +106,7 @@ $col = array();
 $col["title"] = "Наша вхідна ціна, тис.грн"; // caption of column 
 $col["name"] = "secretaryInputPrice"; // grid column name, must be exactly same as returned column-name from sql (tablefield or field-alias) 
 $col["editable"] = true;
+$col["width"] = "150";
 $col["formatter"] = "number"; 
 $col["search"] = false;
 $col["export"] = true;
@@ -108,6 +116,7 @@ $col = array();
 $col["title"] = "Банківська гарантія тендерної пропозиції"; // caption of column 
 $col["name"] = "secretaryBank"; // grid column name, must be exactly same as returned column-name from sql (tablefield or field-alias) 
 $col["editable"] = true; 
+$col["width"] = "150";
 $col["formatoptions"]["op"] = "bw";
 $col["edittype"] = "checkbox"; 
 $col["editoptions"] = array("value"=>"Так:НІ"); 
@@ -123,12 +132,14 @@ $col["edittype"] = "checkbox";
 $col["editoptions"] = array("value"=>"Так:НІ");
 $col["search"] = false;
 $col["export"] = true;
+$col["width"] = "150";
 $cols[] = $col; 
 
 $col = array(); 
 $col["title"] = "Дата початку прийому пропозицій"; // caption of column 
 $col["name"] = "secretaryDateStart"; // grid column name, must be exactly same as returned column-name from sql (tablefield or field-alias) 
 $col["editable"] = true;
+$col["width"] = "150";
 $col["search"] = false;
 $col["export"] = true;
 $cols[] = $col;
@@ -138,6 +149,7 @@ $col["title"] = "Дата завершення прийому пропозиці
 $col["name"] = "secretaryDateOver"; // grid column name, must be exactly same as returned column-name from sql (tablefield or field-alias) 
 $col["editable"] = true; 
 $col["search"] = false;
+$col["width"] = "150";
 $col["export"] = true;
 $cols[] = $col; 
 
@@ -145,6 +157,7 @@ $col = array();
 $col["title"] = "Дата акціону"; // caption of column 
 $col["name"] = "secretaryDateAuction"; // grid column name, must be exactly same as returned column-name from sql (tablefield or field-alias) 
 $col["editable"] = true;
+$col["width"] = "150";
 $col["search"] = false;
 $col["export"] = true;
 $cols[] = $col; 
@@ -155,6 +168,7 @@ $col["name"] = "secretaryResultAction"; // grid column name, must be exactly sam
 $col["editable"] = true; 
 $col["search"] = false;
 $col["export"] = true;
+$col["width"] = "150";
 $cols[] = $col; 
 
 $col = array(); 
@@ -163,15 +177,8 @@ $col["name"] = "secretarySumWinner"; // grid column name, must be exactly same a
 $col["editable"] = true; 
 $col["search"] = false;
 $col["export"] = true;
+$col["width"] = "150";
 $cols[] = $col; 
-
-$col = array(); 
-$col["title"] = "Залишилось"; // caption of column 
-$col["name"] = "secretaryTimerDay"; // grid column name, must be exactly same as returned column-name from sql (tablefield or field-alias) 
-$col["editable"] = true; 
-$col["search"] = false;
-$col["export"] = true;
-$cols[] = $col;
 
 $col = array(); 
 $col["title"] = "Результати ауккціону після кваліфікації"; // caption of column 
@@ -179,7 +186,9 @@ $col["name"] = "secretaryResultActionAbout"; // grid column name, must be exactl
 $col["editable"] = true; 
 $col["search"] = false;
 $col["export"] = true;
+$col["width"] = "150";
 $cols[] = $col; 
+
 
 # Customization of Action column width and other properties
 $col = array();
@@ -237,15 +246,16 @@ function custom_export($param)
 	<link  type='text/css' href='http://www.trirand.com/blog/jqgrid/themes/ui.jqgrid.css' />
     <link rel='stylesheet' type='text/css' href='resource/js/jqgrid/css/ui.jqgrid.css' />	
     <link href="resource/css/style.css" type="text/css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="resource/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/resource/css/bootstrap.min.css">   
+    <script src="/resource/js/jquery.min.js"></script>   
+    <script src="/resource/js/bootstrap.min.js"></script>
 	<script type='text/javascript' src="resource/js/jquery.min.js"></script>
 	<script type='text/javascript' src='resourdce/js/themes/jquery-ui.custom.min.js'></script>        
     <script type='text/javascript' src='resource/js/jqgrid/js/i18n/grid.locale-ua.js'></script>
     <script type='text/javascript' src='resource/js/jqgrid/js/jquery.jqGrid.js'></script>
 </head>
 <body>
-<div class="container">
-    <div class="row">
+
             <!-- Menu -->
         <div class="innerMenu ">
               <?php Menu() ?>  
@@ -258,16 +268,7 @@ function custom_export($param)
 
     </div>
 
-            <!--footer-->
-        <div class="footer">
-            <div class="row">
-                <footer>
-                   
-                </footer>
-            </div>
-        </div>
 
-    </div>
-</div>
+
 
 <?php footer() ?>

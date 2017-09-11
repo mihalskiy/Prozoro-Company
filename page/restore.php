@@ -3,8 +3,6 @@
 ULogin(0);
 Head('Відновлення паролю')?>
 <body>
-<div class="container">
-    <div class="row col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <!-- Menu -->
         <div class="innerMenu">
             <?php Menu() ?>  
@@ -35,16 +33,5 @@ Head('Відновлення паролю')?>
 </div>                 
             </div>
         </div>
-            <!--footer-->
-        <div class="footer">
-            <div class="row">
-                <footer>
-
-                </footer>
-            </div>
-        </div>
-
-    </div>
-</div>
 
 <?php footer() ?>
