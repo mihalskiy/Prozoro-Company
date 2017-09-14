@@ -3,7 +3,7 @@ include_once 'config.php';
 include_once 'setting.php';
 session_start();
 // old link
-$CONNECT = mysqli_connect($host, $user, $password, $database);
+$CONNECT = mysqli_connect(HOST, USER, PASS, DB);
 
 $db_conf = array( 	
 					"type" 		=> PHPGRID_DBTYPE, 
@@ -81,7 +81,6 @@ else if ($Page == 'accountant') include('page/accountant.php');
 else if ($Page == 'business') include('page/business.php');
 else if ($Page == 'admin') include('page/adminTable.php');
 else if ($Page == 'all')  include('page/allTable.php');
-	else if ($Page == 'add_data') include('page/all_table/add_data.php');
 // else if ($Page == 'all') include('page/all_table/allTable.php');
 // else if ($Page == 'pagination') include('page/all_table/pagination.php');
 else if ($Page == 'insert') include('page/all_table/insert.php');

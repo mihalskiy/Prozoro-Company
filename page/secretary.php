@@ -22,7 +22,7 @@ $grid["caption"] = "Секретарь";
 $grid["autowidth"] = true; 
 $grid["toolbar"] = "up"; 
 $grid["autoresize"] = true; // responsive effect 
-$grid["view_options"]['width']='520'; 
+$grid["view_options"]['width']='720'; 
 $grid["shrinkToFit"] = true;
 $grid["autowidth"] = true; 
 $grid["loadtext"] = "Завантаження...";
@@ -44,7 +44,7 @@ $col = array();
 $col["title"] = "№"; // caption of column 
 $col["name"] = "id"; // grid column name, must be exactly same as returned column-name from sql (tablefield or field-alias) 
 $col["editable"] = true; 
-$col["search"] = false;
+
 $col["width"] = "50";
 $col["formatter"] = "function(cellval,options,rowdata){ return '<a target=\"_blank\" href=\"http://'+cellval+'\">'+cellval+'</a>'; }";
 $col["unformat"] = "function(cellval,options,cell){ return $('a', cell).attr('href').replace('http://',''); }";
@@ -55,7 +55,7 @@ $col = array();
 $col["title"] = "Сайт"; // caption of column 
 $col["name"] = "secretarySite"; // grid column name, must be exactly same as returned column-name from sql (tablefield or field-alias) 
 $col["editable"] = true; 
-$col["search"] = false;
+
 $col["width"] = "400";
 $col["formatter"] = "function(cellval,options,rowdata){ return '<a target=\"_blank\" href=\"http://'+cellval+'\">'+cellval+'</a>'; }";
 $col["unformat"] = "function(cellval,options,cell){ return $('a', cell).attr('href').replace('http://',''); }";
@@ -67,7 +67,7 @@ $col["title"] = "Форма проведення закупівлі"; // caption
 $col["name"] = "secretaryForm"; // grid column name, must be exactly same as returned column-name from sql (tablefield or field-alias) 
 $col["editable"] = true; 
 $col["width"] = "150";
-$col["search"] = false;
+
 $col["export"] = true;
 $cols[] = $col; 
 
@@ -78,7 +78,7 @@ $col["editable"] = true;
 $col["width"] = "150"; 
 $col["edittype"] = "textarea"; // render as textarea on edit 
 $col["editoptions"] = array("rows"=>2, "cols"=>20); // with these attributes 
-$col["search"] = false;
+
 $col["export"] = true;
 $cols[] = $col; 
 
@@ -89,7 +89,7 @@ $col["title"] = "Види робіт"; // caption of column
 $col["name"] = "secretaryWork"; // grid column name, must be exactly same as returned column-name from sql (tablefield or field-alias) 
 $col["editable"] = true; 
 $col["width"] = "150";
-$col["search"] = false;
+
 $col["export"] = true;
 $cols[] = $col; 
 
@@ -98,7 +98,7 @@ $col["title"] = "Замовник"; // caption of column
 $col["name"] = "secretaryCustomer"; // grid column name, must be exactly same as returned column-name from sql (tablefield or field-alias) 
 $col["editable"] = true; 
 $col["width"] = "150";
-$col["search"] = false;
+$col["search"] = true;
 $col["export"] = true;
 $cols[] = $col; 
 
@@ -108,7 +108,7 @@ $col["name"] = "secretaryInputPrice"; // grid column name, must be exactly same 
 $col["editable"] = true;
 $col["width"] = "150";
 $col["formatter"] = "number"; 
-$col["search"] = false;
+$col["search"] = true;
 $col["export"] = true;
 $cols[] = $col; 
 
@@ -120,7 +120,7 @@ $col["width"] = "150";
 $col["formatoptions"]["op"] = "bw";
 $col["edittype"] = "checkbox"; 
 $col["editoptions"] = array("value"=>"Так:НІ"); 
-$col["search"] = false;
+$col["search"] = true;
 $col["export"] = true;
 $cols[] = $col; 
 
@@ -130,7 +130,7 @@ $col["name"] = "secretaryBankWork"; // grid column name, must be exactly same as
 $col["editable"] = true;
 $col["edittype"] = "checkbox"; 
 $col["editoptions"] = array("value"=>"Так:НІ");
-$col["search"] = false;
+$col["search"] = true;
 $col["export"] = true;
 $col["width"] = "150";
 $cols[] = $col; 
@@ -140,7 +140,7 @@ $col["title"] = "Дата початку прийому пропозицій"; /
 $col["name"] = "secretaryDateStart"; // grid column name, must be exactly same as returned column-name from sql (tablefield or field-alias) 
 $col["editable"] = true;
 $col["width"] = "150";
-$col["search"] = false;
+$col["search"] = true;
 $col["export"] = true;
 $cols[] = $col;
 
@@ -158,7 +158,7 @@ $col["title"] = "Дата акціону"; // caption of column
 $col["name"] = "secretaryDateAuction"; // grid column name, must be exactly same as returned column-name from sql (tablefield or field-alias) 
 $col["editable"] = true;
 $col["width"] = "150";
-$col["search"] = false;
+$col["search"] = true;
 $col["export"] = true;
 $cols[] = $col; 
 
@@ -166,7 +166,7 @@ $col = array();
 $col["title"] = "Результати акціону"; // caption of column 
 $col["name"] = "secretaryResultAction"; // grid column name, must be exactly same as returned column-name from sql (tablefield or field-alias) 
 $col["editable"] = true; 
-$col["search"] = false;
+$col["search"] = true;
 $col["export"] = true;
 $col["width"] = "150";
 $cols[] = $col; 
@@ -175,7 +175,7 @@ $col = array();
 $col["title"] = "Сума перемоги тис.грн"; // caption of column 
 $col["name"] = "secretarySumWinner"; // grid column name, must be exactly same as returned column-name from sql (tablefield or field-alias) 
 $col["editable"] = true; 
-$col["search"] = false;
+$col["search"] = true;
 $col["export"] = true;
 $col["width"] = "150";
 $cols[] = $col; 
@@ -184,7 +184,7 @@ $col = array();
 $col["title"] = "Результати ауккціону після кваліфікації"; // caption of column 
 $col["name"] = "secretaryResultActionAbout"; // grid column name, must be exactly same as returned column-name from sql (tablefield or field-alias) 
 $col["editable"] = true; 
-$col["search"] = false;
+$col["search"] = true;
 $col["export"] = true;
 $col["width"] = "150";
 $cols[] = $col; 
