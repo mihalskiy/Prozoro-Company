@@ -1,5 +1,8 @@
 <?php
-//include('setting.php');
+$username = 'root';
+$password = '';
+$connection = new PDO( 'mysql:host=localhost;dbname=prozoro', $username, $password );
+
 include('function.php');
 $query = '';
 $output = array();

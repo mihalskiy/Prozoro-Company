@@ -13,6 +13,10 @@ $db_conf = array(
 					"database" 	=> PHPGRID_DBNAME
 );
 
+$username = 'root';
+$password = '';
+$connection = new PDO( 'mysql:host=localhost;dbname=prozoro', $username, $password );
+
     
 // проверка соиденение
 //if ($CONNECT) echo 'Поключение к БД Успешно ';
@@ -72,6 +76,20 @@ if (!$Module or $Page == 'loads' and $Module == 'category' or $Page == 'loads' a
 	else if ($Module == 'control') include('module/loads/control.php');
 	else if ($Module == 'download') include('module/loads/download.php');
 }
+
+else if ($Page == 'test') {
+if (!$Module or $Page == 'test' and $Module == 'create' or $Page == 'test' and $Module == 'main') include('module/all_table/allTable.php');
+//else if ($Module == 'material') {
+include('module/all_table/create.php');
+//include('module/all_table/db.php');
+include('module/all_table/delete.php');
+include('module/all_table/fetch_single.php');
+include('module/all_table/fetch.php');
+include('module/all_table/function.php');
+include('module/all_table/insert.php');
+include('module/all_table/update.php');
+}
+
 else if ($Page == 'calendar') echo include('page/secretary.php');
 else if ($Page == 'graphic') include('page/graphic.php');
 else if ($Page == 'secretary') include('page/secretary.php');
@@ -86,7 +104,7 @@ else if ($Page == 'all')  include('page/allTable.php');
 else if ($Page == 'insert') include('page/all_table/insert.php');
 else if ($Page == 'select') include('page/dbSelect.php');
 else if ($Page == 'account')  include('forms/account.php');
-else if ($Page == 'search')  include('page/search.php');
+else if ($Page == 'search') include('page/search.php');
 // функция отправки сообщения
 function MessageSend($p1, $p2, $p3 = '') {
 if ($p1 == 1) $p1 = 'Помилка' and $_SESSION['message'] = '<div class="alert alert-danger alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong>'.$p1.'!</strong> '.$p2.'</div>';
@@ -100,7 +118,7 @@ exit(header('Location: '.$_SERVER['HTTP_REFERER']));
 // функция поиска
 function searcForm () {
 	global $Page;
-	echo '<li><form form method="POST" action="/search'.$Page.'" class="form-inline my-2 my-lg-0 search"><div class="form-group"><input class="form-control mr-sm-2 nav-item" type="text" placeholder="Знайти ..."></div><div class="form-group"><button class="btn btn-outline-success my-2 my-sm-0" type="submit">Пошук</button> </div></form></li>';
+	echo '<li><form method="POST" action="/search/'.$Page.'" class="form-inline my-2 my-lg-0 search"><div class="form-group"><input class="form-control mr-sm-2 nav-item" type="text" placeholder="Знайти ..."></div><div class="form-group"><input class="btn btn-info" name="enter" type="submit" value="Пошук"> </div></form></li>';
 }
 // функция показа сообщения
 function MessageShow() {

@@ -1,18 +1,21 @@
 <?php
 
-require 'setting.php';
+$username = 'root';
+$password = '';
+$connection = new PDO( 'mysql:host=localhost;dbname=prozoro', $username, $password );
+
 
   $post = $_POST;
 
-  $sql = "INSERT INTO items (title,description) 
+//   $sql = "INSERT INTO secretary (secretarySite, secretaryForm) 
 
-	VALUES ('".$post['title']."','".$post['description']."')";
+// 	VALUES ('".$post['secretarySite']."','".$post['secretaryForm']."')";
 
-  $result = $mysqli->query($sql);
+//   $result = $mysqli->query($sql);
 
-  $sql = "SELECT * FROM items Order by id desc LIMIT 1"; 
+  //$sql = "SELECT * FROM secretary Order by id desc LIMIT 1"; 
 
-  $result = $mysqli->query($sql);
+  //$result = $mysqli->query($sql);
 
   $data = $result->fetch_assoc();
 
