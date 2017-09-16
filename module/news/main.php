@@ -19,7 +19,7 @@ Head('Новини');
   <li role="presentation"><a href="/news/category/id/1">Категорія 1</a></li>
   <li role="presentation"><a href="/news/category/id/2">Категорія 2</a></li>
   <li role="presentation"><a href="/news/category/id/3">Категорія 3</a></li>
-  <?php  searcForm() ?>
+  <?php  SearchForm() ?>
 </ul>
 <div class="pageNews">
     <?php

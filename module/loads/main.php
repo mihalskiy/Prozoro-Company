@@ -20,7 +20,7 @@ Head('Архів файлів');
   <li class="nav-item" role="presentation"><a href="/loads/category/id/2">Бухгалтер</a></li>
   <li class="nav-item" role="presentation"><a href="/loads/category/id/3">Кошторисник</a></li>
   <li class="nav-item" role="presentation"><a href="/loads/category/id/4">Діловод</a></li>
-  <?php  searcForm()?>
+  <?php SearchForm() ?>
   </nav>
 </ul>
 <div class="pageNews">

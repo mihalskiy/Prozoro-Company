@@ -13,9 +13,6 @@ $db_conf = array(
 					"database" 	=> PHPGRID_DBNAME
 );
 
-$username = 'root';
-$password = '';
-$connection = new PDO( 'mysql:host=localhost;dbname=prozoro', $username, $password );
 
     
 // проверка соиденение
@@ -105,6 +102,8 @@ else if ($Page == 'insert') include('page/all_table/insert.php');
 else if ($Page == 'select') include('page/dbSelect.php');
 else if ($Page == 'account')  include('forms/account.php');
 else if ($Page == 'search') include('page/search.php');
+
+
 // функция отправки сообщения
 function MessageSend($p1, $p2, $p3 = '') {
 if ($p1 == 1) $p1 = 'Помилка' and $_SESSION['message'] = '<div class="alert alert-danger alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong>'.$p1.'!</strong> '.$p2.'</div>';
@@ -116,9 +115,9 @@ if ($p3) $_SERVER['HTTP_REFERER'] = $p3;
 exit(header('Location: '.$_SERVER['HTTP_REFERER']));
 }
 // функция поиска
-function searcForm () {
+function SearchForm () {
 	global $Page;
-	echo '<li><form method="POST" action="/search/'.$Page.'" class="form-inline my-2 my-lg-0 search"><div class="form-group"><input class="form-control mr-sm-2 nav-item" type="text" placeholder="Знайти ..."></div><div class="form-group"><input class="btn btn-info" name="enter" type="submit" value="Пошук"> </div></form></li>';
+	echo '<li><form method="POST" action="/search/'.$Page.'" class="form-inline my-2 my-lg-0 search"><div class="form-group"><input class="form-control mr-sm-2 nav-item" name="text" value="'.$_SESSION['SEARCH'].'" type="text" placeholder="Знайти ..."></div><div class="form-group"><input class="btn btn-info" name="enter" type="submit" value="Пошук"> </div></form></li>';
 }
 // функция показа сообщения
 function MessageShow() {
