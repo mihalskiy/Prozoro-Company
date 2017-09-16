@@ -22,23 +22,25 @@ MessageShow()
 
 
 <?php  
-$Count = mysqli_fetch_row(mysqli_query($CONNECT, "SELECT COUNT(`id`) FROM `$Module` WHERE `name` LIKE '%$_SESSION[SEARCH]%'"));
+$Count = mysqli_fetch_row(mysqli_query($CONNECT, "SELECT COUNT(`id`) FROM `load` WHERE `name` LIKE '%$_SESSION[SEARCH]%'"));
 
 
 if ($Count[0]) {
 if (!$Param['page']) {
 $Param['page'] = 1;
-$Result = mysqli_query($CONNECT, "SELECT `id`, `name`, `date` FROM `$Module` WHERE `name` LIKE '%$_SESSION[SEARCH]%' ORDER BY `id` DESC LIMIT 12");
+$Result = mysqli_query($CONNECT, "SELECT `id`, `name`, `date` FROM `load` WHERE `name` LIKE '%$_SESSION[SEARCH]%' ORDER BY `id` DESC LIMIT 12");
 } else {
 $Start = ($Param['page'] - 1) * 12;
-$Result = mysqli_query($CONNECT, str_replace('START', $Start, "SELECT `id`, `name`, `date` FROM `$Module` WHERE `name` LIKE '%$_SESSION[SEARCH]%' ORDER BY `id` DESC LIMIT START, 12"));
+$Result = mysqli_query($CONNECT, str_replace('START', $Start, "SELECT `id`, `name`, `date` FROM `load` WHERE `name` LIKE '%$_SESSION[SEARCH]%' ORDER BY `id` DESC LIMIT START, 12"));
 }
 
 
 PageSelector("/search/$Module/page/", $Param['page'], $Count);
-while ($Row = mysqli_fetch_assoc($Result)) echo '<a href="/'.$Module.'/material/id/'.$Row['id'].'"><div class="ChatBlock"><span>Добавлен: '.$Row['date'].'</span>'.$Row['name'].'</div></a>';
+while ($Row = mysqli_fetch_assoc($Result)) echo '<a href="/loads/material/id/'.$Row['id'].'"><div class="panel panel-success"><div class="panel-heading"> Добавив: '.$Row['added'].' | '.$Row['date'].'<h4>'.$Row['name'].'</h4></div></div></a>';
 PageSelector("/search/$Module/page/", $Param['page'], $Count);
-} else echo 'Ничего не найдено.';
+} 
+
+else echo 'Ничего не найдено.';
 ?>
 
 
